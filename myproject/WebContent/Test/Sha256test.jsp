@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"> </script>
+<script type="text/javascript" src="//code.jquery.com/jquery.min.js"> </script>
 </head>
 <body>
 <%String str;
