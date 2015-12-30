@@ -17,7 +17,7 @@ public class BoardSql  extends BaseDbSql {
 	 
 	 public BoardSql()
 	 {
-		 		 
+		 		  
 	 }
 	
 	 public  BoardDao GetDetailBoard(int no)
