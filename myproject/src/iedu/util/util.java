@@ -4,14 +4,22 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class util {
-   public static  String  GetSha256(String str) {
+	
+	   public static  String  GetSha512(String str) {
 
-			String SHA = ""; 
+			return GetSha(str,"SHA-512");			   
+	   }
+	   
+	   
+	   public static String GetSha(String str,String shatype ) 
+	   {
+		   String SHA = ""; 
 
 			try{
 
-				MessageDigest sh = MessageDigest.getInstance("SHA-256"); 
-
+//				MessageDigest sh = MessageDigest.getInstance("SHA-512"); 
+				MessageDigest sh = MessageDigest.getInstance(shatype);
+				
 				sh.update(str.getBytes()); 
 
 				byte byteData[] = sh.digest();
@@ -34,6 +42,14 @@ public class util {
 			}
 
 			return SHA;
-	   
+
+		   
+		   
+	   }
+	
+   public static  String  GetSha256(String str) {
+			
+			return GetSha(str,"SHA-256");
+							   
    }
 }
