@@ -22,7 +22,7 @@
          request.setAttribute("name",name);              
          request.setAttribute("age",24);
          
-         String[] names = {"홍길동","박아지","장독대","장독대1" ,"장독대2"  };
+         String[] names = {"홍길동","박아지","장독대","장독대1" ,"장독대2","장독대3"  };
          
          request.setAttribute("names", names);
 %>
@@ -54,7 +54,7 @@
 	<table width="50%" align="center" border="1">
 
 
-		<c:forEach var="a" begin="1" end="5">
+		<c:forEach var="a" begin="1" end="6">
 			<c:if test="${a %2 eq  0}">
 				<tr bgcolor="green">
 			</c:if>
