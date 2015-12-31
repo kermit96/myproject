@@ -63,18 +63,17 @@ public class login extends HttpServlet {
 		      session.setAttribute("id", map.get("id"));
 		      session.setAttribute("name", map.get("name"));
 		      session.setAttribute("nick", map.get("nick"));	      	  
-		      String url = (String)session.getAttribute("url");
-		
+		      String url = (String)session.getAttribute("url");		
 		      session.setAttribute("url", "");
 		      
 		      if (url==null)
 		    	  url ="";
 		      if ( url.isEmpty())  {
-		    	  	url="/member//member/login.do";        		    
+		    	  	url="../member/login.do";        		    
 		      }
 
 		      data.isSucess = true;
-		      data.url = "../"+url;
+		      data.url = url;
 		      		      
 	   } else {
 		    data.isSucess = false;
@@ -87,7 +86,7 @@ public class login extends HttpServlet {
 
        String jsonstr = gson.toJson(data);
 			 
-		PrintWriter out=response.getWriter();
+	   PrintWriter out=response.getWriter();
 
  		out.print(jsonstr);        // out.print 내용을 ajax의 dataType이 jason인 놈에게 데이터 쏴줌
 				         
