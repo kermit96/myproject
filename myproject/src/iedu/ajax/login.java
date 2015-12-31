@@ -83,7 +83,7 @@ public class login extends HttpServlet {
 	   }
 	   
 
-	    Gson gson = new Gson();
+	   Gson gson = new Gson();
 
        String jsonstr = gson.toJson(data);
 			 
