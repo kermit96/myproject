@@ -23,8 +23,9 @@ public class sha256  extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	//	super.doGet(req, resp);
-		resp.setContentType("text/html;charset=utf-8");
-
+		resp.setContentType("text/html");
+		resp.setCharacterEncoding("utf-8");
+		
 		String reqstr = req.getParameter("str");
 		System.out.println(reqstr);
 		String str = util.GetSha256(reqstr);
