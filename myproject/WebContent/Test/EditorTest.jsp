@@ -10,14 +10,13 @@
 </head>
 <body>
  
-	<textarea name="editor1" id="editor1" rows="8" cols="80" >&lt;p&gt;This is some &lt;strong&gt;sample text&lt;/strong&gt;. You are using &lt;a href="http://ckeditor.com/"&gt;CKEditor&lt;/a&gt;.&lt;/p&gt;
+	<textarea  id="editor1" rows="8" cols="80" >&lt;p&gt;This is some &lt;strong&gt;sample text&lt;/strong&gt;. You are using &lt;a href="http://ckeditor.com/"&gt;CKEditor&lt;/a&gt;.&lt;/p&gt;
 	</textarea>
 
 	<script>
 	  try {
 		  
-		var editor1 = document.getElementById("editor1");
-		  
+		
 		CKEDITOR.replace( 'editor1', {
 			extraPlugins: 'image2',
 			height: 350,
