@@ -1,0 +1,20 @@
+1. 로그인 
+   1.  로그인은 /member/login.do(iedu.member.login.java  )을 부른다.
+    2.  로그인중이면 
+      다른곳에서 로그인을 부르지 않으면   /member/loginresult.jsp 을 부른다.
+      아니면  처음 부른 곳을 부른다.
+        
+    3.  로그인이 아니면 /member/login.jsp 을 부른다.
+      
+
+2. /member/login.jsp 
+    1. 로그인 check 을 할떄는 /ajax/login (iedu.aja.login.java)
+    2.  로그인 성공 하며  /member/login.do 을 호출한다.
+           
+     
+      
+    
+    
+    
+    
+                 
