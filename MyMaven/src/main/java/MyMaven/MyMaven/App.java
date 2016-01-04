@@ -6,7 +6,9 @@ import java.util.Vector;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.annotate.JsonView;
+import org.json.simple.JSONObject;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -28,6 +30,7 @@ class aa2 {
 	String  c;
 	@JsonView(Views.NameOnly.class)
 	String[] aa ;
+	byte []cc;
 }
 public class App 
 {
@@ -38,6 +41,7 @@ public class App
 		bb.a = 10;
 		bb.b =20;
 		bb.c="20";
+		bb.cc= "한글나라".getBytes();
 	/*	
 		bb.aa= new String[10];
 		
@@ -68,7 +72,12 @@ public class App
 		}
 
 
+		JSONObject obj = new JSONObject();
+		obj.put("aa", "aa1");
+		obj.put("aa2", "aa1");
 
+
+		System.out.println(obj.toJSONString());
        Gson gson = new GsonBuilder().serializeNulls().create();
 //	     Gson gson = new Gson();
 
@@ -76,6 +85,10 @@ public class App
        
        
     	System.out.println(jsonstr);
+    	
+    	aa2 cc2 = gson.fromJson(jsonstr, aa2.class);
+    	String kk = new String(cc2.cc);
+    	System.out.println(kk);
 
 	//	System.out.println( "Hello World!" );
 	}
