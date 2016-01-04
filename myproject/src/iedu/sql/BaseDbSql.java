@@ -9,9 +9,14 @@ public class BaseDbSql {
 	public BaseDbSql()
 	{
 
-     int k=0;
+
 	}
 
+	
+	public DBTYPE getDbtype()
+	{		
+		return dbtype;
+	}
  
 	protected BaseJDBCDao GetjdbcDao() throws Exception
 	{
@@ -20,15 +25,16 @@ public class BaseDbSql {
 
 		String host = handler.getValue("host");
 		int port = 0;
+		
 		try {
 			Integer.parseInt( handler.getValue("port"));
 
 		} catch (Exception ex ) {}
+		
 		String dbname =  handler.getValue("dbname");
 		String userid =  handler.getValue("userid");
 		String password =  handler.getValue("password");
 		int  getdbtype = Integer.parseInt( handler.getValue("dbtype"));
-
 
 		if (getdbtype ==0) 
 		{
