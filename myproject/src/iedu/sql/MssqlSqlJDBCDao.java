@@ -1,6 +1,4 @@
-package iedu.dao;
-
-
+package iedu.sql;
 
 public class MssqlSqlJDBCDao extends BaseJDBCDao {
 	

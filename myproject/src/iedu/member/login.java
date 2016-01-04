@@ -40,7 +40,6 @@ public class login extends HttpServlet {
 
 		String userid = (String)session.getAttribute("id");
 
-		System.out.println(userid);
 		if (userid !=null && !userid.isEmpty() ) {
 			
 			 url = (String)session.getAttribute("url");

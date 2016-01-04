@@ -1,4 +1,4 @@
-package iedu.dao;
+package iedu.sql;
 
 import iedu.config.ConfigFileHandler;
 

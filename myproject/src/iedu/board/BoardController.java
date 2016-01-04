@@ -90,7 +90,8 @@ public class BoardController extends HttpServlet {
 		String view="";
 		
 		resp.setContentType("text/html");
-		resp.setCharacterEncoding("utf-8");	
+		resp.setCharacterEncoding("utf-8");
+		
 		String request = req.getRequestURI();
 
 		
@@ -100,12 +101,6 @@ public class BoardController extends HttpServlet {
 
 		String realReq = request.substring(domain.length());
 
-		out.println("나 실행되니==>"+request+"<br>");
-		out.println("domain==>"+domain+"<br>");
-		
-
-
-		out.println("realReq222==>"+realReq+"<br>");
 		BoarderMain target = map.get(realReq);
 		
 		

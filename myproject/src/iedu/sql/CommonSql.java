@@ -1,4 +1,4 @@
-package iedu.dao;
+package iedu.sql;
 
 public class CommonSql {
       

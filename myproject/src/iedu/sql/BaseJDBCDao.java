@@ -1,4 +1,4 @@
-package iedu.dao;
+package iedu.sql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.util.HashSet;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+
+import iedu.dao.MyResultSet;
 
 public class BaseJDBCDao {
 	protected BasicDataSource ds = new BasicDataSource();

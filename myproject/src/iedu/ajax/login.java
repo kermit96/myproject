@@ -71,14 +71,13 @@ public class login extends HttpServlet {
 		      if ( url.isEmpty())  {
 		    	  	url="../member/login.do";        		    
 		      }
-
+		      
 		      data.isSuccess = true;
 		      data.url = url;
 		      		      
 	   } else {
 		    data.isSuccess = false;
-		    data.failreason = "로그인 유저가 없거나 패스워드가 잘못되어 있습니다. ";
-		   
+		    data.failreason = "로그인 유저가 없거나 패스워드가 잘못되어 있습니다. ";		   
 	   }
 	   
 
@@ -87,9 +86,8 @@ public class login extends HttpServlet {
        String jsonstr = gson.toJson(data);
 			 
 	   PrintWriter out=response.getWriter();
-
- 		out.print(jsonstr);        // out.print 내용을 ajax의 dataType이 jason인 놈에게 데이터 쏴줌
-				         
+ 	   out.print(jsonstr);        // out.print 내용을 ajax의 dataType이 jason인 놈에게 데이터 쏴줌
+ 		
 	}
 
 	/**

@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import iedu.dao.BoardDao;
-import iedu.dao.BoardSql;
-import iedu.dao.DBTYPE;
+import iedu.sql.BoardSql;
+import iedu.sql.DBTYPE;
 
 public class BorderList implements BoarderMain {
 	@Override

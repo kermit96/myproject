@@ -3,8 +3,8 @@ package iedu.board;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import iedu.dao.BoardSql;
-import iedu.dao.DBTYPE;
+import iedu.sql.BoardSql;
+import iedu.sql.DBTYPE;
 
 public class BorderWriteSave implements BoarderMain {
 	@Override
@@ -20,9 +20,8 @@ public class BorderWriteSave implements BoarderMain {
 		String body = req.getParameter("body");
 		
 		String id = (String)req.getSession().getAttribute("id");
-		
-		
-		BoardSql sql = new BoardSql( DBTYPE.MYSQL_TYPE );
+				
+		BoardSql sql = new BoardSql( );
 		  
 		sql.insertBoard(id, title, body);
 		 

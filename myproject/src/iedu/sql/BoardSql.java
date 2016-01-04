@@ -1,10 +1,12 @@
-package iedu.dao;
+package iedu.sql;
 
 import java.sql.NClob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import iedu.dao.BoardDao;
+import iedu.dao.BoardReply;
 import iedu.util.PageInfo;
 
 public class BoardSql  extends BaseDbSql {

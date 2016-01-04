@@ -1,5 +1,4 @@
-package iedu.dao;
-
+package iedu.sql;
 
 public class OracleJDBCDao extends BaseJDBCDao {
 	
