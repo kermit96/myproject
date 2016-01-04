@@ -72,11 +72,11 @@ public class login extends HttpServlet {
 		    	  	url="../member/login.do";        		    
 		      }
 
-		      data.isSucess = true;
+		      data.isSuccess = true;
 		      data.url = url;
 		      		      
 	   } else {
-		    data.isSucess = false;
+		    data.isSuccess = false;
 		    data.failreason = "로그인 유저가 없거나 패스워드가 잘못되어 있습니다. ";
 		   
 	   }

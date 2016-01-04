@@ -34,23 +34,24 @@ public class login extends HttpServlet {
 		// 만약 로그인 중이면  
 		//  /member/loginresult.jsp 을 부른다 
 		// 만약 로그인을 한다고 하면  /member/loginForm.jsp 을 부른다. 
-		HttpSession   session = request.getSession(true);
+		HttpSession   session = request.getSession();
 		
 		String url ="";
 
-		String userid = (String)session.getAttribute("userid");
+		String userid = (String)session.getAttribute("id");
 
+		System.out.println(userid);
 		if (userid !=null && !userid.isEmpty() ) {
 			
 			 url = (String)session.getAttribute("url");
 			if (url != null &&  !url.isEmpty())  {
 				session.setAttribute("url", "");	        			
 			} else {				
-				url = "/member/LoginResultForm.jsp";
+				url = "/Member/LoginResultForm.jsp";
 			}
 						
 		} else {			
-		  	  url = "/member/LoginForm.jsp";
+		  	  url = "/Member/LoginForm.jsp";
 		  	  
 		}
 		

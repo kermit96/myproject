@@ -44,7 +44,7 @@
 		</tr>
 
 		<tr>
-			<td align="center"><a href="LogoutProc.jsp">로그아웃</a></td>
+			<td align="center"><a href="../Member/LogoutProc.jsp">로그아웃</a></td>
 		</tr>
 		
 	</table>

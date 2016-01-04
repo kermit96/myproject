@@ -38,31 +38,37 @@
 			return;
 		}
 		
-		
+
+        try {
         $.ajax({
-            url:'../ajax/login',
+            url:"../ajax/login",
             async:false,
             type:'post',
+            dataType:'json',
             data:{userid:$('#userid').val(),password:$('#password').val()  },
             success:function(data){
-            	
+    
+
             	 if (data.isSuccess)
-                 {            		 
+                 {   
+            		 alert(data.url);
             		 location.href=data.url;            		 
             	 } else {
             		 
             		 alert(data.failreason);
             	 }
             	
-               //  	  $("#serverhash").val(data);
+              
             },
             error:function(request,status,error){
-                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+           //     alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                }
             	                                    
         });
 		
-		
+        } catch (ex) {        	
+        	alert("ajax"+ex);
+        }
 	}
 	   
 	</script>
@@ -80,7 +86,7 @@
 				<td><input type="password" id="password"></td>
 			</tr>
 			<tr>
-				<td align="center" colspan="2"><input id="login" type="input" value="로그인">
+				<td align="center" colspan="2"><input id="login" type="button" value="로그인">
 				</td>
 			</tr>
 		</table>

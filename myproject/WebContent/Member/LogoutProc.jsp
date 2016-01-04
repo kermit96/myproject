@@ -15,7 +15,7 @@
 
    session.invalidate();
  
-	response.sendRedirect("LoginForm.jsp");
+	response.sendRedirect("../member/login.do");
 %>
 	</body>
 </html>

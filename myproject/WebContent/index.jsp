@@ -19,7 +19,7 @@
 		*/
 		
 				 
-		response.sendRedirect("Member/LoginForm.jsp");
+		response.sendRedirect("member/login.do");
 				
 	}
 	%>

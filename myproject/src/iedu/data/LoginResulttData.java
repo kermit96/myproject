@@ -2,13 +2,13 @@ package iedu.data;
 
 public class LoginResulttData {
 	
-  public boolean isSucess;
+  public boolean isSuccess;
   public String  url;
   public String failreason;
   
   public LoginResulttData ()
   {
-	  isSucess = false;
+	  isSuccess = false;
 	  url = "";
 	  failreason ="";
 	  
