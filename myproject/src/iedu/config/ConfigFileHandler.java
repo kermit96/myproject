@@ -31,10 +31,13 @@ public class ConfigFileHandler {
 	
 	private Properties m_oProps = new Properties();
 	private FileLoadingInfo fileLoadingInfo;
+	
 
 	private  static Hashtable fileMap = new Hashtable();
 
-
+	private static  FileLoadingInfo InitialFileInfo = null;
+	
+	private static Properties m_defaultprops = new Properties();
 	/**
 	 * Singlenton pattern
 	 * 
@@ -53,7 +56,7 @@ public class ConfigFileHandler {
 			String filename) {
 		Object o = fileMap.get(filename);
 		if (o != null) {
-			System.out.println(filename);
+
 			ConfigFileHandler handler = (ConfigFileHandler) o;
 			FileLoadingInfo loadingFinfo = handler.fileLoadingInfo;
 			if (loadingFinfo.isUpdated()) {
@@ -61,7 +64,7 @@ public class ConfigFileHandler {
 			}
 			return handler;
 		} else {
-			System.out.println(filename);
+
 			ConfigFileHandler handler = new ConfigFileHandler(filename);
 			fileMap.put(filename, handler);
 			return handler;
@@ -129,6 +132,72 @@ public class ConfigFileHandler {
 		 m_oProps.setProperty(p_sKey, value);	 
 	}
 	 
+	
+	private void LoadInitailDir()
+	{
+
+		if (InitialFileInfo == null || !InitialFileInfo.getFile().isFile()) {
+			// 파일이 제대로 로딩되지 않았다.
+			
+			System.out.println(this.getClass().getName()
+					+ ".loadFile() : cannot open config file==>"+InitialFileInfo.getFile().getName());
+			return ;
+		}
+
+		File configFile = InitialFileInfo.getFile();
+
+		FileInputStream oFileInput = null;
+		try {
+			oFileInput = new FileInputStream(configFile);
+
+			this.m_defaultprops.load(oFileInput);
+			return ;
+		} catch (FileNotFoundException fnfe) {
+			fnfe.printStackTrace();
+			System.out.println("Don't exists Property files");
+			return ;
+		} catch (IOException ie) {
+			ie.printStackTrace();
+			return ;
+		} finally {
+			if (oFileInput != null) try {oFileInput.close();} catch (Exception ignore) {}
+			fileLoadingInfo.setLastLoaded(System.currentTimeMillis());
+		}
+
+		
+	}
+	
+	private  synchronized String getInitDirectory() 
+	{
+
+		String sPath="";
+
+		sPath = ConfigFileHandler.class.getProtectionDomain()
+				.getCodeSource().getLocation().getPath();
+		// WEB-INF 위치
+
+		int nFindInx = sPath.indexOf("WEB-INF");
+
+		if (nFindInx > 0)
+			sPath = sPath.substring(0, nFindInx + 7);
+
+
+		String sConfPath="";
+		sConfPath = sPath + File.separator + "conf" + File.separator+"ini.property";
+		if (InitialFileInfo ==null ) {
+    	   InitialFileInfo =  new  FileLoadingInfo(new File(sConfPath));
+    	   
+    	   LoadInitailDir();
+		} else {
+			
+			if (InitialFileInfo.isUpdated()) {
+				LoadInitailDir();
+			}			
+		}
+		
+		return m_defaultprops.getProperty("DIR");
+	}
+	
 	/**
 	 * iedu.conf 을 메모리에 로딩한다.<br>
 	 * 
@@ -149,6 +218,7 @@ public class ConfigFileHandler {
 			 */
 			String sPath = null;
 
+			/*
 			sPath = ConfigFileHandler.class.getProtectionDomain()
 					.getCodeSource().getLocation().getPath();
 			// WEB-INF 위치
@@ -158,16 +228,15 @@ public class ConfigFileHandler {
 			if (nFindInx > 0)
 				sPath = sPath.substring(0, nFindInx + 7);
 
-			if (sFilePath == null) {
-				sConfPath = sPath + File.separator + "conf" + File.separator
-						+ "iedu.conf";
-			} else // conf 서브디렉토리에 있는 conf파일
-			{
-				sConfPath = sPath + File.separator + "conf" + File.separator
-						+ sFilePath;
-			}
+           */
 			
-			System.out.println(sConfPath);
+			sPath = getInitDirectory();
+			
+
+			sConfPath = sPath +  File.separator
+					+ sFilePath;
+									
+
 			fileLoadingInfo = new FileLoadingInfo(new File(sConfPath));
 
 			loadFile();

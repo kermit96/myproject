@@ -33,4 +33,16 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>WebContent/WEB-INF/conf/iedu.conf</name>
+			<type>1</type>
+			<location>D:/MyStudy/conf/iedu.conf</location>
+		</link>
+		<link>
+			<name>WebContent/WEB-INF/conf/reboard.property</name>
+			<type>1</type>
+			<location>D:/MyStudy/conf/reboard.property</location>
+		</link>
+	</linkedResources>
 </projectDescription>
