@@ -45,23 +45,17 @@
             async:false,
             type:'post',
             dataType:'json',
-            data:{userid:$('#userid').val(),password:$('#password').val()  },
+            data:{userid:userid,password:password  },
             success:function(data){
-    
-
             	 if (data.isSuccess)
                  {   
-            		 alert(data.url);
             		 location.href=data.url;            		 
-            	 } else {
-            		 
+            	 } else {            		 
             		 alert(data.failreason);
-            	 }
-            	
-              
+            	 }            	              
             },
             error:function(request,status,error){
-           //     alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                }
             	                                    
         });

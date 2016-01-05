@@ -1,0 +1,6 @@
+# class.do 와  class의 정의 
+reboard/list.reb=iedu.reborad.list
+#write 
+/reboard/write.reb=iedu.reborad.write
+/reboard/detail.reb=iedu.reborad.Detail
+/reboard/CommentWrite.reb=iedu.reborad.CommentWrite

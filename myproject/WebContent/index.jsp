@@ -30,6 +30,7 @@
 		<a href="MySurvey/SurveyList.jsp">설문조사 문항 보기</a><br>
 		<a href="Guest/GuestList.jsp">방문록</a><br>
 		<a href="Board/BoarderList.bbs">게시판</a><br>
+		<a href="ReBoard/BoarderList.bbs">답글게시판</a><br>
 		<a href="Member/LogoutProc.jsp">로그아웃</a><br>
 				
 	</body>

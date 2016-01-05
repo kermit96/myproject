@@ -19,7 +19,7 @@ import iedu.config.ConfigFileHandler;
 /**
  * Servlet implementation class ReBoardController
  */
-@WebServlet("/reboard/*.reg")
+@WebServlet("/reboard/*")
 public class ReBoardController extends HttpServlet {
 	
 	private  Map<String,ReboardInterfeace> m_map = new HashMap<String,ReboardInterfeace>() ;      

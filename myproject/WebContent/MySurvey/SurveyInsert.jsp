@@ -1,7 +1,7 @@
 <%@page import="java.sql.Statement"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  <%@ page import="iedu.dao.*"  %>   
+  <%@ page import="iedu.sql.*"  %>   
 <!DOCTYPE html >
 <html>
 <head>

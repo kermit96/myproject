@@ -1,5 +1,5 @@
 <%@page import="iedu.dao.BoardDao"%>
-<%@page import="iedu.dao.BoardSql"%>
+<%@page import="iedu.sql.*"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

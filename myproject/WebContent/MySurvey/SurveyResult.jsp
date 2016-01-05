@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ page import="java.sql.*" %>
-<%@ page import="iedu.dao.*" %>
+<%@ page import="iedu.sql.*" %>
 <!DOCTYPE html>
 <html>
 	<head>

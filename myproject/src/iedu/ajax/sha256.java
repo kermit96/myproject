@@ -31,7 +31,7 @@ public class sha256  extends HttpServlet {
 		String str = util.GetSha256(reqstr);
 		 
 		PrintWriter out=resp.getWriter();
-
+         
 		out.print(str);        // out.print 내용을 ajax의 dataType이 jason인 놈에게 데이터 쏴줌
 				  
 	}

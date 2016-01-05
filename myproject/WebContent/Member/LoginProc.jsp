@@ -1,4 +1,4 @@
-<%@page import="iedu.dao.DBTYPE"%>
+
 <%@page import="iedu.dao.LoginDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ page import="java.util.*" %>
@@ -35,7 +35,7 @@
 	    	  response.sendRedirect(url);
 	    	  return;
 	      }
-	      
+	       
    }
    
   response.sendRedirect("LoginForm.jsp");
