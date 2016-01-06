@@ -56,7 +56,7 @@ public class ConfigFileHandler {
 			String filename) {
 		Object o = fileMap.get(filename);
 		if (o != null) {
-
+            
 			ConfigFileHandler handler = (ConfigFileHandler) o;
 			FileLoadingInfo loadingFinfo = handler.fileLoadingInfo;
 			if (loadingFinfo.isUpdated()) {
@@ -65,6 +65,7 @@ public class ConfigFileHandler {
 			return handler;
 		} else {
 
+			
 			ConfigFileHandler handler = new ConfigFileHandler(filename);
 			fileMap.put(filename, handler);
 			return handler;
@@ -84,16 +85,14 @@ public class ConfigFileHandler {
 
 	
 	public void Save()
-	{
-		
+	{		
 		 		  File file = this.fileLoadingInfo.file;
 		 		 
 		 			try {
 		 				m_oProps.store(new FileOutputStream(file), null);
 		 			} catch(IOException e) {
 		 				e.printStackTrace();
-		 			}
-		  		 		  
+		 			}		  		 		  
 	}
 	
 	/**
@@ -127,9 +126,16 @@ public class ConfigFileHandler {
 		 */
 	}
 
+	
+	
 	public void setValue(String p_sKey,String value)
 	{
 		 m_oProps.setProperty(p_sKey, value);	 
+	}
+	 
+	public void setValue(String p_sKey,int value)
+	{
+		 m_oProps.setProperty(p_sKey, Integer.toString(value));	 
 	}
 	 
 	
@@ -144,13 +150,17 @@ public class ConfigFileHandler {
 			return ;
 		}
 
+		
 		File configFile = InitialFileInfo.getFile();
 
+	
+		
 		FileInputStream oFileInput = null;
 		try {
 			oFileInput = new FileInputStream(configFile);
-
-			this.m_defaultprops.load(oFileInput);
+			
+			m_defaultprops.load(oFileInput);
+			
 			return ;
 		} catch (FileNotFoundException fnfe) {
 			fnfe.printStackTrace();
@@ -161,7 +171,9 @@ public class ConfigFileHandler {
 			return ;
 		} finally {
 			if (oFileInput != null) try {oFileInput.close();} catch (Exception ignore) {}
-			fileLoadingInfo.setLastLoaded(System.currentTimeMillis());
+			
+			InitialFileInfo.setLastLoaded(System.currentTimeMillis());
+			
 		}
 
 		
@@ -183,10 +195,13 @@ public class ConfigFileHandler {
 
 
 		String sConfPath="";
-		sConfPath = sPath + File.separator + "conf" + File.separator+"ini.property";
+		sConfPath = sPath + File.separator + "conf" + File.separator+"init.property";
+		
+		
+		System.out.println(sPath);
 		if (InitialFileInfo ==null ) {
     	   InitialFileInfo =  new  FileLoadingInfo(new File(sConfPath));
-    	   
+    	 
     	   LoadInitailDir();
 		} else {
 			
@@ -216,8 +231,9 @@ public class ConfigFileHandler {
 			 * .getLocation().getPath(); WEB-INF밑에 클래스가 있는 경우
 			 * 클래스경로/kr/co/ezaid/conf classpath에 지정된 경우 => 클래스경로을 가져온다.
 			 */
+			System.out.println("init ");
 			String sPath = null;
-
+			
 			/*
 			sPath = ConfigFileHandler.class.getProtectionDomain()
 					.getCodeSource().getLocation().getPath();
@@ -233,9 +249,11 @@ public class ConfigFileHandler {
 			sPath = getInitDirectory();
 			
 
+			System.out.println("file 파일==>"+sPath);
+			
 			sConfPath = sPath +  File.separator
 					+ sFilePath;
-									
+			 							
 
 			fileLoadingInfo = new FileLoadingInfo(new File(sConfPath));
 
@@ -257,7 +275,7 @@ public class ConfigFileHandler {
 			// 파일이 제대로 로딩되지 않았다.
 			
 			System.out.println(this.getClass().getName()
-					+ ".loadFile() : cannot open config file==>"+fileLoadingInfo.getFile().getName());
+					+ ".loadFile() : cannot open config file==>"+fileLoadingInfo.getFile().getPath());
 			return false;
 		}
 

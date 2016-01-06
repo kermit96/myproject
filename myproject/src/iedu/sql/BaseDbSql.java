@@ -1,6 +1,7 @@
 package iedu.sql;
 
 import iedu.config.ConfigFileHandler;
+import iedu.config.Dbconfig;
 
 public class BaseDbSql {
 
@@ -21,20 +22,20 @@ public class BaseDbSql {
 	protected BaseJDBCDao GetjdbcDao() throws Exception
 	{
 
-		ConfigFileHandler handler = ConfigFileHandler.getConfigFileHandler();
-
-		String host = handler.getValue("host");
+		Dbconfig  config = new Dbconfig();
+		
+		String host = config.getHost();
 		int port = 0;
 		
 		try {
-			Integer.parseInt( handler.getValue("port"));
+			config.getPort();
 
 		} catch (Exception ex ) {}
 		
-		String dbname =  handler.getValue("dbname");
-		String userid =  handler.getValue("userid");
-		String password =  handler.getValue("password");
-		int  getdbtype = Integer.parseInt( handler.getValue("dbtype"));
+		String dbname =  config.getDbname();
+		String userid =  config.getUserid();
+		String password =  config.getPassword();
+		int  getdbtype = config.getDbtype();
 
 		if (getdbtype ==0) 
 		{

@@ -40,6 +40,7 @@ $(document).ready(function() {
             success:function(data){            	
             	  $("#serverhash").val(data);
             }
+            
         });
 
        } catch (ex) {

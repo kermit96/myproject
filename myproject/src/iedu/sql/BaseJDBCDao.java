@@ -45,6 +45,29 @@ public class BaseJDBCDao {
 			throw ex;		
 		}
 	}
+	
+	
+	public void setAutoCommit(boolean autoCommit)
+	{
+	     	
+		try {
+			getcon().setAutoCommit(autoCommit);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void Commit()
+	{
+	     	
+		try {
+			getcon().commit();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 
 	public ResultSet GetResultStat(String sql) throws Exception
@@ -119,6 +142,22 @@ public class BaseJDBCDao {
 	}
 
 
+	public Statement getSTMTForUpdate() throws Exception {
+
+		Statement smt = null;
+		try {
+			smt = con.createStatement(ResultSet.TYPE_FORWARD_ONLY,ResultSet.CONCUR_UPDATABLE );			
+			statements.add(smt);						
+		} catch(Exception ex) {
+			throw ex;					
+		}
+
+		return smt;
+	}
+
+
+
+	
 
 /// PreparedStatement 을 얻어 온다.
 	public PreparedStatement getPrepare(String sql) throws Exception {
@@ -135,6 +174,26 @@ public class BaseJDBCDao {
 		return smt;
 
 	}
+	
+
+	public PreparedStatement getPrepareForUpdate(String sql) throws Exception {
+
+		
+		PreparedStatement smt = null;
+		
+		try {
+			smt = con.prepareStatement(sql,ResultSet.TYPE_FORWARD_ONLY,ResultSet.CONCUR_UPDATABLE );
+			this.prestatements.add(smt);			
+		} catch(Exception ex) {
+			throw ex;					
+		}
+
+		return smt;
+
+	}
+	
+	
+	
 
 	public  void closeAll()
 	{
