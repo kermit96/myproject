@@ -3,23 +3,23 @@ package jdbc;
 import java.sql.*;
 
 /*
- * 	ÀÌ Å¬·¡½º´Â °ú°Å¿¡ JDBC ¼ö¾÷À» ÇÒ ¶§ ¸¸µé¾ú´ø JDBCUtil Å¬·¡½º¿Í °°Àº ¿ªÈ°À» ÇÒ Å¬·¡½ºÀÌ´Ù.
+ * 	ì´ í´ë˜ìŠ¤ëŠ” ê³¼ê±°ì— JDBC ìˆ˜ì—…ì„ í•  ë•Œ ë§Œë“¤ì—ˆë˜ JDBCUtil í´ë˜ìŠ¤ì™€ ê°™ì€ ì—­í™œì„ í•  í´ë˜ìŠ¤ì´ë‹¤.
  */
 public class WebDB {
 	/*
-	 * 1.	»ı¼ºÀÚ ÇÔ¼ö¿¡¼­ µå¶óÀÌ¹ö¸¦ ·ÎµùÇÏµµ·Ï ÇÑ´Ù.
+	 * 1.	ìƒì„±ì í•¨ìˆ˜ì—ì„œ ë“œë¼ì´ë²„ë¥¼ ë¡œë”©í•˜ë„ë¡ í•œë‹¤.
 	 */
 	public WebDB() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 		}
 		catch(Exception e) {
-			System.out.println("µå¶óÀÌ¹ö ·Îµù ¿¡·¯ " + e);
+			System.out.println("ë“œë¼ì´ë²„ ë¡œë”© ì—ëŸ¬ " + e);
 		}
 	}
 	
 	/*
-	 * 2.	ÄÁ³Ø¼ÇÀ» ±¸ÇÏ´Â ÇÔ¼ö¸¦ Á¦ÀÛÇÑ´Ù.
+	 * 2.	ì»¨ë„¥ì…˜ì„ êµ¬í•˜ëŠ” í•¨ìˆ˜ë¥¼ ì œì‘í•œë‹¤.
 	 */
 	public Connection getCON() {
 		Connection	con = null;
@@ -27,13 +27,13 @@ public class WebDB {
 			con = DriverManager.getConnection("jdbc:oracle:thin:@192.168.56.81:1521:orcl", "scott", "tiger");
 		}
 		catch(Exception e) {
-			System.out.println("ÄÁ³Ø¼Ç ¿¡·¯ " + e);
+			System.out.println("ì»¨ë„¥ì…˜ ì—ëŸ¬ " + e);
 		}
 		return con;
 	}
 
 	/*
-	 *	3.	Statement¸¦ ¸¸µé¾îÁÖ´Â ÇÔ¼ö¸¦ Á¦ÀÛÇÑ´Ù. 
+	 *	3.	Statementë¥¼ ë§Œë“¤ì–´ì£¼ëŠ” í•¨ìˆ˜ë¥¼ ì œì‘í•œë‹¤. 
 	 */
 	public Statement getSTMT(Connection con) {
 		Statement	stmt = null;
@@ -41,13 +41,13 @@ public class WebDB {
 			stmt = con.createStatement();
 		}
 		catch(Exception e) {
-			System.out.println("½ºÅ×ÀÌÆ®¸ÕÆ® »ı¼º ¿¡·¯ " + e);
+			System.out.println("ìŠ¤í…Œì´íŠ¸ë¨¼íŠ¸ ìƒì„± ì—ëŸ¬ " + e);
 		}
 		return stmt;
 	}
 	
 	/*
-	 * 	4.	PreparedStatement¸¦ ¸¸µé¾îÁÖ´Â ÇÔ¼ö¸¦ Á¦ÀÛÇÑ´Ù.
+	 * 	4.	PreparedStatementë¥¼ ë§Œë“¤ì–´ì£¼ëŠ” í•¨ìˆ˜ë¥¼ ì œì‘í•œë‹¤.
 	 */
 	public PreparedStatement getPSTMT(Connection con, String sql) {
 		PreparedStatement		pstmt = null;
@@ -55,13 +55,13 @@ public class WebDB {
 			pstmt = con.prepareStatement(sql);
 		}
 		catch(Exception e) {
-			System.out.println("PreparedStatement »ı¼º ¿¡·¯ " + e);
+			System.out.println("PreparedStatement ìƒì„± ì—ëŸ¬ " + e);
 		}
 		return pstmt;
 	}
 
 	/*
-	 * 	5.	´İ¾ÆÁÖ´Â ÇÔ¼ö¸¦ Á¦ÀÛÇÑ´Ù.
+	 * 	5.	ë‹«ì•„ì£¼ëŠ” í•¨ìˆ˜ë¥¼ ì œì‘í•œë‹¤.
 	 */
 	public void close(Object obj) {
 		try {
@@ -81,16 +81,7 @@ public class WebDB {
 			}
 		}
 		catch(Exception e) {
-			System.out.println("Close ¿¡·¯ " + e);
+			System.out.println("Close ì—ëŸ¬ " + e);
 		}
 	}
 }
-
-
-
-
-
-
-
-
-

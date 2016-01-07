@@ -88,8 +88,8 @@ public class ConfigFileHandler {
 	{		
 		 		  File file = this.fileLoadingInfo.file;
 		 		 
-		 			try {
-		 				m_oProps.store(new FileOutputStream(file), null);
+		 			try(FileOutputStream fio=   new FileOutputStream(file)) {		 				
+		 				m_oProps.store(fio, null);
 		 			} catch(IOException e) {
 		 				e.printStackTrace();
 		 			}		  		 		  

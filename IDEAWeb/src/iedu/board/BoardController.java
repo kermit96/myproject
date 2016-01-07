@@ -9,14 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-@WebServlet("*.bbs")
 public class BoardController extends HttpServlet {
-	//	¿äÃ»ÀÌ ¿À¸é ½ÇÇàÇÒ Å¬·¡½º¸¦ °¡Áö°í ÀÖÀ» ¸Ê ÄÃ·º¼Ç
+	//	ìš”ì²­ì´ ì˜¤ë©´ ì‹¤í–‰í•  í´ë˜ìŠ¤ë¥¼ ê°€ì§€ê³  ìˆì„ ë§µ ì»¬ë ‰ì…˜
 	HashMap		map = new HashMap();
 	public void init(ServletConfig config) throws ServletException {
-		//	¾î¶² ¿äÃ»ÀÌ ¿ÔÀ»¶§ ¹«¾ùÀ» ½ÇÇàÇÒÁö¸¦ ¹Ì¸® µî·ÏÇØ ³õ°í ÀÌ°ÍÀ» »ç¿ëÇÏ¸é ¾ÈµÉ±î?
+		//	ì–´ë–¤ ìš”ì²­ì´ ì™”ì„ë•Œ ë¬´ì—‡ì„ ì‹¤í–‰í• ì§€ë¥¼ ë¯¸ë¦¬ ë“±ë¡í•´ ë†“ê³  ì´ê²ƒì„ ì‚¬ìš©í•˜ë©´ ì•ˆë ê¹Œ?
 		try {
-			//	»ç¿ëÇÒ Å¬·¡½º¸¦ ·ÎµùÇÑ´Ù.
+			//	ì‚¬ìš©í•  í´ë˜ìŠ¤ë¥¼ ë¡œë”©í•œë‹¤.
 			Class	a = Class.forName("iedu.board.BoardList");
 			Class	b = Class.forName("iedu.board.BoardInsert");
 			Class	c = Class.forName("iedu.board.BoardDetail");
@@ -25,7 +24,7 @@ public class BoardController extends HttpServlet {
 			Class	f = Class.forName("iedu.board.BoardInsertForm");
 			Class	g = Class.forName("iedu.board.BoardReWrite");
 //			Class	h = Class.forName("iedu.board.BoardModifyForm");
-			//	new ¸¦ °­Á¦·Î ½ÃÅ²´Ù.
+			//	new ë¥¼ ê°•ì œë¡œ ì‹œí‚¨ë‹¤.
 			Object		a1 = a.newInstance(); 
 			Object		b1 = b.newInstance(); 
 			Object		c1 = c.newInstance(); 
@@ -35,7 +34,7 @@ public class BoardController extends HttpServlet {
 			Object		g1 = g.newInstance();
 //			Object		h1 = h.newInstance();
 			
-			//	ÀÌ°ÍÀ» ³ªÁß¿¡ »ç¿ëÇÏ±â À§ÇØ¼­ Map¿¡ µî·ÏÇØ ³õ´Â´Ù.
+			//	ì´ê²ƒì„ ë‚˜ì¤‘ì— ì‚¬ìš©í•˜ê¸° ìœ„í•´ì„œ Mapì— ë“±ë¡í•´ ë†“ëŠ”ë‹¤.
 			map.put("/Board/BoardList.bbs", a1);
 			map.put("/Board/BoardInsert.bbs", b1);
 			map.put("/Board/BoardDetail.bbs", c1);
@@ -50,42 +49,42 @@ public class BoardController extends HttpServlet {
 		}
 	}
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, java.io.IOException {
-		//	ÀÌ ÇÔ¼ö´Â get ¹æ½ÄÀ¸·Î ¿äÃ»ÇÏ¸é ½ÇÇàµÇ´Â ÇÔ¼öÀÌ°í
+		//	ì´ í•¨ìˆ˜ëŠ” get ë°©ì‹ìœ¼ë¡œ ìš”ì²­í•˜ë©´ ì‹¤í–‰ë˜ëŠ” í•¨ìˆ˜ì´ê³ 
 		doService(req, resp);
 	}
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, java.io.IOException {
-		//	ÀÌ ÇÔ¼ö´Â post ¹æ½ÄÀ¸·Î ¿äÃ»ÇÏ¸é ½ÇÇàµÇ´Â ÇÔ¼öÀÌ´Ù.
+		//	ì´ í•¨ìˆ˜ëŠ” post ë°©ì‹ìœ¼ë¡œ ìš”ì²­í•˜ë©´ ì‹¤í–‰ë˜ëŠ” í•¨ìˆ˜ì´ë‹¤.
 		doService(req, resp);		
 	}
-	//	ÀÌ°÷¿¡  get, postÀÏ¶§ µ¿½Ã¿¡ ½ÇÇàµÇ´Â ÇÔ¼ö¸¦ ¸¸µé¾îº¸ÀÚ
+	//	ì´ê³³ì—  get, postì¼ë•Œ ë™ì‹œì— ì‹¤í–‰ë˜ëŠ” í•¨ìˆ˜ë¥¼ ë§Œë“¤ì–´ë³´ì
 	public void doService(HttpServletRequest req, HttpServletResponse resp) {
-		String		view = "";			//	¸ğµ¨ÀÌ ¼±ÅÃÇÑ ºä¸¦ ±â¾ïÇÒ ÁØºñ
-		//	ÀÌ°÷¿¡¼­ ÇÒÀÏÀº
-		//		¿äÃ» ³»¿ëÀ» ºĞ¼®ÇØ¼­
-		//	1.	¾î¶»°Ô ¿äÃ»ÀÌ µé¾î¿Ô´ÂÁö È®ÀÎÇÑ´Ù.
+		String		view = "";			//	ëª¨ë¸ì´ ì„ íƒí•œ ë·°ë¥¼ ê¸°ì–µí•  ì¤€ë¹„
+		//	ì´ê³³ì—ì„œ í• ì¼ì€
+		//		ìš”ì²­ ë‚´ìš©ì„ ë¶„ì„í•´ì„œ
+		//	1.	ì–´ë–»ê²Œ ìš”ì²­ì´ ë“¤ì–´ì™”ëŠ”ì§€ í™•ì¸í•œë‹¤.
 		String		request = req.getRequestURI();
-		//		ÀÌ ÇÔ¼ö´Â ¿äÃ» ³»¿ëÀ» ¾Ë¾Æ³»´Â ÇÔ¼öÀÌ´Ù.
+		//		ì´ í•¨ìˆ˜ëŠ” ìš”ì²­ ë‚´ìš©ì„ ì•Œì•„ë‚´ëŠ” í•¨ìˆ˜ì´ë‹¤.
 		String		domain = req.getContextPath();
-		//		ÀÌ ÇÔ¼ö´Â ¿äÃ» ³»¿ëÁß µµ¸ŞÀÎÀ¸·Î ºüÁö´Â ºÎºĞÀ» ¾Ë¼ö ÀÖ´Ù.
+		//		ì´ í•¨ìˆ˜ëŠ” ìš”ì²­ ë‚´ìš©ì¤‘ ë„ë©”ì¸ìœ¼ë¡œ ë¹ ì§€ëŠ” ë¶€ë¶„ì„ ì•Œìˆ˜ ìˆë‹¤.
 		
-		//	ÀÌ µÎ°¡Áö¸¦ Á¶ÇÕÇØ¼­	½ÇÁ¦ ¿äÃ» ³»¿ëÀ» ¾Ë¾Æ³¾ ¼ö ÀÖ´Ù.
+		//	ì´ ë‘ê°€ì§€ë¥¼ ì¡°í•©í•´ì„œ	ì‹¤ì œ ìš”ì²­ ë‚´ìš©ì„ ì•Œì•„ë‚¼ ìˆ˜ ìˆë‹¤.
 		String		realReq = request.substring(domain.length());
 //		System.out.println(request);
 //		System.out.println(domain);
 //		System.out.println(realReq);		//	/Board/BoardList.bbs
 		
-		//	¿äÃ»ÇÑ ³»¿ëÀ» ÀÌ¿ëÇØ¼­ »ç¿ëÇÒ Å¬·¡½º¸¦ ²¨³»ÁÖ¼¼¿ä.
+		//	ìš”ì²­í•œ ë‚´ìš©ì„ ì´ìš©í•´ì„œ ì‚¬ìš©í•  í´ë˜ìŠ¤ë¥¼ êº¼ë‚´ì£¼ì„¸ìš”.
 		BoardMain	target = (BoardMain) map.get(realReq);
-		//	ÀÌÁ¦ ÀÌ Å¬·¡½º¸¦ ½ÇÇàÇØ¼­ ÀÏÀ» ºĞ»êÇÏÀÚ.
-		//	±× ¸ğµ¨ÀÌ °¡Áö°í ÀÖ´Â ¸ŞÀÎ ÇÔ¼ö¸¦ È£ÃâÇÏ´Â °ÍÀÌ´Ù.
-		//	ÀÌ·Î½á ¸ŞÀÎ ÄÁÆ®·Ñ·¯´Â ¿äÃ»¿¡ µû¶ó ¿øÇÏ´Â ¸ğµ¨À» ½ÇÇàÇÏ°Ô µÇ´Â °ÍÀÌ´Ù.
+		//	ì´ì œ ì´ í´ë˜ìŠ¤ë¥¼ ì‹¤í–‰í•´ì„œ ì¼ì„ ë¶„ì‚°í•˜ì.
+		//	ê·¸ ëª¨ë¸ì´ ê°€ì§€ê³  ìˆëŠ” ë©”ì¸ í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•˜ëŠ” ê²ƒì´ë‹¤.
+		//	ì´ë¡œì¨ ë©”ì¸ ì»¨íŠ¸ë¡¤ëŸ¬ëŠ” ìš”ì²­ì— ë”°ë¼ ì›í•˜ëŠ” ëª¨ë¸ì„ ì‹¤í–‰í•˜ê²Œ ë˜ëŠ” ê²ƒì´ë‹¤.
 		view = target.action(req, resp);
-		//	ÀÌÁ¦ ¸ğµ¨ÀÌ ½ÇÇàÀÌ ³¡³ª¸é ºä¿¡°Ô ÀÏÃ³¸®¸¦ ºÎÅ¹ÇØ¾ß ÇÑ´Ù.
-		//	ºä´Â ÀÀ´ä ¹®¼­¸¦ ¸¸µå´Â ÇÁ·Î±×·¥ÀÌ´Ù.		°í·Î ÀÌ ¹®¼­´Â JSP°¡ µÇ¾î¾ß ÇÑ´Ù.
-		//	¹®Á¦´Â JSP ´Â À¥ ¼­¹ö°¡ °¡Áö°í ÀÖ´Â ¿£ÁøÀÌ ½ÇÇàÇÒ ¼ö ÀÖ´Â ¹®¼­ÀÌ´Ù.
-		//	¿£Áø¿¡°Ô ÀÌ ºä¹®¼­¸¦ ½ÇÇàÇØ ´Ş¶ó°í ºÎÅ¹ÇØ¾ß ÇÑ´Ù.
+		//	ì´ì œ ëª¨ë¸ì´ ì‹¤í–‰ì´ ëë‚˜ë©´ ë·°ì—ê²Œ ì¼ì²˜ë¦¬ë¥¼ ë¶€íƒí•´ì•¼ í•œë‹¤.
+		//	ë·°ëŠ” ì‘ë‹µ ë¬¸ì„œë¥¼ ë§Œë“œëŠ” í”„ë¡œê·¸ë¨ì´ë‹¤.		ê³ ë¡œ ì´ ë¬¸ì„œëŠ” JSPê°€ ë˜ì–´ì•¼ í•œë‹¤.
+		//	ë¬¸ì œëŠ” JSP ëŠ” ì›¹ ì„œë²„ê°€ ê°€ì§€ê³  ìˆëŠ” ì—”ì§„ì´ ì‹¤í–‰í•  ìˆ˜ ìˆëŠ” ë¬¸ì„œì´ë‹¤.
+		//	ì—”ì§„ì—ê²Œ ì´ ë·°ë¬¸ì„œë¥¼ ì‹¤í–‰í•´ ë‹¬ë¼ê³  ë¶€íƒí•´ì•¼ í•œë‹¤.
 		
-		//	view ¶ó´Â º¯¼ö¿¡´Â »ç¿ëÇÒ ºä ÇÁ·Î±×·¥(JSP ÇÁ·Î±×·¥ÀÇ ÀÌ¸§)ÀÌ ±â¾ïµÇ¾î ÀÖ´Ù.
+		//	view ë¼ëŠ” ë³€ìˆ˜ì—ëŠ” ì‚¬ìš©í•  ë·° í”„ë¡œê·¸ë¨(JSP í”„ë¡œê·¸ë¨ì˜ ì´ë¦„)ì´ ê¸°ì–µë˜ì–´ ìˆë‹¤.
 		RequestDispatcher	dis = req.getRequestDispatcher(view);
 		try {
 			dis.forward(req,  resp);

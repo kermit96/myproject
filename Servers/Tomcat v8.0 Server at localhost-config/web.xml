@@ -92,11 +92,11 @@
 	<!-- response sent to clients when directory -->
 	<!-- listings is enabled? [true] -->
 
- 
+<!--  
   <listener>
 		<listener-class>iedu.util.MySessionListener</listener-class>
 	</listener>
-
+ -->
 	<servlet>
 		<servlet-name>default</servlet-name>
 		<servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>

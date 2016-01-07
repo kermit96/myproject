@@ -7,17 +7,17 @@ public class GuestDao {
 	public		WebDB		db;
 	public		Connection	con;
 	/*
-	 * 	1.	»ı¼ºÀÚ¿¡¼­ µå¶óÀÌ¹ö ·Îµù°ú ÄÁ³Ø¼ÇÀ» ÇÑ´Ù.
+	 * 	1.	ìƒì„±ìì—ì„œ ë“œë¼ì´ë²„ ë¡œë”©ê³¼ ì»¨ë„¥ì…˜ì„ í•œë‹¤.
 	 */
 	public GuestDao() {
 		db = new WebDB();
 		con = db.getCON();
 	}
 	/*
-	 * 	2.	µÎ°¡Áö ÁúÀÇ ¸í·ÉÀ» ´ë½Å ¼öÇàÇÒ ÇÔ¼ö¸¦ Á¦ÀÛÇÑ´Ù.
+	 * 	2.	ë‘ê°€ì§€ ì§ˆì˜ ëª…ë ¹ì„ ëŒ€ì‹  ìˆ˜í–‰í•  í•¨ìˆ˜ë¥¼ ì œì‘í•œë‹¤.
 	 */
-	//	1.	µî·ÏÇÔ¼ö
-	//		µî·ÏÀ» ÇÏ±â À§ÇØ¼­´Â µî·ÏÇÒ µ¥ÀÌÅÍ¸¦ ¾Ë·ÁÁÖ¾î¾ß ÇÑ´Ù.
+	//	1.	ë“±ë¡í•¨ìˆ˜
+	//		ë“±ë¡ì„ í•˜ê¸° ìœ„í•´ì„œëŠ” ë“±ë¡í•  ë°ì´í„°ë¥¼ ì•Œë ¤ì£¼ì–´ì•¼ í•œë‹¤.
 	public void insertGuest(String writer, String content) {
 		PreparedStatement		pstmt = null;
 		String	sql = 
@@ -29,16 +29,16 @@ public class GuestDao {
 			pstmt.execute();
 		}
 		catch(Exception e) {
-			System.out.println("¹æ¸í·Ï µî·Ï ¿¡·¯ = " + e);
+			System.out.println("ë°©ëª…ë¡ ë“±ë¡ ì—ëŸ¬ = " + e);
 		}
 		finally {
 			db.close(pstmt);
 		}
 	}
 	
-	//	2.	¸ñ·Ï °¡Áö°í ¿À´Â ÇÔ¼ö
-	//		¹æ¸í·ÏÀÇ ¸ñ·ÏÀº		ÇÑÁÙ¿¡ 4°¡Áö Á¤º¸°¡ µé¾îÀÖ°í		==>	HashMap·Î ¹­°í
-	//								±×°ÍÀÌ ¿©·¯ÁÙ ÀÖ´Ù.					==>	ÀÌ°ÍÀ» ´Ù½Ã ArrayList·Î ¹­À» ¿¹Á¤ÀÌ´Ù.
+	//	2.	ëª©ë¡ ê°€ì§€ê³  ì˜¤ëŠ” í•¨ìˆ˜
+	//		ë°©ëª…ë¡ì˜ ëª©ë¡ì€		í•œì¤„ì— 4ê°€ì§€ ì •ë³´ê°€ ë“¤ì–´ìˆê³ 		==>	HashMapë¡œ ë¬¶ê³ 
+	//								ê·¸ê²ƒì´ ì—¬ëŸ¬ì¤„ ìˆë‹¤.					==>	ì´ê²ƒì„ ë‹¤ì‹œ ArrayListë¡œ ë¬¶ì„ ì˜ˆì •ì´ë‹¤.
 	public ArrayList		getGuest() {
 		ArrayList		resultList = new ArrayList();
 		Statement	stmt = null;
@@ -48,21 +48,21 @@ public class GuestDao {
 			stmt = db.getSTMT(con);
 			rs = stmt.executeQuery(sql);
 			while(rs.next()) {
-				//	¾à¼Ó´ë·Î ÇÑÁÙÀÇ µ¥ÀÌÅÍ´Â HashMapÀ¸·Î ¹­ÀÚ
+				//	ì•½ì†ëŒ€ë¡œ í•œì¤„ì˜ ë°ì´í„°ëŠ” HashMapìœ¼ë¡œ ë¬¶ì
 				HashMap		map = new HashMap();
 				map.put("NO", rs.getInt("g_NO"));
 				map.put("WRITER", rs.getString("g_Writer"));
-				String	content = rs.getString("g_Content");		//	ÁÙ¹Ù²Ş ±âÈ£°¡ Á¸ÀçÇÏ´Â ³»¿ëÀ» ¾Ë¾Æ³½´Ù.
-				content = content.replaceAll("\r\n", "<br>");		//	ÁÙ¹Ù²Ş ±âÈ£¸¦ <br> ·Î º¯°æÇÑ ÈÄ
-				map.put("CONTENT", content);						//	±× °á°ú¸¦ ¾Ë·ÁÁØ´Ù.
-				//	¿ø·¡ ³¯Â¥´Â Ãâ·ÂÇÒ ¸ğ½ÀÀ¸·Î ¸¸µé¾î¼­ Á¦°øÇØ¾ß ÇÑ´Ù.
+				String	content = rs.getString("g_Content");		//	ì¤„ë°”ê¿ˆ ê¸°í˜¸ê°€ ì¡´ì¬í•˜ëŠ” ë‚´ìš©ì„ ì•Œì•„ë‚¸ë‹¤.
+				content = content.replaceAll("\r\n", "<br>");		//	ì¤„ë°”ê¿ˆ ê¸°í˜¸ë¥¼ <br> ë¡œ ë³€ê²½í•œ í›„
+				map.put("CONTENT", content);						//	ê·¸ ê²°ê³¼ë¥¼ ì•Œë ¤ì¤€ë‹¤.
+				//	ì›ë˜ ë‚ ì§œëŠ” ì¶œë ¥í•  ëª¨ìŠµìœ¼ë¡œ ë§Œë“¤ì–´ì„œ ì œê³µí•´ì•¼ í•œë‹¤.
 				map.put("DATE", rs.getDate("g_Date"));
-				//	ÀÌ °á°ú¸¦ ArrayList¿¡ ³ÖÀÚ
+				//	ì´ ê²°ê³¼ë¥¼ ArrayListì— ë„£ì
 				resultList.add(map);
 			}
 		}
 		catch(Exception e) {
-			System.out.println("¹æ¸í·Ï ¸ñ·Ïº¸±â ¿¡·¯ " + e);
+			System.out.println("ë°©ëª…ë¡ ëª©ë¡ë³´ê¸° ì—ëŸ¬ " + e);
 		}
 		finally {
 			db.close(rs);
@@ -72,7 +72,7 @@ public class GuestDao {
 	}
 	
 	/*
-	 * 	3.	ÀÚ¿øÀ» ´İ´Â´Ù.
+	 * 	3.	ìì›ì„ ë‹«ëŠ”ë‹¤.
 	 */
 	public void close() {
 		db.close(con);

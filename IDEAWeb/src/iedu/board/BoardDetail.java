@@ -49,7 +49,7 @@ public class BoardDetail implements BoardMain {
 		}
 		
 		//	데이터베이스에서 해당 글을 꺼내서 알려준다.
-		WebDB					db = null;
+		WebDB						db = null;
 		Connection				con = null;
 		PreparedStatement		pstmt = null;
 		ResultSet					rs = null;

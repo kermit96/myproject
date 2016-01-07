@@ -8,6 +8,7 @@ import java.util.HashSet;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
+import iedu.config.Dbconfig;
 import iedu.dao.MyResultSet;
 
 public class BaseJDBCDao {
@@ -22,6 +23,22 @@ public class BaseJDBCDao {
 	{
 		this(drivename,url,userid,password,4);	
 	}
+	 
+	 
+	 public BaseJDBCDao(DBTYPE dbtype, String  url,String userid,String password )
+	 {
+		    
+	          switch(dbtype)
+	          {
+	             case ORACLE_TYPE:
+	            	    break;
+	             case  MSSQL_TYPE:
+	            	     break;
+	             case MYSQL_TYPE:
+	            	    break;
+	          }
+		 
+	 }
 	
 	public BaseJDBCDao(String drivename,String  url,String userid,String password,int initnum )  throws  Exception
 	{
@@ -273,5 +290,41 @@ public class BaseJDBCDao {
 
 	}
 
+	public static  BaseJDBCDao GetjdbcDao(DBTYPE dbtype,String host,  int port, String  dbname,String userid,String password) throws Exception
+	{
+
+		BaseJDBCDao dao = null;
+		
+
+		if (dbtype==DBTYPE.ORACLE_TYPE) 
+		{
+					
+			if (port ==0) 
+				port = 1521;
+			dao = new OracleJDBCDao(userid,password,host,port,dbname  ) ;
+		}
+
+		if (dbtype==DBTYPE.MSSQL_TYPE) 
+		{
+		
+			if (port ==0) 
+				port = 1433;
+			dao = new MssqlSqlJDBCDao(userid,password,host,port,dbname );
+
+		}
+
+		if (dbtype==DBTYPE.MYSQL_TYPE) 
+		{			
+			if (port ==0) 
+				port = 3306;
+
+			dao = new MySqlJDBCDao(userid,password,host,port,dbname );
+		}		                  
+
+		return dao;
+	}
+
+	
+	
 
 }

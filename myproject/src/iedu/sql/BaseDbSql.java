@@ -10,7 +10,7 @@ public class BaseDbSql {
 	public BaseDbSql()
 	{
 
-
+		
 	}
 
 	
@@ -37,40 +37,12 @@ public class BaseDbSql {
 		String password =  config.getPassword();
 		int  getdbtype = config.getDbtype();
 
-		if (getdbtype ==0) 
-		{
-			dbtype=DBTYPE.ORACLE_TYPE;			
-			if (port ==0) 
-				port = 1521;
-		}
-
-		if (getdbtype ==1) 
-		{
-			dbtype=DBTYPE.MSSQL_TYPE;
-			if (port ==0) 
-				port = 1433;
-
-
-		}
-
-		if (getdbtype ==2) 
-		{
-			dbtype=DBTYPE.MYSQL_TYPE;
-			if (port ==0) 
-				port = 3306;
-
-		}
-
+        dbtype = DBTYPE.fromInt(getdbtype); 
 
 		BaseJDBCDao dao = null;                   
 
-		if (dbtype==DBTYPE.ORACLE_TYPE)
-			dao = new OracleJDBCDao(userid,password,host,port,dbname  ) ;			 
-		else if(dbtype==DBTYPE.MSSQL_TYPE) 
-			dao = new MssqlSqlJDBCDao(userid,password,host,port,dbname );
-		else if (dbtype==DBTYPE.MYSQL_TYPE)
-			dao = new MySqlJDBCDao(userid,password,host,port,dbname );
-
+		dao = BaseJDBCDao.GetjdbcDao(dbtype, host, port, dbname, userid, password);
+		
 		return dao;
 	}
 

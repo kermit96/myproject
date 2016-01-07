@@ -22,6 +22,7 @@ public class PageInfo {
 		this.totalCount = totalCount;
 		this.pageList = pageList;
 		this.pageGroup = pageGroup;
+		calcInfo();
 	}
 	//	이제 필요한 나머지 정보를 계산하자.
 	public void calcInfo() {

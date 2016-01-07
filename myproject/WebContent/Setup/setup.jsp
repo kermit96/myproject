@@ -3,7 +3,6 @@
     pageEncoding="UTF-8"%>
   <%@page import="iedu.util.* " %>  
 <%
-
    boolean isview = false;
     //  local 에서  실행하지 않으면 실행되지 않게 한다.    
     String ip=  request.getRemoteAddr();      
@@ -19,6 +18,7 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"> </script>
 <script>
+<%if (isview)  { %> 
 $(document).ready(function() {
 	  // 처음 설정 항목을 가져온다. 
 	   $("#test").click(test);
@@ -36,13 +36,18 @@ function init()
         async:false,
         type:'post',
         dataType:'json',
-        success:function(data){            	
+        success:function(data){
+        	
+   
           $("#dbname").val(data.dbname);
           $("#dbselect").val(data.dbtype);
           $("#dbuser").val(data.userid);
           $("#dbhost").val(data.host);
           $("#dbport").val(data.port);
           $("#dbpassword").val(data.password);
+        },
+        error:function( xhr) {
+        	 alert("An error occured: " + xhr.status + " " + xhr.statusText)
         }
         
     });
@@ -50,20 +55,61 @@ function init()
 
 function test()
 {
-	 
+	$.ajax({
+        url:'../ajax/dbtest',
+        async:false,
+        type:'post',
+        dataType:'html',
+        data:{dbtype:$("#dbselect").val(),
+        	dbname:$("#dbname").val(),
+        	dbuser:$("#dbuser").val(),
+        	dbhost:$("#dbhost").val(),
+        	dbport:$("#dbport").val(),
+        	dbpassword:$("#dbpassword").val(),
+        
+        },
+        success:function(data){            	
+            $("#result").html(data);
+        },
+        error:function( xhr) {
+        	 alert("An error occured: " + xhr.status + " " + xhr.statusText)
+        }
+        
+    }); 
 }
 
 function save()
 {
-	
+	$.ajax({
+        url:'../ajax/dbsave',
+        async:false,
+        type:'post',
+        dataType:'html',
+        data:{dbtype:$("#dbselect").val(),
+        	dbname:$("#dbname").val(),
+        	dbuser:$("#dbuser").val(),
+        	dbhost:$("#dbhost").val(),
+        	dbport:$("#dbport").val(),
+        	dbpassword:$("#dbpassword").val(),
+        
+        },
+        success:function(data){            	
+            alert("저장했습니다.");
+        },
+        error:function( xhr) {
+        	 alert("An error occured: " + xhr.status + " " + xhr.statusText)
+        }        
+    }); 	
 }
 
 
 function myclose()
 {
-	
-}
+	self.opener = self;
+	window.close();
 
+}
+<%} %>
 
 </script>
 </head>
@@ -140,12 +186,12 @@ function myclose()
       <button id="test"> 테스트</button>    <button  id="save"> 저장</button> <button id="end"> 끝내기</button> 
   </td>
   </tr>    
-  
   </table>    
+   <div id="result"  style="color:blue"  align="center"> 
    
    
-   
-      
+   </div>
+         
    <% } else { %>  
        로컬 pc 에서만 실행 할수 있습니다.
 <%} %>

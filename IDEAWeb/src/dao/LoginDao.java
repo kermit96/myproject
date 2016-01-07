@@ -7,7 +7,7 @@ import 		jdbc.*;
 
 public class LoginDao {
 	/*
-	 * 	1.	»ı¼ºÇÏ´Â ¼ø°£ µ¥ÀÌÅÍº£ÀÌ½º¿¡ ÇÊ¿äÇÑ ³»¿ë(µå¶óÀÌ¹ö·Îµù, ÄÁ³Ø¼ÇÀ» ¹Ş¾Æ¿Â´Ù
+	 * 	1.	ìƒì„±í•˜ëŠ” ìˆœê°„ ë°ì´í„°ë² ì´ìŠ¤ì— í•„ìš”í•œ ë‚´ìš©(ë“œë¼ì´ë²„ë¡œë”©, ì»¨ë„¥ì…˜ì„ ë°›ì•„ì˜¨ë‹¤
 	 */
 	public Connection	con;
 	public	WebDB		db;
@@ -17,24 +17,24 @@ public class LoginDao {
 	}
 	
 	/*	 
-	 * 	2.	ÇÊ¿äÇÑ ÁúÀÇ ¸í·ÉÀ» ½ÇÇàÇÒ ÇÔ¼ö¸¦ Á¦ÀÛÇÑ´Ù.(ÀÌ ÇÔ¼ö´Â ¿©·¯°³°¡ ³ª¿Ã ¼ö ÀÖ´Ù.)
+	 * 	2.	í•„ìš”í•œ ì§ˆì˜ ëª…ë ¹ì„ ì‹¤í–‰í•  í•¨ìˆ˜ë¥¼ ì œì‘í•œë‹¤.(ì´ í•¨ìˆ˜ëŠ” ì—¬ëŸ¬ê°œê°€ ë‚˜ì˜¬ ìˆ˜ ìˆë‹¤.)
 	 * 
-	 * 		1.	·Î±×ÀÎ È®ÀÎ ÁúÀÇ ½ÇÇà
+	 * 		1.	ë¡œê·¸ì¸ í™•ì¸ ì§ˆì˜ ì‹¤í–‰
 	 */
 	public HashMap	isMember(String id, String pw) {
-		//	Áï ÀÌ ÇÔ¼ö¿¡°Ô ¾ÆÀÌµğ¿Í ºñ¹øÀ» ¾Ë·ÁÁÖ¸é ±× È¸¿øÀÇ Á¤º¸¸¦ ¾Ë·ÁÁÙ ÇÔ¼ö¸¦ ¸¸µç´Ù.
+		//	ì¦‰ ì´ í•¨ìˆ˜ì—ê²Œ ì•„ì´ë””ì™€ ë¹„ë²ˆì„ ì•Œë ¤ì£¼ë©´ ê·¸ íšŒì›ì˜ ì •ë³´ë¥¼ ì•Œë ¤ì¤„ í•¨ìˆ˜ë¥¼ ë§Œë“ ë‹¤.
 		PreparedStatement		pstmt = null;
 		ResultSet					rs = null;
 		HashMap					map = new HashMap();
 		String	sql = "SELECT * FROM Member WHERE m_ID = ? AND m_Password = ? ";
 		try {
-			//	±× È¸¿øÀÇ Á¤º¸¸¦ ²¨³»ÁØ´Ù.
+			//	ê·¸ íšŒì›ì˜ ì •ë³´ë¥¼ êº¼ë‚´ì¤€ë‹¤.
 			pstmt = db.getPSTMT(con,  sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pw);
 			rs = pstmt.executeQuery();
-			//	ÀÌ È¸¿øÀÇ Á¤º¸¸¦ HashMap¿¡ ³Ö¾î¼­ ¾Ë·ÁÁØ´Ù.
-			//		1.		¾ÆÀÌµğ,		½Ç¸í,			´Ğ³×ÀÓ
+			//	ì´ íšŒì›ì˜ ì •ë³´ë¥¼ HashMapì— ë„£ì–´ì„œ ì•Œë ¤ì¤€ë‹¤.
+			//		1.		ì•„ì´ë””,		ì‹¤ëª…,			ë‹‰ë„¤ì„
 			if(rs.next()) {
 				map.put("ID", rs.getString("m_ID"));
 				map.put("NAME", rs.getString("m_Name"));
@@ -42,7 +42,7 @@ public class LoginDao {
 			}
 		}
 		catch(Exception e) {
-			System.out.println("·Î±×ÀÎ Ã³¸® ¿¡·¯ = " + e);
+			System.out.println("ë¡œê·¸ì¸ ì²˜ë¦¬ ì—ëŸ¬ = " + e);
 		}
 		finally {
 			db.close(rs);
@@ -52,7 +52,7 @@ public class LoginDao {
 	}
 	
 	/*
-	 * ¸¶Áö¸·À¸·Î ¸ğµç ÀÚ¿øÀ» ´İ¾ÆÁÖ´Â ÇÔ¼ö¸¦ Á¦ÀÛÇÑ´Ù.
+	 * ë§ˆì§€ë§‰ìœ¼ë¡œ ëª¨ë“  ìì›ì„ ë‹«ì•„ì£¼ëŠ” í•¨ìˆ˜ë¥¼ ì œì‘í•œë‹¤.
 	 */
 	public void close() {
 		db.close(con);
