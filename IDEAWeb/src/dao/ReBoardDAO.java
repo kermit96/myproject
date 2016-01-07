@@ -229,7 +229,42 @@ public class ReBoardDAO {
 		db.close(stmt);
 	}
 	
-	public void updateGood(int oriNO) {
+	
+	
+	public int  updateBad(int oriNO) {
+		//	좋아요 숫자를 증가시킨다.
+		String	sql = ReBoardSQL.getSQL(ReBoardSQL.UPDATEBAD);
+		try {
+			pstmt = db.getPSTMT(con, sql);
+			pstmt.setInt(1, oriNO);
+			pstmt.execute();
+		}
+		catch(Exception e) {
+			
+		}
+		db.close(pstmt);
+		
+		sql = ReBoardSQL.getSQL(ReBoardSQL.GETBOARDVIEW);
+		try {
+			pstmt = db.getPSTMT(con, sql);
+			pstmt.setInt(1, oriNO);
+			ResultSet result = pstmt.executeQuery();
+			result.next();
+			int count  = result.getInt("OK");
+			return count;
+		}
+		catch(Exception e) {
+			
+		}
+		db.close(pstmt);
+		
+		return 0;
+		
+	}
+
+	
+	
+	public int  updateGood(int oriNO) {
 		//	좋아요 숫자를 증가시킨다.
 		String	sql = ReBoardSQL.getSQL(ReBoardSQL.UPDATEGOOD);
 		try {
@@ -241,6 +276,23 @@ public class ReBoardDAO {
 			
 		}
 		db.close(pstmt);
+		
+		sql = ReBoardSQL.getSQL(ReBoardSQL.GETBOARDVIEW);
+		try {
+			pstmt = db.getPSTMT(con, sql);
+			pstmt.setInt(1, oriNO);
+			ResultSet result = pstmt.executeQuery();
+			result.next();
+			int count  = result.getInt("OK");
+			return count;
+		}
+		catch(Exception e) {
+			
+		}
+		db.close(pstmt);
+		
+		return 0;
+		
 	}
 	
 	

@@ -6,11 +6,16 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 		<title>Insert title here</title>
+		<script type="text/javascript" src="//code.jquery.com/jquery.min.js"> </script>
 		<script>
+		
+		
+		
 			function List() {
 				location.href = "../ReBoard/BoardList.reb?nowPage=${NOWPAGE}";
 				//	JSTL은 이처럼 자바 스크립트 안에서도 사용할 수 있다.
 			}
+			
 			function Reple() {
 				//	GET 방식 요청
 				location.href = "../ReBoard/BoardReWriteForm.reb?oriNO=${DATA.no}"
@@ -19,12 +24,57 @@
 				//	첫글자는 반드시 소문자로 써야 한다.
 				//	나머지 글자는 똑같이 사용해야 한다.
 			}
+			
+			function Bad() {
+			
+				$.ajax({
+		            url:'../ajax/badclick',
+		            async:false,
+		            type:'post',
+		            data:{no:$("#id").val() },
+		            success:function(data){
+
+		            	  $("#cancelspan").html(data);
+		            } ,          
+		            dataType:"html",
+		            
+		            error:function()
+		            {
+		            	alert("error");
+		            	
+		            }		           		    	 
+		     });
+		     
+				
+				
+			}
+			
 			function Good() {
-				location.href = "../ReBoard/BoardGood.reb?oriNO=${DATA.no}&nowPage=${NOWPAGE}";
+		// 		location.href = "../ReBoard/BoardGood.reb?oriNO=${DATA.no}&nowPage=${NOWPAGE}";
+		    
+		     $.ajax({
+		            url:'../ajax/goodclick',
+		            async:false,
+		            type:'post',
+		            data:{no:$("#id").val() },
+		            success:function(data){
+		            
+		            	  $("#okspan").html(data);
+		            } ,          
+		            dataType:"html",
+		            
+		            error:function()
+		            {
+		            	alert("error");
+		            	
+		            }		           		    	 
+		     });
+		        
 			}
 		</script>
 	</head>
 	<body>
+	    <input type="hidden"  id="id" value="${DATA.no}">
 		<table width="50%" border="1" align="center">
 			<tr>
 				<td>번호</td>
@@ -48,8 +98,10 @@
 			</tr>
 			<tr>
 				<td colspan="4" align="center">
-					<button id="ok" onClick="JavaScript:Good()"><li class="fa fa-thumbs-o-up" style="color:red"> ( ${DATA.ok} )</button>
-					<input type="button" id="bed" value="나빠요( ${DATA.bed} )">
+					<button id="ok" onClick="JavaScript:Good()"><li class="fa fa-thumbs-o-up" style="color:red" > <span id="okspan"> ( ${DATA.ok} )</span></button>
+					
+  				<button id="cancel" onClick="JavaScript:Bad()"><li class="fa fa-thumbs-o-down" style="color:red" > <span id="cancelspan"> ( ${DATA.bed} )</span></button>
+
 				</td>
 			</tr>
 			<tr>

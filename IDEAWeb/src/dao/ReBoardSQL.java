@@ -20,7 +20,9 @@ public class ReBoardSQL {
 	public static final int	GETBOARDVIEW		= 5;
 	public static final int	UPDATEHIT			= 6;
 	public static final int	UPDATEORDER		= 7;
-	public static final int	UPDATEGOOD		= 8; 
+	public static final int	UPDATEGOOD		= 8;
+	
+	public static final int	UPDATEBAD		= 9;
 	
 	//	사용할 때
 	//		ReBoardSQL.getSQL(ReBoardSQL.GETMAXNO);
@@ -109,6 +111,15 @@ public class ReBoardSQL {
 				buff.append("		RepleBoard ");
 				buff.append("SET ");
 				buff.append("		rb_OK = rb_OK + 1 ");
+				buff.append("WHERE ");
+				buff.append("		rb_NO = ? ");
+				break;
+
+			case 	UPDATEBAD:
+				buff.append("UPDATE ");
+				buff.append("		RepleBoard ");
+				buff.append("SET ");
+				buff.append("		rb_Bed = rb_Bed + 1 ");
 				buff.append("WHERE ");
 				buff.append("		rb_NO = ? ");
 				break;

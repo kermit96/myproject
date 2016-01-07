@@ -40,6 +40,7 @@
 	<li><a href="http://localhost:8080/IDEAWeb/Survey/SurveyList.jsp">설문조사</a><li>
 	<li><a href="http://localhost:8080/IDEAWeb/Guest/GuestList.jsp">방명록</a><li>
 	<li><a href="http://localhost:8080/IDEAWeb/Board/BoardList.bbs">댓글 게시판</a><li>
+  <li><a href="http://localhost:8080/IDEAWeb/ReBoard/BoardList.reb">답글 게시판</a><li>
 </ul>
 <div style="margin-left:25%;padding:1px 16px;height:1000px;">
 		<h1 style="text-align:center">ISUNDOL HOME</h1>
