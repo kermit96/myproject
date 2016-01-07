@@ -1,4 +1,4 @@
-package iedu.ajax;
+package ajax;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import iedu.util.util;
+import dao.ReBoardDAO;
 
 /**
- * Servlet implementation class ase256
+ * Servlet implementation class badclick
  */
-@WebServlet("/ajax/ase256")
-public class ase256 extends HttpServlet {
+@WebServlet("/ajax/badclick")
+public class badclick extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ase256() {
+    public badclick() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,29 +31,20 @@ public class ase256 extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
 		response.setContentType("text/html");
 		response.setCharacterEncoding("utf-8");
 	
 		PrintWriter out=response.getWriter();
-		
-		String reqstr = request.getParameter("str");
-	
-		
-		String str = "";
-		try {
-			str = iedu.util.ase256.AES_Encode(str);		
-		} catch (Exception ex) {
-		   ex.printStackTrace();				
-		}
-		
-		
-		
-	
+	   
+		String	strNO = request.getParameter("no");
+		int OriNo = Integer.parseInt(strNO);
 
-		out.print(str);        // out.print 내용을 ajax의 dataType이 jason인 놈에게 데이터 쏴줌
-				     
+		//		데이터베이스에 부탁해서 좋아요 숫자를 증가한다.
+		ReBoardDAO	dao = new ReBoardDAO();
+		int count = dao.updateBad(OriNo);		
+		out.print(count);		
+		dao.closeCon(); 		 
+		
 	}
 
 	/**
