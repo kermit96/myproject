@@ -11,22 +11,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
-import com.google.gson.Gson;
-
 import dao.ReBoardDAO;
-import iedu.data.HitInfo;
+import dao.ReBoardSQL;
+import iedu.data.ReBoardData;
 
 /**
- * Servlet implementation class badclick
+ * Servlet implementation class reboarddelete
  */
-@WebServlet("/ajax/badclick")
-public class badclick extends HttpServlet {
+@WebServlet("/ajax/reboarddelete")
+public class reboarddelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public badclick() {
+    public reboarddelete() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,27 +35,37 @@ public class badclick extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+	// 	response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		
+		// 사용자가 로그인 안했으면 삭제 할수 없다. 
+		
+		// 그리고 작성자가 아니면 삭제할 수 없다 . 
+		
+		JSONObject obj =  new JSONObject();
 		response.setContentType("text/html");
 		response.setCharacterEncoding("utf-8");
 	
+		PrintWriter out=response.getWriter();
 		
-	   
-		String	strNO = request.getParameter("no");
-		int OriNo = Integer.parseInt(strNO);
-
-		//		데이터베이스에 부탁해서 좋아요 숫자를 증가한다.
+		String userid = (String)request.getSession().getAttribute("ID");
+		if (userid == null)
+			userid ="";
+		if (userid.isEmpty()) {
+			obj.put("result", false);
+			obj.put("reason", "로그인을 하지 않았습니다.");
+			out.print(obj.toJSONString());
+			return;
+		}
+		
+		int orino = Integer.parseInt(request.getParameter("no"));
 		ReBoardDAO	dao = new ReBoardDAO();
-		HitInfo count = dao.updateBad(OriNo);
+		dao.delete(orino,userid);
 	
+		obj.put("result", true);
+		obj.put("reason", "");
+		out.print(obj.toJSONString());
 
- 	   Gson gson = new Gson();
-
-       String jsonstr = gson.toJson(count);
-			 
-	   PrintWriter out=response.getWriter();
- 	   out.print(jsonstr);        // out.print 내용을 ajax의 dataType이 jason인 놈에게 데이터 쏴줌
- 		
-    	 
 		
 	}
 
@@ -69,8 +78,3 @@ public class badclick extends HttpServlet {
 	}
 
 }
-
-
-
-
-

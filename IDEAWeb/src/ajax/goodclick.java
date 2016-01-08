@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import dao.ReBoardDAO;
+import iedu.data.HitInfo;
 
 /**
  * Servlet implementation class goodclick
@@ -42,10 +45,14 @@ public class goodclick extends HttpServlet {
 		System.out.println("oriNo="+OriNo);
 		//		데이터베이스에 부탁해서 좋아요 숫자를 증가한다.
 		ReBoardDAO	dao = new ReBoardDAO();
-		int count = dao.updateGood(OriNo);		
-		out.print(count);		
-		dao.closeCon(); 		 
+					 		
+		HitInfo count = dao.updateGood(OriNo);
 		
+		Gson data = new Gson(); 
+        String str = data.toJson(count);
+		        
+		out.print(str);		
+		dao.closeCon(); 		 
 		
 	}
 

@@ -4,9 +4,10 @@ import 	jdbc.WebDB;
 import		java.sql.*;
 import java.util.ArrayList;
 
+
 import iedu.data.ReBoardData;
 import iedu.util.PageInfo;
-
+import iedu.data.*;
 /*
  * 	답변형 게시판에서 데이터베이스 질의 처리를 전담해줄 클래스
  */
@@ -231,8 +232,12 @@ public class ReBoardDAO {
 	
 	
 	
-	public int  updateBad(int oriNO) {
+	public HitInfo  updateBad(int oriNO) {
 		//	좋아요 숫자를 증가시킨다.
+		
+		
+		HitInfo info = new HitInfo(); 
+		
 		String	sql = ReBoardSQL.getSQL(ReBoardSQL.UPDATEBAD);
 		try {
 			pstmt = db.getPSTMT(con, sql);
@@ -250,22 +255,43 @@ public class ReBoardDAO {
 			pstmt.setInt(1, oriNO);
 			ResultSet result = pstmt.executeQuery();
 			result.next();
-			int count  = result.getInt("OK");
-			return count;
+			info.GoodCount = result.getInt("OK");
+			info.BadCount = result.getInt("BED");
+			return info;
 		}
 		catch(Exception e) {
 			
 		}
 		db.close(pstmt);
 		
-		return 0;
+		return info;
 		
 	}
 
+
+	public void delete( int oriNO,String userid) {
+		
+		String	sql = ReBoardSQL.getSQL(ReBoardSQL.DELETEBOARD);
+		try {
+			pstmt = db.getPSTMT(con, sql);
+			pstmt.setInt(1, oriNO);
+			pstmt.setString(2, userid);
+			pstmt.execute();
+		}
+		catch(Exception e) {
+			
+		}
+		
+		db.close(pstmt);
+		
+		
+	}
 	
 	
-	public int  updateGood(int oriNO) {
+	public HitInfo  updateGood(int oriNO) {
 		//	좋아요 숫자를 증가시킨다.
+		
+		HitInfo info = new HitInfo(); 
 		String	sql = ReBoardSQL.getSQL(ReBoardSQL.UPDATEGOOD);
 		try {
 			pstmt = db.getPSTMT(con, sql);
@@ -284,14 +310,16 @@ public class ReBoardDAO {
 			ResultSet result = pstmt.executeQuery();
 			result.next();
 			int count  = result.getInt("OK");
-			return count;
+			info.GoodCount = count;
+			info.BadCount = result.getInt("BED");
+			return info;
 		}
 		catch(Exception e) {
 			
 		}
 		db.close(pstmt);
 		
-		return 0;
+		return info;
 		
 	}
 	

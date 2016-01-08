@@ -9,7 +9,63 @@
 		<script type="text/javascript" src="//code.jquery.com/jquery.min.js"> </script>
 		<script>
 		
+		$(document).ready(function() {
+			
+			 
+			if ("${DATA.writer}" != "${sessionScope.ID}") 
+			{
+				$("#modify").hide();
+				$("#delete").hide();
+			} 
+			
+		});
 		
+		
+		function Modify() {
+			  
+			  
+			  
+		  }
+		
+		  function Delete() {			  
+// 삭제 허락 받기 		
+
+              var r = confirm("삭제 하시겠습니까?");
+              if(r == false) {
+            	  
+            	  return;
+              }
+              
+              
+				$.ajax({
+		            url:'../ajax/reboarddelete',
+		            async:false,
+		            type:'post',
+		            data:{no:$("#id").val() },
+		            dataType:'json',
+		            success:function(data){
+		            	try {
+		            		
+		            		if (data.result == true) { 
+		            		alert("삭제 했습니다.");
+		            		location.href = "../ReBoard/BoardList.reb";
+		            	   } else {
+		            		  alert(data.reason); 		            		   
+		            	   }
+		            	} catch(ex) {		            		
+		            		alert(ex);
+		            	}
+		            } ,          		            		           
+		            error:function(xhr)
+		            {
+		            	alert("error==>"+xhr.status + " " + xhr.statusText);
+		            	
+		            }		           		    	 
+		     });
+		     
+				
+			 			 
+		  }
 		
 			function List() {
 				location.href = "../ReBoard/BoardList.reb?nowPage=${NOWPAGE}";
@@ -32,12 +88,17 @@
 		            async:false,
 		            type:'post',
 		            data:{no:$("#id").val() },
+		            dataType:"json",
 		            success:function(data){
-
-		            	  $("#cancelspan").html(data);
+		            	try {
+                         
+		            	  $("#cancelspan").html("( "+data.BadCount+" )");
+		            	  $("#okspan").html("( "+data.GoodCount+" )");
+		            	} catch(ex) {		            		
+		            		alert(ex);
+		            	}
 		            } ,          
-		            dataType:"html",
-		            
+		            		            
 		            error:function()
 		            {
 		            	alert("error");
@@ -57,16 +118,15 @@
 		            async:false,
 		            type:'post',
 		            data:{no:$("#id").val() },
-		            success:function(data){
-		            
-		            	  $("#okspan").html(data);
+		            dataType:"json",
+		            success:function(data){                        
+		            	  $("#cancelspan").html("( "+data.BadCount+" )");
+		            	  $("#okspan").html("( "+data.GoodCount+" )");
 		            } ,          
-		            dataType:"html",
-		            
+		            		            
 		            error:function()
 		            {
-		            	alert("error");
-		            	
+		            	alert("error");		            	
 		            }		           		    	 
 		     });
 		        
@@ -108,10 +168,15 @@
 				<td colspan="4" align="center">
 					<a href="JavaScript:List()">목록보기</a>
 					<a href="JavaScript:Reple()">답글달기</a>
-					<a href="#">수정하기</a>
-					<a href="#">삭제하기</a>
+					
+<%--		  	<c:if test=" ${DATA.writer eq sessionScope.ID}"> --%>      								
+					<a  id="modify" href="javaScript:Modify()">수정하기</a>
+					<a   id="delete"   href="javaScript:Delete()">삭제하기</a>
+<%--			</c:if>  --%>   
+					
 				</td>
 			</tr>
 		</table>
+	
 	</body>
 </html>

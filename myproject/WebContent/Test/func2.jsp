@@ -11,7 +11,7 @@
 	 function test() {
 		 
 		 var result = x(6,4);
-		 alert(result);
+
 	 }
 	 
 	 function sum2(a,b) {

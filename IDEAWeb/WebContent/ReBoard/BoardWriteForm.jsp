@@ -1,76 +1,76 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Insert title here</title>
 		<script>
 			function Write() {
-				//	ÇÒÀÏ
-				//		Á¦¸ñ°ú º»¹®ÀÌ ÀÔ·Â µÇ¾ú´ÂÁö È®ÀÎÇÏ°í
+				//	í• ì¼
+				//		ì œëª©ê³¼ ë³¸ë¬¸ì´ ì…ë ¥ ë˜ì—ˆëŠ”ì§€ í™•ì¸í•˜ê³ 
 				var	title = document.getElementById("title").value;
 				if(title == "") {
-					alert("Á¦¸ñÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä");
+					alert("ì œëª©ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”");
 					return;
 				}
 				var	body = document.getElementById("body").value;
 				if(body == "") {
-					alert("º»¹®À» ÀÔ·ÂÇØ ÁÖ¼¼¿ä");
+					alert("ë³¸ë¬¸ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”");
 					return;
 				}
-				//		Á¦´ë·Î ÀÔ·ÂÀÌ µÇ¾úÀ¸¸é ¼­¹ö¿¡ º¸³»ÁØ´Ù.
+				//		ì œëŒ€ë¡œ ì…ë ¥ì´ ë˜ì—ˆìœ¼ë©´ ì„œë²„ì— ë³´ë‚´ì¤€ë‹¤.
 				var	frm = document.getElementById("frm");
-				//	frm.¼Ó¼º = "³»¿ë";
-				//	ÇØ´ç ¼Ó¼ºÀ» º¯°æÇÏ´Â ±â´É
+				//	frm.ì†ì„± = "ë‚´ìš©";
+				//	í•´ë‹¹ ì†ì„±ì„ ë³€ê²½í•˜ëŠ” ê¸°ëŠ¥
 				frm.action = "../ReBoard/BoardWrite.reb";
-				//	ÀÌ ºÎºĞÀº action ÀÌ¶ó´Â ¼Ó¼º °ªÀ» º¯°æÇÑ´Ù.
+				//	ì´ ë¶€ë¶„ì€ action ì´ë¼ëŠ” ì†ì„± ê°’ì„ ë³€ê²½í•œë‹¤.
 				frm.submit();
 			}
 			function Reset() {
-				//	ÆûÀüÃ¼¿¡ ÀÔ·ÂÇÑ ³»¿ëÀ» ÃÊ±âÈ­ ½ÃÅ°´Â ¹æ¹ı
-				//	Çü½Ä>		Æû.reset();
+				//	í¼ì „ì²´ì— ì…ë ¥í•œ ë‚´ìš©ì„ ì´ˆê¸°í™” ì‹œí‚¤ëŠ” ë°©ë²•
+				//	í˜•ì‹>		í¼.reset();
 				var	frm = document.getElementById("frm");
 				frm.reset();
 			}
 			function List() {
-				//	GET ¹æ½ÄÀ» ÀÌ¿ëÇØ¼­ ¸ñ·Ï º¸±â¸¦ ¿äÃ»
+				//	GET ë°©ì‹ì„ ì´ìš©í•´ì„œ ëª©ë¡ ë³´ê¸°ë¥¼ ìš”ì²­
 				location.href = "../ReBoard/BoardList.reb";
 			}
 		</script>
 	</head>
 	<body>
 <%--
-		±Û¾²±â ÆûÀ» º¸¿©ÁÖ¸é µÈ´Ù.
-		ÇÏÁö¸¸ ¿ª½Ã ºäµµ ÁÖ¼ÒÃ¢¿¡¼­ Á÷Á¢ µé¾î¿À´Â °æ¿ì°¡ ÀÖ´Ù.
+		ê¸€ì“°ê¸° í¼ì„ ë³´ì—¬ì£¼ë©´ ëœë‹¤.
+		í•˜ì§€ë§Œ ì—­ì‹œ ë·°ë„ ì£¼ì†Œì°½ì—ì„œ ì§ì ‘ ë“¤ì–´ì˜¤ëŠ” ê²½ìš°ê°€ ìˆë‹¤.
  --%>
  	<c:if test="${sessionScope.ID eq null}">
  		<c:redirect url="../Member/LoginForm.jsp" />
  	</c:if>
-<%--	ÀÚ¹Ù½ºÅ©¸³Æ®¿Í jquery¸¦ ÀÌ¿ëÇØ¼­ ¹º°¡ ÀÛ¾÷À» ÇÏ°í ½ÍÀ»¶§´Â
-		ÁÖ·Î id °ªÀ» ÀÌ¿ëÇØ¼­ Æ¯Á¤ ¿ä¼Ò¸¦ ¼±ÅÃÇÑ´Ù.
-		¼­¹ö´Â ÁÖ·Î name °ªÀ» ÀÌ¿ëÇØ¼­ °ªÀ» Ã³¸®ÇÑ´Ù.
-		°á·Ğ	ÆûÀ» ¸¸µé¶§´Â ½À°üÀûÀ¸·Î id, name °ªÀ» µÑ ´Ù Á¦°øÇÏµµ·Ï ÇÑ´Ù.
+<%--	ìë°”ìŠ¤í¬ë¦½íŠ¸ì™€ jqueryë¥¼ ì´ìš©í•´ì„œ ë­”ê°€ ì‘ì—…ì„ í•˜ê³  ì‹¶ì„ë•ŒëŠ”
+		ì£¼ë¡œ id ê°’ì„ ì´ìš©í•´ì„œ íŠ¹ì • ìš”ì†Œë¥¼ ì„ íƒí•œë‹¤.
+		ì„œë²„ëŠ” ì£¼ë¡œ name ê°’ì„ ì´ìš©í•´ì„œ ê°’ì„ ì²˜ë¦¬í•œë‹¤.
+		ê²°ë¡ 	í¼ì„ ë§Œë“¤ë•ŒëŠ” ìŠµê´€ì ìœ¼ë¡œ id, name ê°’ì„ ë‘˜ ë‹¤ ì œê³µí•˜ë„ë¡ í•œë‹¤.
  --%>	
  	<form method="POST" id="frm" name="frm" action="">
 	<table width="50%" border="1" align="center">
 		<tr>
-			<td>±Û¾´ÀÌ</td>
+			<td>ê¸€ì“´ì´</td>
 			<td><input type="text" disabled value="${sessionScope.ID}"></td>
 		</tr>	
 		<tr>
-			<td>Á¦¸ñ</td>
+			<td>ì œëª©</td>
 			<td><input type="text" name="title" id="title"></td>
 		</tr>	
 		<tr>
-			<td>º»¹®</td>
+			<td>ë³¸ë¬¸</td>
 			<td><textarea name="body" id="body"></textarea></td>
 		</tr>	
 		<tr>
 			<td colspan="2" align="center">
-				<a href="JavaScript:Write()">±Û¾²±â</a>
-				<a href="JavaScript:Reset()">´Ù½Ã¾²±â</a>
-				<a href="JavaScript:List()">¸ñ·Ïº¸±â</a>
+				<a href="JavaScript:Write()">ê¸€ì“°ê¸°</a>
+				<a href="JavaScript:Reset()">ë‹¤ì‹œì“°ê¸°</a>
+				<a href="JavaScript:List()">ëª©ë¡ë³´ê¸°</a>
 			</td>
 		</tr>	
 	</table>

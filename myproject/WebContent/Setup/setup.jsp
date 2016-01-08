@@ -24,7 +24,7 @@ $(document).ready(function() {
 	   $("#test").click(test);
 	   $("#save").click(save);
 	   $("#end").click(myclose);	   
-	   init();
+	   
 	   
 });
 

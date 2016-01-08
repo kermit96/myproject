@@ -1,5 +1,14 @@
 package iedu.config;
 
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+
 import iedu.sql.DBTYPE;
 
 public class Dbconfig {
@@ -70,7 +79,14 @@ public class Dbconfig {
 	 */
 	public void setPassword(String password) {
 		this.password = password;
-		handler.setValue("password",password );
+				
+		try {
+			handler.setValue("password",		iedu.util.ase256.AES_Encode(password));
+		} catch (InvalidKeyException | UnsupportedEncodingException | NoSuchAlgorithmException | NoSuchPaddingException
+				| InvalidAlgorithmParameterException | IllegalBlockSizeException | BadPaddingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -126,10 +142,16 @@ public class Dbconfig {
 		
 		dbname =  handler.getValue("dbname");
 		userid =  handler.getValue("userid");
-		 password =  handler.getValue("password");
+				
+		 try {
+			password =   iedu.util.ase256.AES_Decode( handler.getValue("password"));
+			
+		} catch (Exception	ex) {
+			
+			password = handler.getValue("password");
+		}
 		 
 		dbtype = Integer.parseInt( handler.getValue("dbtype"));
-
 	    	
     }
     

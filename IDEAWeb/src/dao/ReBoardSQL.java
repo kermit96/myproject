@@ -24,6 +24,8 @@ public class ReBoardSQL {
 	
 	public static final int	UPDATEBAD		= 9;
 	
+	public static final int	DELETEBOARD		= 10;
+	
 	//	사용할 때
 	//		ReBoardSQL.getSQL(ReBoardSQL.GETMAXNO);
 	//		ReBoardSQL.getSQL(ReBoardSQL.INSERTBOARD);		이런식으로 사용할 예정이다.
@@ -123,6 +125,14 @@ public class ReBoardSQL {
 				buff.append("WHERE ");
 				buff.append("		rb_NO = ? ");
 				break;
+
+			case 	DELETEBOARD:
+				buff.append("delete ");
+				buff.append("	from 	RepleBoard ");
+				buff.append("WHERE ");
+				buff.append("		rb_NO = ? and rb_Writer=?  ");
+				break;
+				
 		}
 		return buff.toString();
 	}

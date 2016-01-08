@@ -90,6 +90,7 @@ public class ConfigFileHandler {
 		 		 
 		 			try(FileOutputStream fio=   new FileOutputStream(file)) {		 				
 		 				m_oProps.store(fio, null);
+		 				fileLoadingInfo.setLastLoaded(System.currentTimeMillis());
 		 			} catch(IOException e) {
 		 				e.printStackTrace();
 		 			}		  		 		  
