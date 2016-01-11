@@ -1,0 +1,120 @@
+CREATE TABLE [dbo].[board](
+	[boardtype] [tinyint] NULL,
+	[seq] [int] IDENTITY(1,1) NOT NULL,
+	[title] [nvarchar](100) NULL,
+	[writerseq] [int] NULL,
+	[content] [nvarchar](max) NULL,
+	[createdate] [datetime] NULL,
+	[updatedate] [datetime] NULL,
+	[isdelete] [char](1) NOT NULL,
+	[refseq] [int] NULL,
+	[step] [int] NULL,
+	[boardorder] [int] NULL,
+	[hit] [int] NULL,
+ CONSTRAINT [PK_board] PRIMARY KEY CLUSTERED 
+(
+	[seq] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[boardcomment]    Script Date: 2016-01-11 오후 7:10:43 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[boardcomment](
+	[seq] [int] IDENTITY(1,1) NOT NULL,
+	[boardseq] [int] NULL,
+	[content] [nvarchar](max) NULL,
+	[isDelete] [char](1) NULL,
+	[CreateDate] [datetime] NULL,
+	[UpdateDate] [datetime] NULL,
+ CONSTRAINT [PK_boardcomment] PRIMARY KEY CLUSTERED 
+(
+	[seq] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[member]    Script Date: 2016-01-11 오후 7:10:43 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[member](
+	[usernum] [int] IDENTITY(1,1) NOT NULL,
+	[userid] [nvarchar](50) NOT NULL,
+	[password] [varchar](20) NULL,
+	[name] [nvarchar](50) NULL,
+	[nickname] [nvarchar](50) NULL,
+	[tel] [varchar](40) NULL,
+	[isDelete] [char](1) NULL,
+	[CreateDate] [datetime] NULL,
+	[UpdateDate] [datetime] NULL,
+ CONSTRAINT [PK_member] PRIMARY KEY CLUSTERED 
+(
+	[usernum] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+SET ANSI_PADDING ON
+
+GO
+/****** Object:  Index [IX_member]    Script Date: 2016-01-11 오후 7:10:43 ******/
+CREATE UNIQUE NONCLUSTERED INDEX [IX_member] ON [dbo].[member]
+(
+	[userid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[board] ADD  CONSTRAINT [DF_board_createdate]  DEFAULT (getdate()) FOR [createdate]
+GO
+ALTER TABLE [dbo].[board] ADD  CONSTRAINT [DF_board_updatedate]  DEFAULT (getdate()) FOR [updatedate]
+GO
+ALTER TABLE [dbo].[board] ADD  CONSTRAINT [DF_board_refseq]  DEFAULT ((-1)) FOR [refseq]
+GO
+ALTER TABLE [dbo].[board] ADD  CONSTRAINT [DF_board_step]  DEFAULT ((0)) FOR [step]
+GO
+ALTER TABLE [dbo].[board] ADD  CONSTRAINT [DF_board_boardorder]  DEFAULT ((0)) FOR [boardorder]
+GO
+ALTER TABLE [dbo].[boardcomment] ADD  CONSTRAINT [DF_boardcomment_isDelete]  DEFAULT ('N') FOR [isDelete]
+GO
+ALTER TABLE [dbo].[boardcomment] ADD  CONSTRAINT [DF_boardcomment_CreateDate]  DEFAULT (getdate()) FOR [CreateDate]
+GO
+ALTER TABLE [dbo].[boardcomment] ADD  CONSTRAINT [DF_boardcomment_UpdateDate]  DEFAULT (getdate()) FOR [UpdateDate]
+GO
+ALTER TABLE [dbo].[member] ADD  CONSTRAINT [DF_member_CreateDate]  DEFAULT (getdate()) FOR [CreateDate]
+GO
+ALTER TABLE [dbo].[member] ADD  CONSTRAINT [DF_member_UpdateDate]  DEFAULT (getdate()) FOR [UpdateDate]
+GO
+ALTER TABLE [dbo].[board]  WITH CHECK ADD  CONSTRAINT [FK_board_member] FOREIGN KEY([writerseq])
+REFERENCES [dbo].[member] ([usernum])
+GO
+ALTER TABLE [dbo].[board] CHECK CONSTRAINT [FK_board_member]
+GO
+ALTER TABLE [dbo].[boardcomment]  WITH CHECK ADD  CONSTRAINT [FK_boardcomment_board] FOREIGN KEY([boardseq])
+REFERENCES [dbo].[board] ([seq])
+GO
+ALTER TABLE [dbo].[boardcomment] CHECK CONSTRAINT [FK_boardcomment_board]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'게시판 종류, 0 이면  공지사항 1 이면 자유게시판
+2. 회사 게시판' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'board', @level2type=N'COLUMN',@level2name=N'boardtype'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'작성자  seq 
+member 의 id 와 같다.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'board', @level2type=N'COLUMN',@level2name=N'writerseq'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'삭제 여부 : Y 이면 삭제 ' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'board', @level2type=N'COLUMN',@level2name=N'isdelete'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'table ' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'board'
+GO

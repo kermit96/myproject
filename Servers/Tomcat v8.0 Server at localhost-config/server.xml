@@ -128,7 +128,7 @@
       <Context docBase="myproject" path="/myproject" reloadable="true" source="org.eclipse.jst.jee.server:myproject"/>
       <Context docBase="IDEAWeb" path="/IDEAWeb" reloadable="true" source="org.eclipse.jst.jee.server:IDEAWeb"/>
       
-      </Host>
+      <Context docBase="myfirstproject" path="/myfirstproject" reloadable="true" source="org.eclipse.jst.jee.server:myfirstproject"/></Host>
     </Engine>
   </Service>
 </Server>

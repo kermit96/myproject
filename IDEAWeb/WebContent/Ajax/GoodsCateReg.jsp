@@ -32,11 +32,12 @@
 				$.ajax({
 					url : "CateMiddleSelect.jsp",
 					data : {lcate:value},
-					dataType : "json",
+					dataType : "xml",
 					type : "GET",
+					cache:false,
 					success : setCombo, 
-					error : function() {
-						alert("나오면 안되는데 왜 나왔니?");
+					error : function(err) {
+						alert("나오면 안되는데 왜 나왔니?==>"+err);
 					}
 				});
 			}
@@ -44,19 +45,64 @@
 				//	할일
 				//		1.	콤보의 기존에 내용은 지운다.
 				//			1)	콤보상자를 알아내고
+				
+				/*
 				var	combo = document.getElementById("mcate");
 				var	len = combo.length;
 				//			2)	그 갯수만큼 반복하면서 지운다.
 				for(i = 0; i < len; i++) {
 					combo.remove(0);
-				}
+				) */
+				
+				$("#mcate").empty();
+				
 				//	강제로 == 선택하세요를 붙인다.
+		/*		
 				var	option = document.createElement("option");
 				option.text = "== 선택하세요 ==";
 				option.value = "0";
 				combo.options.add(option);
+				*/
+				 
+				 var option = "<option value=\"0\"> == 선택하세요 == </option>";
+				 
+				 $("#mcate").append(option);
+			
+				// xml 방식 
 				
+				$mcate =$(data).find("Goods");
+				
+				$goods = $mcate.find("Good");
+				
+		
 
+				$goods.each(function() {
+					
+					var name=$(this).find("NAME").text();
+					var code=$(this).find("CODE").text();;
+				
+					/*
+					var	option = document.createElement("option");
+					option.text = name;
+					option.value = code;
+					
+					combo.options.add(option);
+					*/
+					
+					var option = "<option value=\""+ code +"\">"  +name   +"</option>";
+		
+					 $("#mcate").append(option);
+				
+					
+				}
+						
+				);
+				
+				
+				
+/*
+			
+				
 				
 				for(var index in data) 
 				{
@@ -71,6 +117,7 @@
 					combo.options.add(option);
 					
 				}
+				*/
 				
 			/*	
 				//		2.	콤보에 새로운 내용으로 채운다.

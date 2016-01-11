@@ -40,7 +40,7 @@ public class getdbconfig extends HttpServlet {
 
 		response.setContentType("text/html");
 		response.setCharacterEncoding("utf-8");
-       System.out.println("do get");
+
 		Dbconfig config = new Dbconfig();
 
 		Gson gson = new Gson();

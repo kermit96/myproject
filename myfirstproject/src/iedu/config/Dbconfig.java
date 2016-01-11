@@ -9,7 +9,7 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-
+import iedu.sql.DBTYPE;
 
 public class Dbconfig {
     private String dbname;
@@ -130,7 +130,7 @@ public class Dbconfig {
 	public Dbconfig(String filename)
 	{
 		
-     	handler = ConfigFileHandler.getConfigFileHandler(filename);
+	handler = ConfigFileHandler.getConfigFileHandler(filename);
     	
     	host = handler.getValue("host");
 		port = 0;
@@ -151,7 +151,6 @@ public class Dbconfig {
 			password = handler.getValue("password");
 		}
 		 
-		 System.out.println(handler.getValue("dbtype"));
 		dbtype = Integer.parseInt( handler.getValue("dbtype"));
 	    	
 

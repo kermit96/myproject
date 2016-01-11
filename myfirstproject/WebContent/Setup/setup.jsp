@@ -32,6 +32,7 @@ $(document).ready(function() {
 
 function init()
 {
+
     $.ajax({
         url:'../ajax/getdbconfig',
         async:false,
@@ -39,7 +40,7 @@ function init()
         dataType:'json',
         success:function(data){
         	
-     
+   
           $("#dbname").val(data.dbname);
           $("#dbselect").val(data.dbtype);
           $("#dbuser").val(data.userid);
