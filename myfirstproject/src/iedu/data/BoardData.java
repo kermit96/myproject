@@ -11,9 +11,10 @@ public class BoardData {
    public Date updatedate;
    public String content;
    public int hit;   
-   public int seq;   
+   public int seq; 
+   public int boardtype;
    
-   public int ref_seq;
+   public int ref_seq = -1;
    public int step;
    public int order;
    

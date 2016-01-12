@@ -28,7 +28,7 @@ public class LoginDao extends BaseDbSql {
 	    
 	    try {
 	    	dao = GetjdbcDao();
-	        pstat = dao.getPrepare("select * from member where m_id = ? and m_password=?");
+	        pstat = dao.getPrepare("select * from member where userid = ? and password=? and isdelete='N'");
 	    	pstat.setString(1, id);
 	    	pstat.setString(2, pw);
 	    	
@@ -36,8 +36,8 @@ public class LoginDao extends BaseDbSql {
 	    	while(result.next()) {
 	    		map.put("id", result.getString("userid"));
 	    		map.put("name", result.getString("name"));
-	    		map.put("nick", result.getString("m_Nick"));
-	    		map.put("seq", result.getString("usernum"));
+	    		map.put("nick", result.getString("nickname"));
+	    		map.put("seq", result.getInt("usernum"));
 	    	}
 	    	
 	    	/*
@@ -57,8 +57,8 @@ public class LoginDao extends BaseDbSql {
 	    	ex.printStackTrace();
 	    	
 	    } finally {
-	    	if (dao!=null)
-	    	  dao.getClass();
+   	    	if (dao!=null)
+   	    		dao.closeAll();   	    
 	    	
 	    }
 	    	   

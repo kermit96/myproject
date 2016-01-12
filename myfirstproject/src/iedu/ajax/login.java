@@ -66,11 +66,11 @@ public class login extends HttpServlet {
 		      session.setAttribute("nick", map.get("nick"));	      	  
 		      String url = (String)session.getAttribute("url");		
 		      session.setAttribute("url", "");
-		      
+		      session.setAttribute("usernum", map.get("seq"));
 		      if (url==null)
 		    	  url ="";
 		      if ( url.isEmpty())  {
-		    	  	url="../member/login.do";        		    
+		    	  	url="../index.jsp";        		    
 		      }
 		      
 		      data.isSuccess = true;

@@ -15,7 +15,7 @@
 
    session.invalidate();
  
-	response.sendRedirect("../memberservlet/login");
+   response.sendRedirect("../memberservelet/login");
 %>
 	</body>
 </html>

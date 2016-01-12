@@ -8,7 +8,7 @@
 
 
 <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"> </script>
-
+<script type="text/javascript" src="../js/sha256.js"> </script>
 <script>
 	
 	$( document ).ready(function() {
@@ -16,15 +16,28 @@
 	      $("#login").click(
 	    		  login
 	      );
+	      
+	      $("#makeid").click(
+	    		  make
+	      );
+
 
 	});
 	
+	function make()
+	{
+		
+		// location.href = ;
+		window.open('MakeMember.jsp', "_blank" );
+	}
 	
 	function login()
 	{
 		
 		var userid = $("#userid").val().trim();
 		var password = $("#password").val().trim();
+		
+		         
 		
 		if (userid == "") {
 			
@@ -38,13 +51,15 @@
 			return;
 		}
 		
-
+        password = Sha256.hash(password);
+        
         try {
         $.ajax({
             url:"../ajax/login",
             async:false,
             type:'post',
             dataType:'json',
+            cache:false,
             data:{userid:userid,password:password  },
             success:function(data){
             	 if (data.isSuccess)
@@ -61,14 +76,13 @@
         });
 		
         } catch (ex) {        	
-        	alert("ajax"+ex);
+        	alert("ajax="+ex);
         }
 	}
-	   
+	
 	</script>
 </head>
 <body>
-
 	<form method="POST"  id="formid">
 		<table border="1" width="50%" align="center">
 			<tr>
@@ -80,17 +94,13 @@
 				<td><input type="password" id="password"></td>
 			</tr>
 			<tr>
-				<td align="center" colspan="2"><input id="login" type="button" value="로그인">
+				<td align="center" colspan="2">
+				<input id="login" type="button" value="로그인">
+				<input id="makeid" type="button" value="가입">
 				</td>
 			</tr>
 		</table>
 	</form>
-
 </body>
 
-
 </html>
-
-
-
-

@@ -19,4 +19,5 @@ public class BoardComment {
 	public String Content;
 	public Date Createdate;
 	public String isDelete;
+	public int Writerseq;
 }

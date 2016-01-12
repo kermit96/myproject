@@ -7,21 +7,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import iedu.dao.LoginDao;
-import iedu.dao.MemberDao;
-import iedu.data.memberdata;
+import iedu.dao.BoardDao;
+import iedu.data.BoardComment;
+import iedu.data.BoardData;
 
 /**
- * Servlet implementation class membermmodify
+ * Servlet implementation class InsertComment
  */
-@WebServlet("/ajax/membermodify")
-public class membermmodify extends HttpServlet {
+@WebServlet("/InsertComment")
+public class InsertComment extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public membermmodify() {
+    public InsertComment() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,29 +32,16 @@ public class membermmodify extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	//	response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-		String name = request.getParameter("name");
-		String nickname = request.getParameter("nickname");
-		String tel = request.getParameter("tel");
-		String id = (String)request.getSession().getAttribute("id");		
-//		String password = request.getParameter("password");
-		
-		MemberDao dao = new MemberDao();
-	 
-		 memberdata data = new memberdata();
-		 
-		 data.name = name;
-         data.nickname = nickname;
-         data.tel = tel;
-         data.userid = id;
-		 
-		try {
-		     dao.UpdateMember(data);		    
-		} catch (Exception ex) {
-			ex.printStackTrace();		
-		}
+       BoardComment data = new BoardComment();
+       data.Content  = request.getParameter("content");
+       data.boardseq  = Integer.parseInt(request.getParameter("boardseq"));
+	   data.Writerseq  =  (int)request.getSession().getAttribute("usernum");
+	   
+	   BoardDao dao = new BoardDao(); 
+	   
+	   dao.InsertCommnet(data);
+	   
 	}
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

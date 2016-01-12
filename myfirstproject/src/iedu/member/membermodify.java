@@ -1,27 +1,25 @@
-package iedu.ajax;
+package iedu.member;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import iedu.dao.LoginDao;
-import iedu.dao.MemberDao;
-import iedu.data.memberdata;
-
 /**
- * Servlet implementation class membermmodify
+ * Servlet implementation class membermodify
  */
-@WebServlet("/ajax/membermodify")
-public class membermmodify extends HttpServlet {
+@WebServlet("/memberservelet/modify")
+public class membermodify extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public membermmodify() {
+    public membermodify() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,30 +29,11 @@ public class membermmodify extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	//	response.getWriter().append("Served at: ").append(request.getContextPath());
+		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		String name = request.getParameter("name");
-		String nickname = request.getParameter("nickname");
-		String tel = request.getParameter("tel");
-		String id = (String)request.getSession().getAttribute("id");		
-//		String password = request.getParameter("password");
-		
-		MemberDao dao = new MemberDao();
-	 
-		 memberdata data = new memberdata();
-		 
-		 data.name = name;
-         data.nickname = nickname;
-         data.tel = tel;
-         data.userid = id;
-		 
-		try {
-		     dao.UpdateMember(data);		    
-		} catch (Exception ex) {
-			ex.printStackTrace();		
-		}
+		RequestDispatcher disp =request.getRequestDispatcher("/Member/Modify.jsp");
+		disp.forward(request, response);
 	}
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

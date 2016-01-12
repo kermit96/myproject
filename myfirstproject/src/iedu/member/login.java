@@ -46,7 +46,7 @@ public class login extends HttpServlet {
 			if (url != null &&  !url.isEmpty())  {
 				session.setAttribute("url", "");	        			
 			} else {				
-				url = "/mian/index.jsp";
+				url = "/main/index.jsp";
 			}
 						
 		} else {			
