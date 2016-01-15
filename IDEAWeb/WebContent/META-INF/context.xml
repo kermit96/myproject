@@ -1,0 +1,23 @@
+<Context>
+ 
+		<Resource
+		    name = "jdbc/oracle"
+	        auth="Container"
+	        type="javax.sql.DataSource"
+	        driverClassName="oracle.jdbc.driver.OracleDriver"
+	        url="jdbc:oracle:thin:@192.168.56.81:1521:orcl"
+	        username="scott"
+	        password="tiger"
+	        maxActive="8"
+	        maxIdle="0"
+	        maxWait="5000"
+	        removeAbandoned="true"
+	        testOnBorrow="true"
+	        loginTimeout="10"
+		/>
+   
+    
+    <Environment name="dbtype" value="0" type="java.lang.Integer"/>
+            			
+ </Context>
+ 

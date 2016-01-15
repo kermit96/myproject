@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class BoardModify implements BoardMain {
 	public String action(HttpServletRequest req, HttpServletResponse resp) {
-		System.out.println("³ª´Â ¼öÁ¤ ¿äÃ» ÇÔ¼öÀÌ´Ù.");
+		System.out.println("ë‚˜ëŠ” ìˆ˜ì • ìš”ì²­ í•¨ìˆ˜ì´ë‹¤.");
 		return "";
 	}
 }

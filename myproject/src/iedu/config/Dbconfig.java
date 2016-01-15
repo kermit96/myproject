@@ -151,8 +151,14 @@ public class Dbconfig {
 			password = handler.getValue("password");
 		}
 		 
-		 System.out.println(handler.getValue("dbtype"));
-		dbtype = Integer.parseInt( handler.getValue("dbtype"));
+	//	 System.out.println(handler.getValue("dbtype"));
+		
+		 try {
+		   dbtype = Integer.parseInt( handler.getValue("dbtype"));
+		 } catch(Exception ex) {
+			
+			 dbtype= 0;
+		 }
 	    	
 
 	}

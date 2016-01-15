@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class BoardDelete implements BoardMain {
 	public String action(HttpServletRequest req, HttpServletResponse resp) {
-		System.out.println("³ª´Â »èÁ¦ ¿äÃ» ÇÔ¼öÀÌ´Ù.");
+		System.out.println("ë‚˜ëŠ” ì‚­ì œ ìš”ì²­ í•¨ìˆ˜ì´ë‹¤.");
 		return "";
 	}
 }

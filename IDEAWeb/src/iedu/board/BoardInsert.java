@@ -11,20 +11,20 @@ import jdbc.WebDB;
 
 public class BoardInsert implements BoardMain {
 	public String action(HttpServletRequest req, HttpServletResponse resp) {
-		//	ÇÒÀÏ
-		//		³Ñ¾î¿Â ÆÄ¶ó¸ŞÅÍ¸¦ ¹Ş¾Æ³½´Ù.
+		//	í• ì¼
+		//		ë„˜ì–´ì˜¨ íŒŒë¼ë©”í„°ë¥¼ ë°›ì•„ë‚¸ë‹¤.
 		String		title = req.getParameter("title");
 		String		body = req.getParameter("body");
-		//	¾Æ½Ã´Ù½ÃÇÇ ±Û¾´ÀÌ´Â disabled µÇ¾î ÀÖÀ¸¹Ç·Î ³Ñ¾î¿ÀÁö ¸øÇÑ´Ù.
-		//	±×·¡¼­ °­Á¦·Î ¼¼¼Ç¿¡¼­ ¾Ë¾Æ³»¾ß ÇÑ´Ù.
-		//	¹®Á¦		JSP´Â sessionÀÌ Á¸ÀçÇÏÁö¸¸ ¸ğµ¨Àº sessionÀÌ ¾ø´Ù.
-		//	ÇØ°á		sessionÀ» ¸¸µé¾î¼­ »ç¿ëÇØ¾ß ÇÑ´Ù.
+		//	ì•„ì‹œë‹¤ì‹œí”¼ ê¸€ì“´ì´ëŠ” disabled ë˜ì–´ ìˆìœ¼ë¯€ë¡œ ë„˜ì–´ì˜¤ì§€ ëª»í•œë‹¤.
+		//	ê·¸ë˜ì„œ ê°•ì œë¡œ ì„¸ì…˜ì—ì„œ ì•Œì•„ë‚´ì•¼ í•œë‹¤.
+		//	ë¬¸ì œ		JSPëŠ” sessionì´ ì¡´ì¬í•˜ì§€ë§Œ ëª¨ë¸ì€ sessionì´ ì—†ë‹¤.
+		//	í•´ê²°		sessionì„ ë§Œë“¤ì–´ì„œ ì‚¬ìš©í•´ì•¼ í•œë‹¤.
 		HttpSession	session = req.getSession();
 		String		id = (String) session.getAttribute("ID");
 		
-		//		ÀÌ ³»¿ëÀ» µ¥ÀÌÅÍº£ÀÌ½º¿¡ ±â·ÏÇÑ´Ù.
-		//		¿ø·¡ µ¥ÀÌÅÍº£ÀÌ½º Ã³¸®´Â dao Å¬·¡½º¸¦ ¸¸µé¾î¼­ »ç¿ëÇÏ´Â °ÍÀÌ ½Ç¹«¿¡¼­ÀÇ ¿øÄ¢ÀÌ´Ù.
-		//		ÀÌ¹ø °Ô½ÃÆÇÀº ¸·ÄÚµùÀ¸·Î ÇÏ°Ú´Ù.
+		//		ì´ ë‚´ìš©ì„ ë°ì´í„°ë² ì´ìŠ¤ì— ê¸°ë¡í•œë‹¤.
+		//		ì›ë˜ ë°ì´í„°ë² ì´ìŠ¤ ì²˜ë¦¬ëŠ” dao í´ë˜ìŠ¤ë¥¼ ë§Œë“¤ì–´ì„œ ì‚¬ìš©í•˜ëŠ” ê²ƒì´ ì‹¤ë¬´ì—ì„œì˜ ì›ì¹™ì´ë‹¤.
+		//		ì´ë²ˆ ê²Œì‹œíŒì€ ë§‰ì½”ë”©ìœ¼ë¡œ í•˜ê² ë‹¤.
 		WebDB					db = null;
 		Connection				con = null;
 		PreparedStatement		pstmt = null;
@@ -39,13 +39,13 @@ public class BoardInsert implements BoardMain {
 			pstmt.execute();
 		}
 		catch(Exception e) {
-			System.out.println("°Ô½Ã¹° µî·Ï ¿¡·¯ = " + e);
+			System.out.println("ê²Œì‹œë¬¼ ë“±ë¡ ì—ëŸ¬ = " + e);
 		}
 		finally {
 			db.close(pstmt);
 			db.close(con);
 		}
-		//		°á°ú¹°Àº ¾øÀ¸¹Ç·Î...	ºä¸¦ ¼±ÅÃÇÑ´Ù.
+		//		ê²°ê³¼ë¬¼ì€ ì—†ìœ¼ë¯€ë¡œ...	ë·°ë¥¼ ì„ íƒí•œë‹¤.
 		return "/Board/BoardInsert.jsp";
 	}
 

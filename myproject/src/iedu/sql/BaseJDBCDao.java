@@ -18,6 +18,8 @@ public class BaseJDBCDao {
 	protected HashSet<Statement> statements = new HashSet<Statement>();
 	protected HashSet<PreparedStatement>  prestatements = new HashSet<PreparedStatement>();
 	protected HashSet<ResultSet>  resultsets = new HashSet<ResultSet>();
+	
+	protected DBTYPE dbtype;
 
 	 public BaseJDBCDao(String drivename,String  url,String userid,String password )  throws  Exception
 	{
@@ -38,6 +40,13 @@ public class BaseJDBCDao {
 	            	    break;
 	          }
 		 
+	 }
+	 
+	 
+	 public DBTYPE GetDbtype()
+	 {
+		 
+		 return dbtype;
 	 }
 	
 	public BaseJDBCDao(String drivename,String  url,String userid,String password,int initnum )  throws  Exception
@@ -290,6 +299,33 @@ public class BaseJDBCDao {
 
 	}
 
+	public static  BaseJDBCDao GetjdbcDao()  throws Exception
+	{
+		
+		Dbconfig  config = new Dbconfig();
+		
+		String host = config.getHost();
+		int port = 0;
+
+		port =config.getPort();
+
+		
+		String dbname =  config.getDbname();
+		String userid =  config.getUserid();
+		String password =  config.getPassword();
+		int  getdbtype = config.getDbtype();
+
+		DBTYPE  dbtype = DBTYPE.fromInt(getdbtype); 
+
+		BaseJDBCDao dao = null;                   
+
+		dao = GetjdbcDao(dbtype, host, port, dbname, userid, password);
+		
+		return dao;
+		
+
+	}
+	
 	public static  BaseJDBCDao GetjdbcDao(DBTYPE dbtype,String host,  int port, String  dbname,String userid,String password) throws Exception
 	{
 

@@ -1,51 +1,50 @@
 package jdbc;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 
-import org.apache.tomcat.jdbc.pool.DataSource;
-
-
-
-/*
- * 	이 클래스는 과거에 JDBC 수업을 할 때 만들었던 JDBCUtil 클래스와 같은 역활을 할 클래스이다.
- */
-public class WebDB {
-	/*
-	 * 1.	생성자 함수에서 드라이버를 로딩하도록 한다.
-	 */
-	
-	
+public class PoolDB {
 	private DataSource ds ;
 	
-	public WebDB() {
-		
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-		}
-		catch(Exception e) {
-			System.out.println("드라이버 로딩 에러 " + e);
-		}
-									
+	public PoolDB() {
+		 // 1. Context.xml 에 등록한 리소스를 알아내기 위한 클래스를 준비한다.
+		Context ct ;
+		  try {
+			ct = new InitialContext();
+			 ds = (DataSource)ct.lookup("java:comp/env/jdbc/oracle");
+			 
+			 Context environmentContext =(Context)ct.lookup("java:/comp/env");
+			 int connectionURL = (int) environmentContext.lookup("dbtype");
+			  System.out.println(connectionURL);
+			  
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	    	  		
 	}
 	
 	/*
 	 * 2.	컨넥션을 구하는 함수를 제작한다.
 	 */
 	public Connection getCON() {
-				
+		
+		
 		Connection	 con = null;
 		try {
-			con = DriverManager.getConnection("jdbc:oracle:thin:@192.168.56.81:1521:orcl", "scott", "tiger");
 		
+			con  = ds.getConnection();
 		}
 		catch(Exception e) {
 			System.out.println("컨넥션 에러 " + e);
 		}
-		
 		return con;
 	}
 
@@ -101,4 +100,5 @@ public class WebDB {
 			System.out.println("Close 에러 " + e);
 		}
 	}
+	
 }

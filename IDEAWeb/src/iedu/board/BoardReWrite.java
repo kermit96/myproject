@@ -10,19 +10,19 @@ import javax.servlet.http.HttpSession;
 import jdbc.WebDB;
 
 /*
- * 	¸ğµ¨Àº ´ÙÇü¼º ±¸ÇöÀ» ÇÏ±â À§ÇØ¼­ ¸ŞÀÎ ¸ğµ¨À» »ó¼Ó¹Ş¾Æ¼­ ¸¸µé±â·Î ¾à¼ÓÇß´Ù.
+ * 	ëª¨ë¸ì€ ë‹¤í˜•ì„± êµ¬í˜„ì„ í•˜ê¸° ìœ„í•´ì„œ ë©”ì¸ ëª¨ë¸ì„ ìƒì†ë°›ì•„ì„œ ë§Œë“¤ê¸°ë¡œ ì•½ì†í–ˆë‹¤.
  */
 public class BoardReWrite implements BoardMain {
 	public String action(HttpServletRequest req, HttpServletResponse resp) {
-		//	ÇÒÀÏ
-		//		³Ñ¾î¿Â ÆÄ¶ó¸ŞÅÍ ¹Ş´Â´Ù.
+		//	í• ì¼
+		//		ë„˜ì–´ì˜¨ íŒŒë¼ë©”í„° ë°›ëŠ”ë‹¤.
 		String		strOriNO = req.getParameter("oriNO");
 		int			oriNO = Integer.parseInt(strOriNO);
 		String		body = req.getParameter("body");
 		HttpSession	session = req.getSession();
 		String		writer = (String) session.getAttribute("ID");
 		
-		//		µ¥ÀÌÅÍº£ÀÌ½º¿¡ ±â·ÏÇÑ´Ù.
+		//		ë°ì´í„°ë² ì´ìŠ¤ì— ê¸°ë¡í•œë‹¤.
 		WebDB				db = null;
 		Connection			con = null;
 		PreparedStatement	pstmt = null;
@@ -37,15 +37,15 @@ public class BoardReWrite implements BoardMain {
 			pstmt.execute();
 		}
 		catch(Exception e) {
-			System.out.println("´ñ±Û µî·Ï ¿¡·¯ = " + e);
+			System.out.println("ëŒ“ê¸€ ë“±ë¡ ì—ëŸ¬ = " + e);
 		}
 		finally {
 			db.close(pstmt);
 			db.close(con);
 		}
-		//		ºä¿¡¼­ »ç¿ëÇÒ µ¥ÀÌÅÍ¸¦ ¹İµå½Ã º¸³»ÁÖ¾î¾ß ÇÑ´Ù.
+		//		ë·°ì—ì„œ ì‚¬ìš©í•  ë°ì´í„°ë¥¼ ë°˜ë“œì‹œ ë³´ë‚´ì£¼ì–´ì•¼ í•œë‹¤.
 		req.setAttribute("ORINO", oriNO);
-		//		ºä¸¦ ¼±ÅÃÇÑ´Ù.
+		//		ë·°ë¥¼ ì„ íƒí•œë‹¤.
 		return "/Board/BoardReWrite.jsp";
 	}
 }

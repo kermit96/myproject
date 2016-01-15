@@ -132,13 +132,13 @@ public class ConfigFileHandler {
 	}
 	 
 	
-	private void LoadInitailDir()
+	private static void LoadInitailDir()
 	{
 
 		if (InitialFileInfo == null || !InitialFileInfo.getFile().isFile()) {
 			// 파일이 제대로 로딩되지 않았다.
 			
-			System.out.println(this.getClass().getName()
+			System.out.println(ConfigFileHandler.class.getName()
 					+ ".loadFile() : cannot open config file==>"+InitialFileInfo.getFile().getName());
 			return ;
 		}
@@ -172,7 +172,7 @@ public class ConfigFileHandler {
 		
 	}
 	
-	private  synchronized String getInitDirectory() 
+	public static synchronized String getInitDirectory() 
 	{
 
 		String sPath="";
@@ -205,6 +205,58 @@ public class ConfigFileHandler {
 		
 		return m_defaultprops.getProperty("DIR");
 	}
+	
+	public  static  synchronized boolean SaveInitDirectory(String Dir)
+	{
+		String sPath="";
+
+		sPath = ConfigFileHandler.class.getProtectionDomain()
+				.getCodeSource().getLocation().getPath();
+		// WEB-INF 위치
+
+		int nFindInx = sPath.indexOf("WEB-INF");
+
+		if (nFindInx > 0)
+			sPath = sPath.substring(0, nFindInx + 7);
+
+		String sConfPath="";
+		sConfPath = sPath + File.separator + "conf" + File.separator+"init.property";
+		
+		m_defaultprops.setProperty("DIR", Dir);	 
+		
+		 try {
+			  File file = new File(Dir);
+			  boolean ret =true;
+			  if (!file.exists())
+			    ret =  file.mkdir();
+			  if (ret == false)
+			  {
+				  return ret;
+				  
+			  }
+			 
+		 } catch(Exception ex) {
+			 
+			 return false;
+		 }
+		
+		 
+			try(FileOutputStream fio=   new FileOutputStream(sConfPath)) {		 				
+				m_defaultprops.store(fio, null);
+				InitialFileInfo.setLastLoaded(System.currentTimeMillis());
+
+ 			} catch(IOException e) {
+ 				e.printStackTrace();
+ 			}		
+	
+			
+			fileMap.clear();
+			
+			return true;
+	}
+	
+	
+	
 	
 	/**
 	 * iedu.conf 을 메모리에 로딩한다.<br>
@@ -272,6 +324,9 @@ public class ConfigFileHandler {
 			return false;
 		}
 
+		
+		m_oProps.clear();
+		
 		File configFile = fileLoadingInfo.getFile();
 		System.out.println(this.getClass().getName() + ".loadFile() : "
 				+ configFile.getName() + " loaded.");

@@ -150,10 +150,13 @@ public class Dbconfig {
 			
 			password = handler.getValue("password");
 		}
-		 
-		dbtype = Integer.parseInt( handler.getValue("dbtype"));
-	    	
-
+		
+		 try {
+		   dbtype = Integer.parseInt( handler.getValue("dbtype"));		
+		 } catch (Exception ex) {
+			 dbtype =0;
+		 }
+		 	    
 	}
 	
     public Dbconfig()

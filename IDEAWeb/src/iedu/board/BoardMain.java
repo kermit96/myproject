@@ -3,10 +3,10 @@ package iedu.board;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 /*
- * 	ÀÌ ÀÎÅÍÆäÀÌ½º´Â ½ÇÁ¦ ÀÛ¾÷À» ¼öÇàÇÒ ¸ğµ¨ Å¬·¡½º¸¦ À§ÇØ¼­ ´ÙÇü¼ºÀ» ±¸ÇöÇÒ »óÀ§ Å¬·¡½º
- * 	¿ªÈ°À» ÇÒ ¿¹Á¤ÀÌ´Ù.
+ * 	ì´ ì¸í„°í˜ì´ìŠ¤ëŠ” ì‹¤ì œ ì‘ì—…ì„ ìˆ˜í–‰í•  ëª¨ë¸ í´ë˜ìŠ¤ë¥¼ ìœ„í•´ì„œ ë‹¤í˜•ì„±ì„ êµ¬í˜„í•  ìƒìœ„ í´ë˜ìŠ¤
+ * 	ì—­í™œì„ í•  ì˜ˆì •ì´ë‹¤.
  * 
- * 	¸ğµ¨ Å¬·¡½º¶õ	¿äÃ»¿¡ ÀÇÇØ ÇÊ¿äÇÑ µ¥ÀÌÅÍ¸¦ »ı»êÇÏ´Â Å¬·¡½º¸¦ ¸»ÇÑ´Ù.
+ * 	ëª¨ë¸ í´ë˜ìŠ¤ë€	ìš”ì²­ì— ì˜í•´ í•„ìš”í•œ ë°ì´í„°ë¥¼ ìƒì‚°í•˜ëŠ” í´ë˜ìŠ¤ë¥¼ ë§í•œë‹¤.
  */
 public interface BoardMain {
 	public String action(HttpServletRequest req, HttpServletResponse resp);

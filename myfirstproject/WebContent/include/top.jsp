@@ -18,7 +18,7 @@ li {
 		
 		String url =request.getRequestURL().toString();
 		
-		session.setAttribute("url", url );
+		session.setAttribute("url", url+"?"+"" );
 	/*	
 		RequestDispatcher rd =
 				  request.getRequestDispatcher("Member/LoginForm.jsp");
@@ -41,7 +41,7 @@ li {
    }
    function logout()
    {
-	   location.href ="../member/LogoutProc.jsp" 	   
+	   location.href ="../Member/LogoutProc.jsp" 	   
    }
    
    function modify()

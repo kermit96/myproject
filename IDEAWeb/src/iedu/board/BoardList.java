@@ -10,80 +10,80 @@ import javax.servlet.http.HttpServletResponse;
 import iedu.util.PageInfo;
 import jdbc.WebDB;
 /*
- * 	ÀÌ Å¬·¡½º´Â ¸ñ·Ï º¸±â ¿äÃ»ÀÌ µé¾î¿À¸é ¸ñ·ÏÀ» ¸¸µé µ¥ÀÌÅÍ¸¦ »ý»êÇÒ ¸ðµ¨ Å¬·¡½ºÀÌ´Ù.
+ * 	ì´ í´ëž˜ìŠ¤ëŠ” ëª©ë¡ ë³´ê¸° ìš”ì²­ì´ ë“¤ì–´ì˜¤ë©´ ëª©ë¡ì„ ë§Œë“¤ ë°ì´í„°ë¥¼ ìƒì‚°í•  ëª¨ë¸ í´ëž˜ìŠ¤ì´ë‹¤.
  */
 public class BoardList implements BoardMain {
-	//	ÀÌ ÇÔ¼ö°¡ ÄÁÆ®·Ñ·¯¿¡ ÀÇÇØ ½ÇÇàµÉ ¸ÞÀÎ ÇÔ¼öÀÇ ¿ªÈ°À» ÇÒ °ÍÀÌ´Ù.
+	//	ì´ í•¨ìˆ˜ê°€ ì»¨íŠ¸ë¡¤ëŸ¬ì— ì˜í•´ ì‹¤í–‰ë  ë©”ì¸ í•¨ìˆ˜ì˜ ì—­í™œì„ í•  ê²ƒì´ë‹¤.
 	public String action(HttpServletRequest req, HttpServletResponse resp) {
-		//	ÇÒÀÏ
-		//		³Ñ¾î¿Â ÆÄ¶ó¸ÞÅÍ¸¦ ¹Þ´Â´Ù.
+		//	í• ì¼
+		//		ë„˜ì–´ì˜¨ íŒŒë¼ë©”í„°ë¥¼ ë°›ëŠ”ë‹¤.
 		String		strPage = req.getParameter("nowPage");
 		int			nowPage = 0;
-		//	¼±ÅÃ¿ä¼ÒÀÎ °æ¿ì¿¡´Â ³Ñ¾î¿ÀÁö ¾Ê¾ÒÀ» °æ¿ì¸¦ ¹Ýµå½Ã ´ëºñÇØ ÁÖ¾î¾ß ÇÑ´Ù.
+		//	ì„ íƒìš”ì†Œì¸ ê²½ìš°ì—ëŠ” ë„˜ì–´ì˜¤ì§€ ì•Šì•˜ì„ ê²½ìš°ë¥¼ ë°˜ë“œì‹œ ëŒ€ë¹„í•´ ì£¼ì–´ì•¼ í•œë‹¤.
 		if(strPage == null || strPage.length() == 0) {
-			//	³Ñ¾î¿ÀÁö ¾ÊÀ¸¸é 1ÆäÀÌÁöºÎÅÍ º¸¿©ÁÖ±â·Î ÇÑ´Ù.
+			//	ë„˜ì–´ì˜¤ì§€ ì•Šìœ¼ë©´ 1íŽ˜ì´ì§€ë¶€í„° ë³´ì—¬ì£¼ê¸°ë¡œ í•œë‹¤.
 			nowPage = 1;
 		}
 		else {
 			nowPage = Integer.parseInt(strPage);
 		}
 		
-		//	ÀÌ ºÎºÐ¿¡¼­ ¿øÇÏ´Â µ¥ÀÌÅÍ¸¦ »ý»êÇØ ³¾°ÍÀÌ´Ù.
-		//	»ý»êÀÌ ´Ù ³¡³µÀ¸¸é.... 
-		//	»ý»êµÈ µ¥ÀÌÅÍ¸¦ ºä¿¡¼­ »ç¿ëÇÒ ¼ö ÀÖµµ·Ï ÀúÀåÇÑ ÈÄ
+		//	ì´ ë¶€ë¶„ì—ì„œ ì›í•˜ëŠ” ë°ì´í„°ë¥¼ ìƒì‚°í•´ ë‚¼ê²ƒì´ë‹¤.
+		//	ìƒì‚°ì´ ë‹¤ ëë‚¬ìœ¼ë©´.... 
+		//	ìƒì‚°ëœ ë°ì´í„°ë¥¼ ë·°ì—ì„œ ì‚¬ìš©í•  ìˆ˜ ìžˆë„ë¡ ì €ìž¥í•œ í›„
 		
-		//	ÀÌ µ¥ÀÌÅÍ¸¦ ÀÌ¿ëÇÏ´Â ºä¸¦ ¼±ÅÃÇÏµµ·Ï ÇÑ´Ù.(ºä°¡ °áÁ¤µÇÁö ¾Ê¾Ò´Ù.)
-		//	Âü°í	ºä°¡ °áÁ¤µÇ´Â °ÍÀÌ ¾Æ´Ï¶ó ¼±ÅÃÇÏµµ·Ï ÇÏ´Â ÀÌÀ¯´Â?
-		//			¸ðµ¨ÀÌ Ã³¸® °á°ú¿¡ µû¶ó »ç¿ëÇÒ ºä°¡ ´Þ¶óÁú ¼öµµ ÀÖ±â ¶§¹®ÀÌ´Ù.
-		//		¿¹>	Á¤»óÀûÀÎ °æ¿ì
-		//				ºñÁ¤»óÀûÀÎ °æ¿ì			»ç¿ëÇÒ ºä°¡ ´Þ¶óÁú ¼ö ÀÖ´Ù.
+		//	ì´ ë°ì´í„°ë¥¼ ì´ìš©í•˜ëŠ” ë·°ë¥¼ ì„ íƒí•˜ë„ë¡ í•œë‹¤.(ë·°ê°€ ê²°ì •ë˜ì§€ ì•Šì•˜ë‹¤.)
+		//	ì°¸ê³ 	ë·°ê°€ ê²°ì •ë˜ëŠ” ê²ƒì´ ì•„ë‹ˆë¼ ì„ íƒí•˜ë„ë¡ í•˜ëŠ” ì´ìœ ëŠ”?
+		//			ëª¨ë¸ì´ ì²˜ë¦¬ ê²°ê³¼ì— ë”°ë¼ ì‚¬ìš©í•  ë·°ê°€ ë‹¬ë¼ì§ˆ ìˆ˜ë„ ìžˆê¸° ë•Œë¬¸ì´ë‹¤.
+		//		ì˜ˆ>	ì •ìƒì ì¸ ê²½ìš°
+		//				ë¹„ì •ìƒì ì¸ ê²½ìš°			ì‚¬ìš©í•  ë·°ê°€ ë‹¬ë¼ì§ˆ ìˆ˜ ìžˆë‹¤.
 		
-		//	±×·¡¼­ ¼±ÅÃÇÏ´Â ¿ø¸®´Â »ç¿ëÇÒ ºäÀÇ ÀÌ¸§À» ÄÁÆ®·Ñ·¯¿¡°Ô ¾Ë·ÁÁÖ±â·Î ¾à¼ÓÇß´Ù.
+		//	ê·¸ëž˜ì„œ ì„ íƒí•˜ëŠ” ì›ë¦¬ëŠ” ì‚¬ìš©í•  ë·°ì˜ ì´ë¦„ì„ ì»¨íŠ¸ë¡¤ëŸ¬ì—ê²Œ ì•Œë ¤ì£¼ê¸°ë¡œ ì•½ì†í–ˆë‹¤.
 		
-		//	¸ñ·Ï º¸±â¿¡ ÇÊ¿äÇÑ µ¥ÀÌÅÍ¸¦ »ý»êÇÑ´Ù.
-		//		¸ñ·Ï º¸±â¿¡ ÇÊ¿äÇÑ µ¥ÀÌÅÍ´Â µ¥ÀÌÅÍº£ÀÌ½º¿¡ ÀÖ´Â ³»¿ëµéÀÌ´Ù.
+		//	ëª©ë¡ ë³´ê¸°ì— í•„ìš”í•œ ë°ì´í„°ë¥¼ ìƒì‚°í•œë‹¤.
+		//		ëª©ë¡ ë³´ê¸°ì— í•„ìš”í•œ ë°ì´í„°ëŠ” ë°ì´í„°ë² ì´ìŠ¤ì— ìžˆëŠ” ë‚´ìš©ë“¤ì´ë‹¤.
 		WebDB		db = null;
 		Connection	con = null;
 		Statement	stmt = null;
 		ResultSet		rs = null;
 		ArrayList		list = new ArrayList();
-		//	ÆäÀÌÁö Á¤º¸¸¦ ±â¾ïÇÒ À¯Æ¿¸®Æ¼ Å¬·¡½º¸¦ ÁØºñÇÑ´Ù.
+		//	íŽ˜ì´ì§€ ì •ë³´ë¥¼ ê¸°ì–µí•  ìœ í‹¸ë¦¬í‹° í´ëž˜ìŠ¤ë¥¼ ì¤€ë¹„í•œë‹¤.
 		PageInfo		pInfo = null;
-		//	ÀÌ ÆäÀÌÁö Á¤º¸¸¦ ¸¸µé±â À§ÇØ¼­´Â ÇöÀç ÆäÀÌÁö¿Í ÃÑ µ¥ÀÌÅÍ°³¼ö¸¦ ¾Ë·ÁÁÖ¾î¾ß ÇÑ´Ù.
+		//	ì´ íŽ˜ì´ì§€ ì •ë³´ë¥¼ ë§Œë“¤ê¸° ìœ„í•´ì„œëŠ” í˜„ìž¬ íŽ˜ì´ì§€ì™€ ì´ ë°ì´í„°ê°œìˆ˜ë¥¼ ì•Œë ¤ì£¼ì–´ì•¼ í•œë‹¤.
 		try {
 			db = new WebDB();
 			con = db.getCON();
 			stmt = db.getSTMT(con);
-			//	ÃÑ µ¥ÀÌÅÍ °³¼ö¸¦ ±¸ÇØº¸ÀÚ.
+			//	ì´ ë°ì´í„° ê°œìˆ˜ë¥¼ êµ¬í•´ë³´ìž.
 			String		sql = "SELECT COUNT(*) as CNT FROM ReBoard WHERE rb_isShow='Y'";
 			rs = stmt.executeQuery(sql);
 			rs.next();
 			int	totalCount = rs.getInt("CNT");
 			db.close(rs);
-			//	ÆäÀÌÁö Á¤º¸¸¦ ¸¸µéÀÚ
+			//	íŽ˜ì´ì§€ ì •ë³´ë¥¼ ë§Œë“¤ìž
 			pInfo = new PageInfo(nowPage, totalCount, 3, 5);
 			pInfo.calcInfo2();
 			
 			
 			sql = "SELECT * FROM ReBoard WHERE rb_isShow='Y' ORDER BY rb_NO DESC";
 			rs = stmt.executeQuery(sql);
-			//	ÀÌÁ¦ ÀÌ °á°ú¹°À» ºä¿¡°Ô ¾Ë·ÁÁÖ¾î¾ß ÇÑ´Ù.
-			//		°á°ú¹°Àº	ÇÑÁÙ¿¡ ¿©·¯°³ÀÇ µ¥ÀÌÅÍ°¡ Á¸ÀçÇÏ°í		MapÀ¸·Î ¹­ÀÚ
-			//		ÀÌ ÁÙÀÌ ¿©·¯ÁÙÀÌ Á¸ÀçÇÑ´Ù.							ArrayList·Î ¹­ÀÚ
+			//	ì´ì œ ì´ ê²°ê³¼ë¬¼ì„ ë·°ì—ê²Œ ì•Œë ¤ì£¼ì–´ì•¼ í•œë‹¤.
+			//		ê²°ê³¼ë¬¼ì€	í•œì¤„ì— ì—¬ëŸ¬ê°œì˜ ë°ì´í„°ê°€ ì¡´ìž¬í•˜ê³ 		Mapìœ¼ë¡œ ë¬¶ìž
+			//		ì´ ì¤„ì´ ì—¬ëŸ¬ì¤„ì´ ì¡´ìž¬í•œë‹¤.							ArrayListë¡œ ë¬¶ìž
 
 			
-			//	ÀÌ ºÎºÐÀº ÁúÀÇ ¸í·É °á°ú¸¦ ´Ù ²¨³»´Â ºÎºÐÀÌ´Ù.
-			//	¿ì¸®´Â 3°³¸¸ ²¨³»¸é µÈ´Ù.
-			//	¹°·Ð ¼­ºê ÁúÀÇ¸¦ ÀÌ¿ëÇÏ¸é µ¥ÀÌÅÍº£ÀÌ½º¿¡¼­ ²¨³¾¶§ 3°³¸¸ ²¨³¾ ¼ö ÀÖ´Ù.
-			//	ÇÏÁö¸¸ ¿À´ÃÀº ÀÌ¹Ì ÁúÀÇ¸¦ »ç¿ëÇßÀ¸¹Ç·Î ÀÌºÎºÐÀ» ¼öÁ¤ÇØ¼­ Ã³¸®ÇÒ ¿¹Á¤ÀÌ´Ù.
+			//	ì´ ë¶€ë¶„ì€ ì§ˆì˜ ëª…ë ¹ ê²°ê³¼ë¥¼ ë‹¤ êº¼ë‚´ëŠ” ë¶€ë¶„ì´ë‹¤.
+			//	ìš°ë¦¬ëŠ” 3ê°œë§Œ êº¼ë‚´ë©´ ëœë‹¤.
+			//	ë¬¼ë¡  ì„œë¸Œ ì§ˆì˜ë¥¼ ì´ìš©í•˜ë©´ ë°ì´í„°ë² ì´ìŠ¤ì—ì„œ êº¼ë‚¼ë•Œ 3ê°œë§Œ êº¼ë‚¼ ìˆ˜ ìžˆë‹¤.
+			//	í•˜ì§€ë§Œ ì˜¤ëŠ˜ì€ ì´ë¯¸ ì§ˆì˜ë¥¼ ì‚¬ìš©í–ˆìœ¼ë¯€ë¡œ ì´ë¶€ë¶„ì„ ìˆ˜ì •í•´ì„œ ì²˜ë¦¬í•  ì˜ˆì •ì´ë‹¤.
 			
-			//	¿ø¸®
-			//		ÀÌÁ¨ ÆäÀÌÁö¿¡¼­ º¸¿©ÁÙ ³»¿ëÀº ½ºÅµ½ÃÅ²´Ù.
-			//		¿¹>		Áö±Ý	2ÆäÀÌÁö¸¦ º¸¿©ÁÙ Â÷·ÊÀÌ¸é ÀÌÀü¿¡ ÀÖ´ø 3°³´Â ½ºÅµ½ÃÅ²´Ù.
+			//	ì›ë¦¬
+			//		ì´ì   íŽ˜ì´ì§€ì—ì„œ ë³´ì—¬ì¤„ ë‚´ìš©ì€ ìŠ¤í‚µì‹œí‚¨ë‹¤.
+			//		ì˜ˆ>		ì§€ê¸ˆ	2íŽ˜ì´ì§€ë¥¼ ë³´ì—¬ì¤„ ì°¨ë¡€ì´ë©´ ì´ì „ì— ìžˆë˜ 3ê°œëŠ” ìŠ¤í‚µì‹œí‚¨ë‹¤.
 			for(int i = 0; i < pInfo.pageList * (nowPage - 1); i++) {
 				rs.next();
 			}
-			//		Áö±Ý ÆäÀÌÁö¿¡ º¸¿©ÁÙ ³»¿ë¸¸ ²¨³½´Ù.
+			//		ì§€ê¸ˆ íŽ˜ì´ì§€ì— ë³´ì—¬ì¤„ ë‚´ìš©ë§Œ êº¼ë‚¸ë‹¤.
 			for(int i = 0; i < pInfo.pageList && rs.next(); i++) {
 				HashMap	map = new HashMap();
 				map.put("NO", rs.getInt("rb_NO"));
@@ -96,28 +96,28 @@ public class BoardList implements BoardMain {
 			}
 		}
 		catch(Exception e) {
-			System.out.println("¸ñ·Ï º¸±â ¿¡·¯ = " + e);
+			System.out.println("ëª©ë¡ ë³´ê¸° ì—ëŸ¬ = " + e);
 		}
 		finally {
 			db.close(rs);
 			db.close(stmt);
 			db.close(con);
 		}
-		//	ÀÌÁ¦ ¸¸µé¾îÁø µ¥ÀÌÅÍ¸¦ ºä¿¡°Ô ¾Ë·ÁÁÖ¾î¾ß ÇÑ´Ù.
-		//	ºä¿¡°Ô ¾Ë·ÁÁÖ´Â ¹æ¹ý
+		//	ì´ì œ ë§Œë“¤ì–´ì§„ ë°ì´í„°ë¥¼ ë·°ì—ê²Œ ì•Œë ¤ì£¼ì–´ì•¼ í•œë‹¤.
+		//	ë·°ì—ê²Œ ì•Œë ¤ì£¼ëŠ” ë°©ë²•
 		//		1.		application.setAttribute()
-		//				ÀÌ µ¥ÀÌÅÍ´Â ¸ðµç ºä¿¡¼­ ´Ù »ç¿ëÇÒ ¼ö ÀÖ´Â µ¥ÀÌÅÍ°¡ µÈ´Ù.
+		//				ì´ ë°ì´í„°ëŠ” ëª¨ë“  ë·°ì—ì„œ ë‹¤ ì‚¬ìš©í•  ìˆ˜ ìžˆëŠ” ë°ì´í„°ê°€ ëœë‹¤.
 		//		2.		session.setAttribute()
-		//				ÀÌ µ¥ÀÌÅÍ´Â °°Àº ¼¼¼ÇÀ» °¡Áø ºä¿¡¼­ »ç¿ëÇÒ¼ö ÀÖ´Â µ¥ÀÌÅÍ°¡ µÈ´Ù.
-		//		¡Ú¡Ú¡Ú
+		//				ì´ ë°ì´í„°ëŠ” ê°™ì€ ì„¸ì…˜ì„ ê°€ì§„ ë·°ì—ì„œ ì‚¬ìš©í• ìˆ˜ ìžˆëŠ” ë°ì´í„°ê°€ ëœë‹¤.
+		//		â˜…â˜…â˜…
 		//		3.		req.setAttribute()
-		//				ÀÌ ¸ðµ¨ÀÌ ¼±ÅÃÇÑ ºä¿¡¼­¸¸ »ç¿ëÇÒ ¼ö ÀÖ´Â µ¥ÀÌÅÍ°¡ µÈ´Ù.
+		//				ì´ ëª¨ë¸ì´ ì„ íƒí•œ ë·°ì—ì„œë§Œ ì‚¬ìš©í•  ìˆ˜ ìžˆëŠ” ë°ì´í„°ê°€ ëœë‹¤.
 		
-		//	Âü°í	setAttribute´Â Map Çü½ÄÀ¸·Î ¾Ë·ÁÁÖ´Â ¹æ½ÄÀ¸·Î µ¥ÀÌÅÍ¸¦ Å°°ª°ú ÇÔ²² µî·ÏÇØ¾ß ÇÑ´Ù.
+		//	ì°¸ê³ 	setAttributeëŠ” Map í˜•ì‹ìœ¼ë¡œ ì•Œë ¤ì£¼ëŠ” ë°©ì‹ìœ¼ë¡œ ë°ì´í„°ë¥¼ í‚¤ê°’ê³¼ í•¨ê»˜ ë“±ë¡í•´ì•¼ í•œë‹¤.
 		req.setAttribute("DATA", list);
-		//	ºä¿¡¼­´Â ÆäÀÌÁö Á¤º¸µµ ÀÌ¿ëÇØ¾ß ÇÏ¹Ç·Î °°ÀÌ º¸³»ÁØ´Ù.
+		//	ë·°ì—ì„œëŠ” íŽ˜ì´ì§€ ì •ë³´ë„ ì´ìš©í•´ì•¼ í•˜ë¯€ë¡œ ê°™ì´ ë³´ë‚´ì¤€ë‹¤.
 		req.setAttribute("PINFO", pInfo);
-		//	ÀÌÃ³·³ ¸ðµ¨Àº »ý»êµÈ µ¥ÀÌÅÍ¸¦ ºä°¡ ÇÊ¿äÇÏ¸é ¸î°³µçÁö º¸³¾ ¼ö ÀÖ´Ù.
+		//	ì´ì²˜ëŸ¼ ëª¨ë¸ì€ ìƒì‚°ëœ ë°ì´í„°ë¥¼ ë·°ê°€ í•„ìš”í•˜ë©´ ëª‡ê°œë“ ì§€ ë³´ë‚¼ ìˆ˜ ìžˆë‹¤.
 		return "/Board/BoardList.jsp";
 	}
 }

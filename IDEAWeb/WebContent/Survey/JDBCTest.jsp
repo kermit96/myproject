@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@	page import="java.sql.*" %>
+<%@	page import="jdbc.*" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -17,6 +18,8 @@
 	catch(Exception e) {
 		System.out.println("드라이버 로딩 실패");
 	}
+
+       
 	//	컨넥션
 	Connection		con = null;
 	try {
@@ -33,6 +36,17 @@
 		}
 		catch(Exception e) {}
 	}
+	
+	try {
+	   PoolDB db = new PoolDB();
+   	   con  = db.getCON();
+   	   con.close();
+	} catch(Exception ex) {
+		
+	   ex.printStackTrace();
+	}
+	
+	  
 	
 
 %>

@@ -3,14 +3,14 @@ package iedu.data;
 import java.util.Date;
 
 /*
- * 	¸ðµ¨°ú ºä»çÀÌ¿¡ ÇÊ¿äÇÑ µ¥ÀÌÅÍ¸¦ ÁÖ°í ¹Þ±â À§ÇÑ Å¬·¡½º ¿ªÈ°À» ÇÒ ¿¹Á¤ÀÌ´Ù.
- *	Áö±Ý±îÁö´Â ¸ðµ¨¿¡¼­ »ý»êµÈ µ¥ÀÌÅÍ¸¦ ºä¿¡°Ô ÁÙ¶§ MAPÀ¸·Î ¸¸µé¾î¼­ Á¦°øÇß´Ù.
- *	Map ´ë½Å¿¡ ÀÌ Å¬·¡½º¿¡ ÀÖ´Â º¯¼ö¿¡ ÇÊ¿äÇÑ µ¥ÀÌÅÍ¸¦ ÀÔ·ÂÇØ ³õ°í
- *	ÀÌ Å¬·¡½º¸¦ ÅëÃ¤·Î ÁÜÀ¸·Î½á ºä¿¡¼­ »ç¿ëÇÒ ¼ö ÀÖµµ·Ï ÇÒ ¿¹Á¤ÀÌ´Ù.
+ * 	ëª¨ë¸ê³¼ ë·°ì‚¬ì´ì— í•„ìš”í•œ ë°ì´í„°ë¥¼ ì£¼ê³  ë°›ê¸° ìœ„í•œ í´ëž˜ìŠ¤ ì—­í™œì„ í•  ì˜ˆì •ì´ë‹¤.
+ *	ì§€ê¸ˆê¹Œì§€ëŠ” ëª¨ë¸ì—ì„œ ìƒì‚°ëœ ë°ì´í„°ë¥¼ ë·°ì—ê²Œ ì¤„ë•Œ MAPìœ¼ë¡œ ë§Œë“¤ì–´ì„œ ì œê³µí–ˆë‹¤.
+ *	Map ëŒ€ì‹ ì— ì´ í´ëž˜ìŠ¤ì— ìžˆëŠ” ë³€ìˆ˜ì— í•„ìš”í•œ ë°ì´í„°ë¥¼ ìž…ë ¥í•´ ë†“ê³ 
+ *	ì´ í´ëž˜ìŠ¤ë¥¼ í†µì±„ë¡œ ì¤Œìœ¼ë¡œì¨ ë·°ì—ì„œ ì‚¬ìš©í•  ìˆ˜ ìžˆë„ë¡ í•  ì˜ˆì •ì´ë‹¤.
  */
 public class ReBoardData {
-	//	ÀÌ ¾È¿¡´Â	
-	//		1.	ºä¿¡°Ô Àü´ÞÇÒ µ¥ÀÌÅÍ¸¦ ±â¾ïÇÒ º¯¼ö¸¦ ÁØºñÇØ¾ß ÇÑ´Ù.
+	//	ì´ ì•ˆì—ëŠ”	
+	//		1.	ë·°ì—ê²Œ ì „ë‹¬í•  ë°ì´í„°ë¥¼ ê¸°ì–µí•  ë³€ìˆ˜ë¥¼ ì¤€ë¹„í•´ì•¼ í•œë‹¤.
 	public		int		no;
 	public		String	title;
 	public		String	writer;
@@ -23,9 +23,9 @@ public class ReBoardData {
 	public		int		ok;
 	public		int		bed;
 
-	//		2.	ºä¿¡¼­´Â ÀÌ µ¥ÀÌÅÍ¸¦ jstl ¹æ½ÄÀ¸·Î »ç¿ëÇÒ ¿¹Á¤ÀÌ´Ù.
-	//			»ç¿ëÀÚ Å¬·¡½º¿¡ ÀÖ´Â µ¥ÀÌÅÍ¸¦ »ç¿ëÇÏ±â À§ÇØ¼­´Â
-	//			±× Å¬·¡½º¿¡ getXxx()°¡ Á¸ÀçÇØ¾ß ÇÑ´Ù.
+	//		2.	ë·°ì—ì„œëŠ” ì´ ë°ì´í„°ë¥¼ jstl ë°©ì‹ìœ¼ë¡œ ì‚¬ìš©í•  ì˜ˆì •ì´ë‹¤.
+	//			ì‚¬ìš©ìž í´ëž˜ìŠ¤ì— ìžˆëŠ” ë°ì´í„°ë¥¼ ì‚¬ìš©í•˜ê¸° ìœ„í•´ì„œëŠ”
+	//			ê·¸ í´ëž˜ìŠ¤ì— getXxx()ê°€ ì¡´ìž¬í•´ì•¼ í•œë‹¤.
 	
 	public int getOk() {
 		return ok;
@@ -115,17 +115,17 @@ public class ReBoardData {
 		this.no = no;
 	}
 	
-	//	JSTL¿¡¼­´Â ¾îÂ¥ÇÇ º¯¼öÀ» ÀÌ¸§À» ÀÌ¿ëÇØ¼­ Ãâ·ÂÇÏ´Â °ÍÀÌ ¾Æ´Ï°í
-	//	get ÇÔ¼ö¸¦ ÀÌ¿ëÇØ¼­ Ãâ·ÂÀ» ÇÏ°Ô µÈ´Ù.
-	//	Áï get ÇÔ¼ö°¡ ¹ÝÈ¯ÇÑ °ªÀ» Ãâ·ÂÇÏ°Ô µÇ´Â °ÍÀÌ´Ù.
-	//	ÀÌ°ÍÀ» ¿ª ÀÌ¿ëÇÏ¸é get ÇÔ¼ö¿¡¼­ µ¥ÀÌÅÍ¸¦ °¡°øÇØ¼­ ¾Ë·ÁÁÖ¸é
-	//	Ãâ·Âµµ °¡°øµÈ °á°ú°¡ Ãâ·ÂµÉ °ÍÀÌ´Ù.
+	//	JSTLì—ì„œëŠ” ì–´ì§œí”¼ ë³€ìˆ˜ì„ ì´ë¦„ì„ ì´ìš©í•´ì„œ ì¶œë ¥í•˜ëŠ” ê²ƒì´ ì•„ë‹ˆê³ 
+	//	get í•¨ìˆ˜ë¥¼ ì´ìš©í•´ì„œ ì¶œë ¥ì„ í•˜ê²Œ ëœë‹¤.
+	//	ì¦‰ get í•¨ìˆ˜ê°€ ë°˜í™˜í•œ ê°’ì„ ì¶œë ¥í•˜ê²Œ ë˜ëŠ” ê²ƒì´ë‹¤.
+	//	ì´ê²ƒì„ ì—­ ì´ìš©í•˜ë©´ get í•¨ìˆ˜ì—ì„œ ë°ì´í„°ë¥¼ ê°€ê³µí•´ì„œ ì•Œë ¤ì£¼ë©´
+	//	ì¶œë ¥ë„ ê°€ê³µëœ ê²°ê³¼ê°€ ì¶œë ¥ë  ê²ƒì´ë‹¤.
 	public String getBrbody() {
 		String temp = body.replaceAll("\r\n", "<br>");
 		return temp;
 	}
-	//	ÀÌ ±â´ÉÀÌ Á¸ÀçÇÏ´Â °ÍÀÌ MapÀ» ÀÌ¿ëÇÏ´Â °Í º¸´Ù ÈÎ¾À ÀÛ¾÷ÀÌ ÆíÇÏ´Ù´Â
-	//	ÀÌÁ¡ÀÌ ÀÖ´Ù.
+	//	ì´ ê¸°ëŠ¥ì´ ì¡´ìž¬í•˜ëŠ” ê²ƒì´ Mapì„ ì´ìš©í•˜ëŠ” ê²ƒ ë³´ë‹¤ í›¨ì”¬ ìž‘ì—…ì´ íŽ¸í•˜ë‹¤ëŠ”
+	//	ì´ì ì´ ìžˆë‹¤.
 }
 
 
