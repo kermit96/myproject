@@ -8,7 +8,7 @@ import java.util.HashSet;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
-import iedu.config.Dbconfig;
+import iedu.config.Globalconfig;
 import iedu.dao.MyResultSet;
 
 public class BaseJDBCDao {
@@ -290,6 +290,9 @@ public class BaseJDBCDao {
 
 	}
 
+	
+	
+	
 	public static  BaseJDBCDao GetjdbcDao(DBTYPE dbtype,String host,  int port, String  dbname,String userid,String password) throws Exception
 	{
 
@@ -323,8 +326,5 @@ public class BaseJDBCDao {
 
 		return dao;
 	}
-
 	
-	
-
 }

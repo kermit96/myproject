@@ -90,8 +90,7 @@
 		            data:{no:$("#id").val() },
 		            dataType:"json",
 		            success:function(data){
-		            	try {
-                         
+		            	try {                         
 		            	  $("#cancelspan").html("( "+data.BadCount+" )");
 		            	  $("#okspan").html("( "+data.GoodCount+" )");
 		            	} catch(ex) {		            		
@@ -101,14 +100,11 @@
 		            		            
 		            error:function()
 		            {
-		            	alert("error");
-		            	
+		            	alert("error");		            	
 		            }		           		    	 
 		     });
-		     
-				
-				
-			}
+		     								
+		}
 			
 			function Good() {
 		// 		location.href = "../ReBoard/BoardGood.reb?oriNO=${DATA.no}&nowPage=${NOWPAGE}";

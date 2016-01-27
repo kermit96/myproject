@@ -34,7 +34,7 @@ function init()
 {
 
     $.ajax({
-        url:'../ajax/getdbconfig',
+        url:'../ajax/getglobalconfig',
         async:false,
         type:'post',
         dataType:'json',
@@ -47,6 +47,7 @@ function init()
           $("#dbhost").val(data.host);
           $("#dbport").val(data.port);
           $("#dbpassword").val(data.password);
+          $("#savedir").val(data.savedir);
         },
         error:function( xhr) {
         	 alert("An error occured: " + xhr.status + " " + xhr.statusText)
@@ -83,7 +84,7 @@ function test()
 function save()
 {
 	$.ajax({
-        url:'../ajax/dbsave',
+        url:'../ajax/globalsave',
         async:false,
         type:'post',
         dataType:'html',
@@ -93,6 +94,7 @@ function save()
         	dbhost:$("#dbhost").val(),
         	dbport:$("#dbport").val(),
         	dbpassword:$("#dbpassword").val(),
+        	savedir:$("#savedir").val(),
         
         },
         success:function(data){            	
@@ -181,6 +183,16 @@ function myclose()
        <input type="password"  id="dbpassword"  value="">   
       </td>     
    </tr>   
+  
+    <tr> 
+      <td>
+          파일 저장 디렉토리   
+      </td>
+      <td>
+       <input type="text"  id="savedir"  value="">   
+      </td>     
+   </tr>   
+  
   
   <tr>
   <td colspan="2"  align="center">

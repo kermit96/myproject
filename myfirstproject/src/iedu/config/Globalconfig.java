@@ -1,5 +1,6 @@
 package iedu.config;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -11,7 +12,7 @@ import javax.crypto.NoSuchPaddingException;
 
 import iedu.sql.DBTYPE;
 
-public class Dbconfig {
+public class Globalconfig {
     private String dbname;
     private int    dbtype;
     
@@ -20,8 +21,30 @@ public class Dbconfig {
     private String  host;
     private int    port;
     
+    private String savedir;
     
-    ConfigFileHandler handler;
+    /**
+	 * @return the savedir
+	 */
+	public String getSavedir() {
+		return savedir;
+	}
+
+	/**
+	 * @param savedir the savedir to set
+	 */
+	public void setSavedir(String savedir) {
+		this.savedir = savedir;
+		
+        File dir = new File(savedir);
+        if (dir.exists() == false) 
+		  dir.mkdirs();
+		
+		
+		handler.setValue("savedir",savedir );
+	}
+
+	ConfigFileHandler handler;
     /**
 	 * @return the dbname
 	 */
@@ -127,10 +150,10 @@ public class Dbconfig {
 		
 	}
 	
-	public Dbconfig(String filename)
+	public Globalconfig(String filename)
 	{
 		
-	handler = ConfigFileHandler.getConfigFileHandler(filename);
+	    handler = ConfigFileHandler.getConfigFileHandler(filename);
     	
     	host = handler.getValue("host");
 		port = 0;
@@ -156,10 +179,14 @@ public class Dbconfig {
 		 } catch (Exception ex) {
 			 dbtype =0;
 		 }
-		 	    
+		 
+		 savedir = handler.getValue("savedir");
+		 if (savedir == null)
+			 savedir = "";
+		 
 	}
 	
-    public Dbconfig()
+    public Globalconfig()
     {
       this("iedu.conf");  	
     }

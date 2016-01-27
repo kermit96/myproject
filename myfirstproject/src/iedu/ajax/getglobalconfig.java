@@ -11,19 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import iedu.config.Dbconfig;
+import iedu.config.Globalconfig;
 
 /**
  * Servlet implementation class getdbconfig
  */
-@WebServlet("/ajax/getdbconfig")
-public class getdbconfig extends HttpServlet {
+@WebServlet("/ajax/getglobalconfig")
+public class getglobalconfig extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public getdbconfig() {
+	public getglobalconfig() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -41,7 +41,7 @@ public class getdbconfig extends HttpServlet {
 		response.setContentType("text/html");
 		response.setCharacterEncoding("utf-8");
 
-		Dbconfig config = new Dbconfig();
+		Globalconfig config = new Globalconfig();
 
 		Gson gson = new Gson();
 
@@ -49,7 +49,7 @@ public class getdbconfig extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		out.print(jsonstr); // out.print 내용을 ajax의 dataType이 jason인 놈에게 데이터 쏴줌
-
+		
 	}
 
 	/**

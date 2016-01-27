@@ -76,6 +76,18 @@ public class PoolDB {
 		return pstmt;
 	}
 
+	// 질의 명령을 실행해줄 함수 
+	
+	public void execute(Statement stmt ,String sql) {
+		
+		 try {
+			  stmt.execute(sql);
+		 } catch(Exception e) {}
+		 		
+	}
+	
+	
+	
 	/*
 	 * 	5.	닫아주는 함수를 제작한다.
 	 */

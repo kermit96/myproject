@@ -51,11 +51,12 @@ public class FileBoardController extends HttpServlet{
     		}
     	}
 	}
+	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		execute(request, response);
 	}
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		execute(request, response);
+		doGet(request, response);
 	}
 	//	2가지 종류의 서비스 함수를 하나로 모아서 처리할 함수를 강제로 만들자
 	public void execute(HttpServletRequest request, HttpServletResponse response) {

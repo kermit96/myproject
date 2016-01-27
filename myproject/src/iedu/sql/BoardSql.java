@@ -14,12 +14,12 @@ public class BoardSql  extends BaseDbSql {
 
 	 public BoardSql( DBTYPE dbtype )
 	 {        		 
-         this.dbtype= dbtype;		 
+  //       this.dbtype= dbtype;		 
 	 }
 	 
 	 public BoardSql()
 	 {
-		 		  
+		 		   
 	 }
 	
 	 public  BoardDao GetDetailBoard(int no)
@@ -115,7 +115,7 @@ public class BoardSql  extends BaseDbSql {
 			
 			dao = GetjdbcDao();			
 			String sql = "insert into reboard(rb_No,rb_title,rb_Writer,rb_Content,rb_date,rb_hit,rb_isSHow) values( (select nvl(max(rb_No),0)+1  from reboard ), ?,?,?, sysdate,0,'Y')";
-			if (dbtype != DBTYPE.ORACLE_TYPE) {				
+			if (dao.GetDbtype() != DBTYPE.ORACLE_TYPE) {				
 				sql = "insert into reboard(rb_title,rb_Writer,rb_Content,rb_hit,rb_isSHow) values( ?,?,?, 0,'Y')";
 			}
 			pstat = dao.getPrepare(sql);
@@ -145,7 +145,7 @@ public class BoardSql  extends BaseDbSql {
 						
 			dao = GetjdbcDao();			
 			String sql = "insert into reply(rr_no, rb_no,rr_Writer,rr_Content,rr_date,rr_isShow) values( (select nvl(max(rb_No),0)+1  from reply ), ?,?,?)";
-			if (dbtype != DBTYPE.ORACLE_TYPE) {				
+			if (dao.GetDbtype() != DBTYPE.ORACLE_TYPE) {				
 				sql = "insert into reply(rb_no,rr_Writer,rr_Content) values( ?,?,?)";
 			}
 			pstat = dao.getPrepare(sql);

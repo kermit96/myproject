@@ -1,7 +1,7 @@
 package iedu.sql;
 
 import iedu.config.ConfigFileHandler;
-import iedu.config.Dbconfig;
+import iedu.config.Globalconfig;
 
 public class BaseDbSql {
 
@@ -9,7 +9,6 @@ public class BaseDbSql {
 
 	public BaseDbSql()
 	{
-
 		
 	}
 
@@ -22,7 +21,7 @@ public class BaseDbSql {
 	protected BaseJDBCDao GetjdbcDao() throws Exception
 	{
 
-		Dbconfig  config = new Dbconfig();
+		Globalconfig  config = new Globalconfig();
 		
 		String host = config.getHost();
 		int port = 0;

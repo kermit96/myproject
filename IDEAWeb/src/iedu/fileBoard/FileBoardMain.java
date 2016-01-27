@@ -12,8 +12,3 @@ public abstract class FileBoardMain {
 	//	이 클래스에 계층 추적을 위한 함수를 제작해 놓자.
 	public abstract String service(HttpServletRequest req, HttpServletResponse resp);
 }
-
-
-
-
-

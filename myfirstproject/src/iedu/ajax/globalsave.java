@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import iedu.config.Dbconfig;
+import iedu.config.Globalconfig;
 
 /**
  * Servlet implementation class dbsave
  */
-@WebServlet("/ajax/dbsave")
-public class dbsave extends HttpServlet {
+@WebServlet("/ajax/globalsave")
+public class globalsave extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public dbsave() {
+    public globalsave() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,6 +39,7 @@ public class dbsave extends HttpServlet {
 		int     port = 0 ;
 		String userid ="" ;				
 		String password="";
+		String savedir="";
 		
 		dbtype = Integer.parseInt(request.getParameter("dbtype") );
 		dbname = request.getParameter("dbname");
@@ -46,8 +47,10 @@ public class dbsave extends HttpServlet {
 		 port = Integer.parseInt(request.getParameter("dbport"));
 		 userid = request.getParameter("dbuser");
 		 password = request.getParameter("dbpassword");
+		 savedir = request.getParameter("savedir");
 		 
-		Dbconfig config = new Dbconfig();
+		 
+		Globalconfig config = new Globalconfig();
 		
 		config.setDbtype(dbtype);
 		config.setDbname(dbname);
@@ -55,6 +58,7 @@ public class dbsave extends HttpServlet {
 		config.setPort(port);;
 		config.setUserid(userid);
 		config.setPassword(password);
+		config.setSavedir(savedir);
 		
 		config.Save();
 		response.setContentType("text/html");

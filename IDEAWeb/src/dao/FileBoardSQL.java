@@ -7,6 +7,7 @@ public class FileBoardSQL {
 	public static final int	GETBOARDLIST = 3;
 	public	static final int	GETSEARCHTOTAL = 4;
 	public static final int	GETBOARDSEARCHLIST = 5;
+	public static final int	GETBOARDVIEW = 6;
 	
 	public static String getSQL(int code) {
 		StringBuffer	buff = new StringBuffer();
@@ -61,6 +62,20 @@ public class FileBoardSQL {
 			buff.append("ORDER BY ");
 			buff.append("		fb_NO DESC ");
 			break;
+			
+		case GETBOARDVIEW:
+			 buff.append("select ");
+			 buff.append("		fb_NO AS NO, ");
+			 buff.append("		fb_body AS body, ");
+				buff.append("		fb_Title AS TITLE, ");
+				buff.append("		fb_Writer AS WRITER, ");
+				buff.append("		fb_FileLength AS LEN ");
+				buff.append("		fb_FilePath AS path ");
+				buff.append("		fb_FileOriName AS oname ");
+				buff.append("		fb_FileSaveName AS sname ");
+			 buff.append(" from fileboard");
+			 buff.append(" where fb_no=?");
+			 
 		}
 		return buff.toString();
 	}

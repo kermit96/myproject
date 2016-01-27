@@ -101,6 +101,33 @@ public class FileBoardDAO {
 		return list;
 	}
 	
+	public FileBoardData GetView(int no)
+	{
+		String	sql = FileBoardSQL.getSQL(FileBoardSQL.GETBOARDVIEW);
+				
+		PreparedStatement ptmt = null;		
+		ResultSet		rs = null;
+		FileBoardData  data = new FileBoardData(); 
+		
+		
+		try {
+			ptmt = db.getPSTMT(con, sql);
+			rs = ptmt.executeQuery();
+			while(rs.next())
+			{
+				
+				
+			}
+		}
+		catch(Exception e) {
+			System.out.println("File View data " + e);
+		}
+		db.close(rs);
+		db.close(ptmt);
+		
+		return data;
+	}
+	
 	/*
 	 * 	검색 데이터 개수를 구하는 함수
 	 */
