@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+	<!-- 	로그인 질의 명령 
+			질의 명령의 결과를 어떤 방식으로 받을지							
+			resultType
+			질의 명령을 실행할 때 필요한 데이터를 어떤 형태로 제공할지	
+			parameterType
+	-->
+	<select id="loginproc" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT
+			m_ID		AS ID,
+			m_Name	AS NAME,
+			m_Nick		AS NICK
+		FROM
+			Member
+			<!-- 	myBatis에서는 ?의 순서에 의해서 값이 입력되지 않고
+					키값에 의해서 입력되는 방식을 채택했다.
+					결론	?로 사용하지 않고	#{키값}의 형태로 입력한다.
+			-->
+		WHERE
+					m_ID = #{ID}
+			AND	m_Password = #{PW}
+	</select>	
+</mapper>

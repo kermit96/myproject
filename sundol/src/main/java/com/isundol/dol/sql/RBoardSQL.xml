@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rboard">
+<!-- 	게시물 등록 질의 -->
+<!-- 	게시물 목록 질의 -->
+<!-- 	게시물 상세보기 질의 -->
+<!-- 	게시물 조회수 증가 질의 -->
+<!-- 	게시물 수정 질의 -->
+<!-- 	게시물 삭제 질의 -->
+<!-- 	게시물 추천 증가 질의 -->
+<!-- 	게시물 댓글 등록 질의 -->
+<!-- 	게시물 댓글 삭제 질의 -->
+<!-- 	게시물 댓글 추천 증가 질의 -->
+</mapper>

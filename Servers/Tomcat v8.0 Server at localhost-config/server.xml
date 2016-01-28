@@ -129,7 +129,7 @@
       <Context docBase="myproject" path="/myproject" reloadable="true" source="org.eclipse.jst.jee.server:myproject"/>
       <Context docBase="springmyproject" path="/springmyproject" reloadable="true" source="org.eclipse.jst.jee.server:springmyproject"/>
       
-      <Context docBase="springproject" path="/springproject" reloadable="true" source="org.eclipse.jst.jee.server:springproject"/></Host>
+      <Context docBase="sundol" path="/dol" reloadable="true" source="org.eclipse.jst.jee.server:sundol"/></Host>
     </Engine>
   </Service>
 </Server>
