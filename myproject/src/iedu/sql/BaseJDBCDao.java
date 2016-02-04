@@ -51,6 +51,11 @@ public class BaseJDBCDao {
 	
 	public BaseJDBCDao(String drivename,String  url,String userid,String password,int initnum )  throws  Exception
 	{
+		
+		// super("oracle.jdbc.driver.OracleDriver","jdbc:oracle:thin:@"+"localhost"+":"+1521+":"+"orcl",
+//  		userid,password,4
+	 // 	);			
+
 		try {					
 			ds.setDriverClassName(drivename);
 			ds.setUrl(url);

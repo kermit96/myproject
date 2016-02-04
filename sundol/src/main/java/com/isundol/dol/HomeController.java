@@ -40,7 +40,7 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		
 		int		total	= sampleDAO.getTotal();
-		System.out.println("총 회원수 = " + total);
+
 		
 		return "home";
 	}

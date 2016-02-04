@@ -14,77 +14,77 @@ import 	com.isundol.dol.dao.MemberDAO;
 
 @Controller
 public class MemberController {
-	//	ÀÌ ÄÁÆ®·Ñ·¯¿¡¼­ »ç¿ëÇÒ DAO´Â ¹°·Ğ ÇÊ¿äÇÑ ½ÃÁ¡¿¡¼­ new ½ÃÄÑ¼­ »ç¿ëÇØµµ µÈ´Ù.
-	//	´Ù¸¸ ½ºÇÁ¸µÀÌ ÀÚ¶ûÇÏ´Â ±â¼úÁß¿¡ DI ±â¹ıÀÌ ÀÖÀ¸¹Ç·Î.....
-	//	ÀÌ ±â¹ıÀ» ÀÌ¿ëÇØ¼­ Ã³¸®ÇÏ¸é ÁÁÀ»°Í °°´Ù.....
+	//	ì´ ì»¨íŠ¸ë¡¤ëŸ¬ì—ì„œ ì‚¬ìš©í•  DAOëŠ” ë¬¼ë¡  í•„ìš”í•œ ì‹œì ì—ì„œ new ì‹œì¼œì„œ ì‚¬ìš©í•´ë„ ëœë‹¤.
+	//	ë‹¤ë§Œ ìŠ¤í”„ë§ì´ ìë‘í•˜ëŠ” ê¸°ìˆ ì¤‘ì— DI ê¸°ë²•ì´ ìˆìœ¼ë¯€ë¡œ.....
+	//	ì´ ê¸°ë²•ì„ ì´ìš©í•´ì„œ ì²˜ë¦¬í•˜ë©´ ì¢‹ì„ê²ƒ ê°™ë‹¤.....
 	@Autowired
 	MemberDAO	mDao;
 	
 	/*
-	 * ·Î±×ÀÎ Æû ¿äÃ» ÇÔ¼ö
+	 * ë¡œê·¸ì¸ í¼ ìš”ì²­ í•¨ìˆ˜
 	 */
 	@RequestMapping("/Member/LoginForm")
 	public ModelAndView loginForm() {
 		ModelAndView		mv = new ModelAndView();
-		//	ÇÒÀÏ		ÀüÇô¾ø´Ù.
+		//	í• ì¼		ì „í˜€ì—†ë‹¤.
 		mv.setViewName("Member/LoginForm");
 		return mv;
 	}
 	
 	/*
-	 * 	·Î±×ÀÎ ¿äÃ» ÇÔ¼ö
+	 * 	ë¡œê·¸ì¸ ìš”ì²­ í•¨ìˆ˜
 	 */
 	@RequestMapping("/Member/LoginProc")
 	public ModelAndView loginProc(HttpServletRequest req, HttpSession session) {
 		ModelAndView		mv = new ModelAndView();
 		String	id 	= req.getParameter("id");
 		String	pw = req.getParameter("pw");
-		//	ÀÌÁ¦ µ¥ÀÌÅÍº£ÀÌ½º¿¡°Ô ÁúÀÇ¸¦ ´øÁ®¼­ ·Î±×ÀÎÀ» ÇØÁÖµµ·Ï ÇÑ´Ù.
-		//		1.	SQL¸¦ ¸¸µç´Ù.
+		//	ì´ì œ ë°ì´í„°ë² ì´ìŠ¤ì—ê²Œ ì§ˆì˜ë¥¼ ë˜ì ¸ì„œ ë¡œê·¸ì¸ì„ í•´ì£¼ë„ë¡ í•œë‹¤.
+		//		1.	SQLë¥¼ ë§Œë“ ë‹¤.
 		//			com.isundol.dol.sql.MemberSQL.xml
-		//		2.	DAO¸¦ ÀÌ¿ëÇØ¼­ µ¥ÀÌÅÍº£ÀÌ½º Ã³¸®¸¦ ÇÑ´Ù.
+		//		2.	DAOë¥¼ ì´ìš©í•´ì„œ ë°ì´í„°ë² ì´ìŠ¤ ì²˜ë¦¬ë¥¼ í•œë‹¤.
 		//			com.isundol.dol.dao.MemberDAO.java
 		
-		//	ÀÌÁ¦ DAO¸¦ ÀÌ¿ëÇØ¼­ Ã³¸®ÇÏ°íÀÚ ÇÑ´Ù.
-		//	DAO¿¡°Ô ÇÊ¿äÇÑ Á¤º¸¸¦ HashMapÀ¸·Î ¸¸µé¾î¼­ Á¦°øÇÏµµ·Ï ¾à¼ÓÇß´Ù.
+		//	ì´ì œ DAOë¥¼ ì´ìš©í•´ì„œ ì²˜ë¦¬í•˜ê³ ì í•œë‹¤.
+		//	DAOì—ê²Œ í•„ìš”í•œ ì •ë³´ë¥¼ HashMapìœ¼ë¡œ ë§Œë“¤ì–´ì„œ ì œê³µí•˜ë„ë¡ ì•½ì†í–ˆë‹¤.
 		HashMap	map = new HashMap();
 		map.put("PW", pw);
 		map.put("ID", id);
-		//	Á¶½É		Å°°ªÀº SQL¿¡¼­ ÁöÁ¤ÇÑ #{Å°°ª}	°ú µ¿ÀÏÇØ¾ß ÇÑ´Ù.
+		//	ì¡°ì‹¬		í‚¤ê°’ì€ SQLì—ì„œ ì§€ì •í•œ #{í‚¤ê°’}	ê³¼ ë™ì¼í•´ì•¼ í•œë‹¤.
 		HashMap	result = mDao.login(map);
 		
 		if(result == null || result.isEmpty()) {
-			//	°á°ú¹°ÀÌ Á¸ÀçÇÏÁö ¾Ê´Ï?		·Î±×ÀÎ ½ÇÆĞ
+			//	ê²°ê³¼ë¬¼ì´ ì¡´ì¬í•˜ì§€ ì•Šë‹ˆ?		ë¡œê·¸ì¸ ì‹¤íŒ¨
 		}
 		else {
-			//	°á°ú¹°ÀÌ Á¸ÀçÇÏ´Ï?			·Î±×ÀÎ ¼º°ø
-			//	¼¼¼Ç¿¡ ±× °á°ú¹°ÀÇ Á¤º¸¸¦ ÀÔ·ÂÇØÁÜÀ¸·Î ³ªÁß¿¡ ¼¼¼ÇÀ» ÀÌ¿ëÇØ¼­
-			//	ÀÌ »ç¶÷À» Á¤º¸¸¦ ¾òÀ» ¼ö ÀÖµµ·Ï ÇØÁØ´Ù.
+			//	ê²°ê³¼ë¬¼ì´ ì¡´ì¬í•˜ë‹ˆ?			ë¡œê·¸ì¸ ì„±ê³µ
+			//	ì„¸ì…˜ì— ê·¸ ê²°ê³¼ë¬¼ì˜ ì •ë³´ë¥¼ ì…ë ¥í•´ì¤Œìœ¼ë¡œ ë‚˜ì¤‘ì— ì„¸ì…˜ì„ ì´ìš©í•´ì„œ
+			//	ì´ ì‚¬ëŒì„ ì •ë³´ë¥¼ ì–»ì„ ìˆ˜ ìˆë„ë¡ í•´ì¤€ë‹¤.
 			session.setAttribute("ID", result.get("ID"));
 			session.setAttribute("NAME", result.get("NAME"));
 			session.setAttribute("NICK", result.get("NICK"));
-			//	Âü°í	¹İÈ¯°ªÀÌ MapÀÎ °æ¿ì Key°ªÀº
-			//			ÀÚµ¿ÀûÀ¸·Î AS¿¡ »ç¿ëÇÑ ³»¿ëÀÌ Å°°ªÀ¸·Î µî·ÏµÈ´Ù.
-			//			¸¸¾à AS¸¦ »ç¿ëÇÏÁö ¾ÊÀ¸¸é ÇÊµåÀÌ¸§ÀÌ Å°°ªÀ¸·Î µî·ÏµÈ´Ù.
+			//	ì°¸ê³ 	ë°˜í™˜ê°’ì´ Mapì¸ ê²½ìš° Keyê°’ì€
+			//			ìë™ì ìœ¼ë¡œ ASì— ì‚¬ìš©í•œ ë‚´ìš©ì´ í‚¤ê°’ìœ¼ë¡œ ë“±ë¡ëœë‹¤.
+			//			ë§Œì•½ ASë¥¼ ì‚¬ìš©í•˜ì§€ ì•Šìœ¼ë©´ í•„ë“œì´ë¦„ì´ í‚¤ê°’ìœ¼ë¡œ ë“±ë¡ëœë‹¤.
 		}
 		mv.setViewName("Member/LoginForm");
 		return mv;
 	}
 	
 	/*
-	 * ·Î±×¾Æ¿ô ¿äÃ» ÇÔ¼ö
+	 * ë¡œê·¸ì•„ì›ƒ ìš”ì²­ í•¨ìˆ˜
 	 */
 	@RequestMapping("/Member/LoginOut")
 	public ModelAndView loginOut(HttpSession session) {
 		ModelAndView		mv = new ModelAndView();
-		//	ÇÒÀÏ
-		//		¼¼¼ÇÀ» ´Ù Á×ÀÌ°í ·Î±×ÀÎ ÆûÀ¸·Î º¸³½´Ù.
+		//	í• ì¼
+		//		ì„¸ì…˜ì„ ë‹¤ ì£½ì´ê³  ë¡œê·¸ì¸ í¼ìœ¼ë¡œ ë³´ë‚¸ë‹¤.
 //		session.removeAttribute("ID");
 //		session.removeAttribute("NAME");
 //		session.removeAttribute("NICK");
 		session.invalidate();
-		//	Âü°í
-		//		¿ø·¡´Â ÀÌ ºÎºĞ¿¡¼­ ´Ù¸¥°÷¿¡¼­ »ç¿ëÇß´ø ¸ğµç ¼¼¼ÇÀ» °°ÀÌ ¾ø¾Ö¾ß ÇÑ´Ù.
+		//	ì°¸ê³ 
+		//		ì›ë˜ëŠ” ì´ ë¶€ë¶„ì—ì„œ ë‹¤ë¥¸ê³³ì—ì„œ ì‚¬ìš©í–ˆë˜ ëª¨ë“  ì„¸ì…˜ì„ ê°™ì´ ì—†ì• ì•¼ í•œë‹¤.
 		mv.setViewName("Member/LoginForm");
 		return mv;
 	}

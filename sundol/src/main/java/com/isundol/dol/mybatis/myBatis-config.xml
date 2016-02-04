@@ -11,12 +11,17 @@
 		<!-- 
 		<typeAlias alias="mdata" type="com.isundol.dol.data.MemberData" />
 		 -->
+		 <typeAlias alias="rbdata" type="com.isundol.dol.data.RBoardData" />
 	</typeAliases>
+	
+	
+	
 	<mappers>
 		<!-- 	이 안에는 사용할 SQL의 xml 파일을 등록한다. 
 		<mapper resource="/com/isundol/dol/sql/MemberSQL.xml" />
 		-->
 		<mapper resource="/com/isundol/dol/sql/SampleSQL.xml" />
 		<mapper resource="/com/isundol/dol/sql/MemberSQL.xml" />
+		<mapper resource="/com/isundol/dol/sql/RBoardSQL.xml" />
 	</mappers>
 </configuration>

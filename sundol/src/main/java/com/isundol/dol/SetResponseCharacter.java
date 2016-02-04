@@ -17,7 +17,7 @@ public class SetResponseCharacter implements Filter {
      * Default constructor. 
      */
 	
-	private String encode="";
+	private String encode="UTF-8";
 	
     public SetResponseCharacter() {
         // TODO Auto-generated constructor stub
@@ -35,12 +35,7 @@ public class SetResponseCharacter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		// place your code here
 
-		// pass the request along the filter chain
-		
-		// 
-		response.setContentType("text/html");
 		response.setCharacterEncoding(encode);            
 		chain.doFilter(request, response);
 	}
@@ -50,15 +45,11 @@ public class SetResponseCharacter implements Filter {
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
 		
-		
 	   encode = fConfig.getInitParameter("Encode");
 	
-		 if (encode == null) 
+	   if (encode == null) 
 			 encode ="UTF-8";
-		 
-// 		System.out.println("encode="+encode);
-		
-		// TODO Auto-generated method stub
+	   
 	}
 
 }

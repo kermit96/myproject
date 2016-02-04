@@ -17,7 +17,7 @@ public class ase256 {
 
 	private static volatile ase256 INSTANCE;
 
-	final static String secretKey   = "123456789012345678901234567A9012"; //32bit
+	final static String secretKey   = "123456789012345678901234AB789012"; //32bit
 	static String IV                = ""; //16bit
 
 	public static ase256 getInstance(){
