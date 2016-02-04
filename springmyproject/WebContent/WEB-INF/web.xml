@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 	약속된 스키마 파일을 설정하는 루트 태그 -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+id="SpringWebSample" 
+version="3.0">
+	<!-- 	스프링 환경 설정 부분 -->
+	<!-- 	스프링의 제목을 설정하는 부분 아무런 의미가 없다.	-->	
+	<display-name>SpringWebSample</display-name>
+	<!-- 	Welcome 파일을 설정하는 부분 -->
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	<!-- 	컨트롤러를 관리할 xml 파일을 지정하는 부분 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<!-- 	★★★
+				컨트롤러를 관리할 xml 파일의 이름 규칙을 지정하는 것으로
+				현재는
+				/WEB-INF/아래에 서블릿이름-servlet.xml로 이름을 정하기로 약속
+		 -->
+		<param-value>/WEB-INF/*-servlet.xml</param-value>
+	</context-param>
+	<!-- 	사용할 컨트롤러를 지정하는 부분이다.
+			우리는 MVC 처리에서 우리가 만든 컨트롤러를 사용했지만
+			스프링은 컨트롤러를 제공하고 있다.	
+			그 컨트롤러가 바로 		DispatcherServlet.java
+	-->
+	<servlet>
+		<servlet-name>firstspringproject</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- 	서블릿(컨트롤러)를 관리하는 환경 설정 파일을 지정하는 부분 -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<!-- 	이 컨트롤러의 환경 설정파일은
+					/WEB-INF/isundol-servlet.xml 이 되어야 한다.
+					
+					그러면 서버가 기동되는 순간 web.xml 파일이 먼저 실행되고
+					연이어서 지정한 환경설정 파일이 실행되어어서
+					컨트롤러 환경을 설정하게 된다.
+			 -->
+			<param-value>/WEB-INF/*-servlet.xml</param-value>
+		</init-param>
+		<!-- 	이 컨트롤러가 실행되는 우선 순위를 지정하는 것 
+				스프링은 우선순위가 0부터 7까지 준비되어 있다.
+				
+				혹시 다른 우선순위(대표적으로 파일 다운로드 컨트롤러나 인터셉터....)
+				가 존재할 경우를 대비해서 우선순위를 정한것이다.
+		-->
+		<load-on-startup>1</load-on-startup>  
+	 </servlet>
+	<!-- 매핑 처리 부분이다.
+			이 컨트롤러가 실행될 요청의 형태를 지정한다./
+	 -->
+	<servlet-mapping>
+		<servlet-name>firstspringproject</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<context-param>
+	    <param-name>contextConfigLocation</param-name>
+	    <param-value>
+	        /WEB-INF/myBatis/myBatis-context.xml
+    	</param-value>
+	</context-param>
+		<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>		
+</web-app>

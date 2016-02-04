@@ -1,0 +1,32 @@
+<Context>
+ 
+		<Resource
+		    name = "jdbc/iedu"
+	        auth="Container"
+	        type="javax.sql.DataSource"
+	        driverClassName="oracle.jdbc.driver.OracleDriver"
+	        url="jdbc:oracle:thin:@localhost:1521:orcl"
+	        username="scott"
+	        password="tiger"
+	        maxActive="8"
+	        maxIdle="0"
+	        maxWait="5000"
+	        removeAbandoned="true"
+	        testOnBorrow="true"
+	        loginTimeout="10"
+		/>
+   
+    
+    <Environment name="dbtype" value="0" type="java.lang.Integer"/>
+
+   			
+<mvc:annotation-driven>
+  <mvc:message-converters register-defaults="true">
+    <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+      <property name="supportedMediaTypes" value = "text/plain;charset=UTF-8" />
+    </bean>
+  </mvc:message-converters>
+</mvc:annotation-driven>
+
+ </Context>
+ 
