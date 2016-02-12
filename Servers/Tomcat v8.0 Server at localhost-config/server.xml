@@ -124,12 +124,10 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="myfirstproject" path="/myfirstproject" reloadable="true" source="org.eclipse.jst.jee.server:myfirstproject"/>
-      <Context docBase="IDEAWeb" path="/IDEAWeb" reloadable="true" source="org.eclipse.jst.jee.server:IDEAWeb"/>
-      <Context docBase="myproject" path="/myproject" reloadable="true" source="org.eclipse.jst.jee.server:myproject"/>
-      <Context docBase="springmyproject" path="/springmyproject" reloadable="true" source="org.eclipse.jst.jee.server:springmyproject"/>
-      
-      <Context docBase="sundol" path="/dol" reloadable="true" source="org.eclipse.jst.jee.server:sundol"/></Host>
+      <Context docBase="IDEAWeb" path="/IDEAWeb" reloadable="true" source="org.eclipse.jst.jee.server:IDEAWeb"/><Context docBase="myproject" path="/myproject" reloadable="true" source="org.eclipse.jst.jee.server:myproject"/><Context docBase="myfirstproject" path="/myfirstproject" reloadable="true" source="org.eclipse.jst.jee.server:myfirstproject"/>
+      <Context docBase="springtest" path="/test" reloadable="true" source="org.eclipse.jst.jee.server:springtest"/>
+      <Context docBase="sundol" path="/dol" reloadable="true" source="org.eclipse.jst.jee.server:sundol"/>
+      <Context docBase="springmyproject" path="/springmyproject" reloadable="true" source="org.eclipse.jst.jee.server:springmyproject"/><Context docBase="javaconfig" path="/myapp" reloadable="true" source="org.eclipse.jst.jee.server:javaconfig"/></Host>
     </Engine>
   </Service>
 </Server>

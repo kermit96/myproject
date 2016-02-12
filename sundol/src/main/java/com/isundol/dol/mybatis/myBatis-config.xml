@@ -8,20 +8,18 @@
 	</settings>
 	<typeAliases>
 		<!-- 	이 안에는 SQL이 사용할 데이터 타입의 별칭을 등록한다. -->
-		<!-- 
-		<typeAlias alias="mdata" type="com.isundol.dol.data.MemberData" />
-		 -->
-		 <typeAlias alias="rbdata" type="com.isundol.dol.data.RBoardData" />
+		<typeAlias alias="rbdata" type="com.isundol.dol.data.RBoardData" />
+		<typeAlias alias="fudata" type="com.isundol.dol.data.FileUploadData" />
 	</typeAliases>
-	
-	
-	
 	<mappers>
-		<!-- 	이 안에는 사용할 SQL의 xml 파일을 등록한다. 
-		<mapper resource="/com/isundol/dol/sql/MemberSQL.xml" />
-		-->
+		<!-- 	이 안에는 사용할 SQL의 xml 파일을 등록한다. -->
 		<mapper resource="/com/isundol/dol/sql/SampleSQL.xml" />
 		<mapper resource="/com/isundol/dol/sql/MemberSQL.xml" />
 		<mapper resource="/com/isundol/dol/sql/RBoardSQL.xml" />
+		<mapper resource="/com/isundol/dol/sql/FileUploadSQL.xml" />
 	</mappers>
 </configuration>
+
+
+
+

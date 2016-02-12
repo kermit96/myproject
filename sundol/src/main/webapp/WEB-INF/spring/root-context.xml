@@ -4,6 +4,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
  	
+
+	
+	
 		
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- 	
@@ -20,6 +23,9 @@
 		설치된 컨넥션 풀을 다른 컨트롤러에서 사용할 수 있도록 DI 등록을 해준다.
 	-->
 	<!-- 	컨넥션 풀 설정 -->
+	
+	
+	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
   	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" />
@@ -55,6 +61,15 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
+	
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="100000000" />
+		<property name="maxInMemorySize" value="100000000" />
+	</bean>
+	
+	
+	
 	<!-- 	우리가 만든 DAO 클래스를 DI 기법으로 사용하기 위해서 등록한다. 
 	<bean id="sampleDAO" class="com.isundol.dol.dao.SampleDAO"> 
    		<property name="sqlSessionTemplate" ref="sqlSession" />

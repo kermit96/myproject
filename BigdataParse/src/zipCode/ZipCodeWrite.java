@@ -20,11 +20,11 @@ public class ZipCodeWrite {
 	  Connection con  = null;
 	  PreparedStatement pstmt = null;
 	  
-	  
+	    
 	  try {
 		  Class.forName("oracle.jdbc.driver.OracleDriver");
 		  con  = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","scott","tiger");
-         String sql = "insert into zipcode values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+               String sql = "insert into zipcode values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
          pstmt =  con.prepareStatement(sql);
 		  
 	  } catch (Exception ex) {

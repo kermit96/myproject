@@ -9,5 +9,6 @@
 	<body>
 		<a href="./Member/LoginForm.dol">로그인</a><br>
 		<a href="./RBoard/BoardList.dol">댓글형 게시판</a><br>
+		<a href="./FileUpload/BoardList.dol">일반 파일 업로드</a><br>
 	</body>
 </html>
