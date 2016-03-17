@@ -37,10 +37,10 @@ $(document).ready(function() {
             async:false,
             type:'post',
             data:{str:$('#message').val()  },
-            success:function(data){
-            	
+            success:function(data){            	
             	  $("#serverhash").val(data);
             }
+            
         });
 
        } catch (ex) {

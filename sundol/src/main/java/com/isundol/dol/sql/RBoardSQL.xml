@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rboard">
+<!-- 	게시물 등록 질의 -->
+	<insert id="boardinsert" parameterType="rbdata">
+		INSERT 
+		INTO
+			RBoard
+		VALUES
+			((SELECT NVL(MAX(rb_NO), 0) + 1 FROM RBoard), 
+			#{id}, #{title}, #{body}, SYSDATE, SYSDATE, 0, #{pw}, 'Y', 0)
+	</insert>
+<!-- 	총 데이터 개수 구하기 질의 -->	
+	<select id="gettotal" resultType="java.lang.Integer">
+		SELECT
+			COUNT(*) AS TOTAL
+		FROM
+			RBoard
+		WHERE
+			rb_isShow = 'Y'
+	</select>
+<!-- 	게시물 목록 질의 
+		resutType을 데이터빈 클래스 형태로 지정하면
+		데이터 빈 클래스의 setXXX함수를 이용해서 찾은 데이터를 기억해 준다.
+		
+		참고	resultType은 나타날 데이터의 줄수와는 상관없이
+				오직 한줄의 데이터를 어떻게 처리할지를 정하는 것이다.
+-->
+	<select id="getlist" resultType="rbdata">
+		SELECT
+			rb_NO			AS no,
+			rb_Writer		AS id,
+			m_Nick			AS nick,
+			rb_Title		AS title,
+			rb_mDate		AS wdate,
+			rb_Hit			AS hit
+		FROM
+			RBoard, Member
+		WHERE
+					rb_isShow = 'Y'
+			AND	rb_Writer = m_ID
+		ORDER BY
+			rb_NO DESC
+	</select>
+<!-- 	봤던 글번호를 알아내는 질의 -->
+	<select id="showno" resultType="java.util.HashMap" 
+											parameterType="java.lang.String">
+		SELECT
+			bh_ID	AS ID,
+			bh_NO AS SHOWNO
+		FROM
+			BoardHit
+		WHERE
+			bh_ID = #{ID}
+	</select>
+<!-- 	새로운 글을 봤으면 다음에는 그 글을 처리못하도록 수정질의 -->
+	<update id="updateshowno" parameterType="java.util.HashMap">
+		UPDATE
+			BoardHit
+		SET
+			bh_NO = #{NO}
+		WHERE
+			bh_ID = #{ID}		
+	</update>
+<!-- 	처음 글을 본사람은 그 사람의 ID로 등록된 것이 없으므로 새롭게 등록해 주는질의 -->
+	<insert id="insertshowno" parameterType="java.util.HashMap">
+		INSERT
+		INTO
+			BoardHit
+		VALUES
+			(#{ID}, #{NO})
+	</insert>
+<!-- 	게시물 상세보기 질의 -->
+	<select id="boardview" resultType="rbdata" parameterType="java.lang.Integer">
+		SELECT
+			rb_NO			AS NO,
+			rb_Writer		AS ID,
+			m_NICK		AS NICK,
+			rb_Title		AS TITLE,
+			rb_Body		AS BODY,
+			rb_Date		AS WDATE,
+			rb_mDate		AS MDATE,
+			rb_Hit			AS HIT,
+			rb_Good		AS GOOD
+		FROM
+			RBoard, Member
+		WHERE
+					rb_No = #{NO}
+			AND	rb_Writer = m_ID
+	</select>
+<!-- 	게시물 조회수 증가 질의 -->
+	<update id="updatehit" parameterType="java.lang.Integer">
+		UPDATE
+			RBoard
+		SET
+			rb_Hit = rb_Hit + 1
+		WHERE
+			rb_No = #{NO}
+	</update>
+<!-- 	게시물 댓글 등록 질의 -->
+	<insert id="insertreple" parameterType="rbdata">
+		INSERT
+		INTO
+			RBoardRe
+		VALUES
+			((SELECT NVL(MAX(rr_NO), 0) + 1 FROM RBoardRe), #{no}, #{id}, 
+			#{body},  #{pw}, 'Y', 0,SYSDATE)
+	</insert>
+<!-- 	댓글 검색 질의 -->
+	<select id="selectreple" resultType="rbdata" parameterType="java.lang.Integer">
+		SELECT
+			rr_NO			AS RNO,
+			rb_NO			AS NO,
+			rr_Writer		AS ID,
+			m_Nick			AS NICK,
+			rr_Body		AS BODY,
+			rr_Date		AS WDATE,
+			rr_Good		AS GOOD
+		FROM
+			RBoardRe, Member
+		WHERE
+					rr_Writer = m_ID
+			AND	rb_NO = #{NO}
+			AND	rr_isShow = 'Y'
+		ORDER BY
+			rr_NO DESC
+	</select>
+<!-- 	수정 혹은 삭제가 가능한 경우인지 판단하는 질의
+		이 질의는 여러가지 형태로 만들수 있는데........ 
+
+		비번이 같으면 결과는 1이 나오고
+		비번이 다르면 결과는 0이 나온다.
+-->	
+	<select id="isupdate" resultType="java.lang.Integer" 
+												parameterType="java.util.HashMap">
+		SELECT
+			COUNT(*) AS CNT
+		FROM
+			RBoard
+		WHERE
+					rb_NO = #{NO}
+			AND	rb_Password = #{PW}
+	</select>
+<!-- 	게시물 수정 질의 -->
+	<update id="updateboard" parameterType="rbdata">
+		UPDATE
+			RBoard
+		SET
+			rb_Title = #{title},
+			rb_Body = #{body},
+			rb_mDate = SYSDATE
+		WHERE
+			rb_NO = #{no}
+	</update>
+<!-- 	게시물 삭제 질의 -->
+	<update id="deleteboard"	parameterType="java.lang.Integer">
+		UPDATE
+			RBoard
+		SET
+			rb_isShow = 'N'
+		WHERE
+			rb_NO = #{NO}
+	</update>
+<!-- 	게시물 추천 증가 질의 -->
+	<update id="updategood"	parameterType="java.lang.Integer">
+		UPDATE
+			RBoard
+		SET
+			rb_Good = rb_Good + 1
+		WHERE
+			rb_NO = #{NO}	
+	</update>
+<!-- 	게시물 추천 상황 질의 -->
+	<select id="selectgood"	resultType="java.lang.Integer"	
+													parameterType="java.lang.Integer">
+		SELECT
+			rb_Good AS GOOD
+		FROM
+			RBoard
+		WHERE
+			rb_NO = #{NO}
+	</select>
+<!-- 	게시물 댓글 삭제 질의 -->
+<!-- 	게시물 댓글 추천 증가 질의 -->
+
+</mapper>
+
+

@@ -1,4 +1,4 @@
-<%@page import="iedu.dao.DBTYPE"%>
+
 <%@page import="iedu.dao.LoginDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ page import="java.util.*" %>
@@ -11,7 +11,7 @@
 	<body>
 <%
 
-    LoginDao login = new LoginDao();  
+  
 
    String userid = request.getParameter("userid");
    
@@ -21,21 +21,21 @@
    System.out.println("password="+password);
    
    HashMap map ; 
-   
+   LoginDao login = new LoginDao();  
    map = login.isMember(userid, password);
-   System.out.println("map size="+map.size());
+   
    if (!map.isEmpty()) {
 	      session.setAttribute("id", map.get("id"));
 	      session.setAttribute("name", map.get("name"));
 	      session.setAttribute("nick", map.get("nick"));	      	  
 	      String url = (String)session.getAttribute("url");
-	      System.out.println(url);
+	
 	      if (url != null &&  !url.isEmpty())  {
 	    	  session.setAttribute("url", "");	        
 	    	  response.sendRedirect(url);
 	    	  return;
 	      }
-	      
+	       
    }
    
   response.sendRedirect("LoginForm.jsp");

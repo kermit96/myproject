@@ -23,8 +23,7 @@ function max1() {
 }
 
   function test() {
-
-      var max = max1( 1,5,6,32,11,37);
+      var max = max1( 1,5,6,32,67,37);
       alert(max);
   }
 </script>

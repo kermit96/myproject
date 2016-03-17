@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "HTTP://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="useGeneratedKeys" value="true" />
+		<setting name="defaultExecutorType" value="REUSE" />
+	</settings>
+	<typeAliases>
+		<typeAlias alias="hashMap" type="java.util.HashMap" />
+		<typeAlias alias="map" type="java.util.Map" />
+				<typeAlias alias="string" type="java.lang.String" />
+				<typeAlias alias="int" type="java.lang.Integer" />
+	</typeAliases>
+<!-- 	사용할 SQL 파일을 등록하는 부분이다.
+		참고로	myBatis에서는 SQL 파일을 자바 클래스로 만들지 않고
+		xml 파일로 만들게 된다.
+-->	
+	<mappers>		
+		<mapper resource="/springmyproject/sql/MemberSQL.xml" />
+		
+	</mappers>
+</configuration>

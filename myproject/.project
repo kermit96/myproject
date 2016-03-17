@@ -25,12 +25,30 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.springframework.ide.eclipse.core.springbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
+		<nature>org.springframework.ide.eclipse.core.springnature</nature>
 		<nature>org.eclipse.jem.workbench.JavaEMFNature</nature>
 		<nature>org.eclipse.wst.common.modulecore.ModuleCoreNature</nature>
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>WebContent/WEB-INF/conf/iedu.conf</name>
+			<type>1</type>
+			<location>D:/MyStudy/conf/iedu.conf</location>
+		</link>
+		<link>
+			<name>WebContent/WEB-INF/conf/reboard.property</name>
+			<type>1</type>
+			<location>D:/MyStudy/conf/reboard.property</location>
+		</link>
+	</linkedResources>
 </projectDescription>

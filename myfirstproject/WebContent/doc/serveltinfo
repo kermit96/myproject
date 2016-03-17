@@ -1,0 +1,14 @@
+개인 정보 수정 요청  
+ 요청 -- /memberservlet/modify 
+        파라메트 없음 
+  JSP  -- /member/Modify.jsp
+  
+  ajax -- /ajax/membermmodify
+        --  파라메터  
+            name, tel,nickname 
+         -- class : iedu.ajax.membermodify
+      
+       
+    
+ 
+       

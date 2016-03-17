@@ -1,0 +1,173 @@
+package iedu.config;
+
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+
+
+
+public class Dbconfig {
+    private String dbname;
+    private int    dbtype;
+    
+    private String  userid;
+    private String  password;
+    private String  host;
+    private int    port;
+    
+    
+    ConfigFileHandler handler;
+    /**
+	 * @return the dbname
+	 */
+	public String getDbname() {
+		return dbname;
+	}
+
+	/**
+	 * @param dbname the dbname to set
+	 */
+	public void setDbname(String dbname) {
+		this.dbname = dbname;
+		handler.setValue("dbname",dbname );
+	}
+
+	/**
+	 * @return the dbtype
+	 */
+	public int getDbtype() {
+		return dbtype;
+	}
+
+	/**
+	 * @param dbtype the dbtype to set
+	 */
+	public void setDbtype(int dbtype) {
+		this.dbtype = dbtype;
+		handler.setValue("dbtype",dbtype );
+	}
+
+	/**
+	 * @return the userid
+	 */
+	public String getUserid() {
+		return userid;
+	}
+
+	/**
+	 * @param userid the userid to set
+	 */
+	public void setUserid(String userid) {
+		this.userid = userid;
+		handler.setValue("userid",userid );
+	}
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+				
+		try {
+			handler.setValue("password",		iedu.util.ase256.AES_Encode(password));
+		} catch (InvalidKeyException | UnsupportedEncodingException | NoSuchAlgorithmException | NoSuchPaddingException
+				| InvalidAlgorithmParameterException | IllegalBlockSizeException | BadPaddingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * @return the host
+	 */
+	public String getHost() {
+		return host;
+	}
+
+	/**
+	 * @param host the host to set
+	 */
+	public void setHost(String host) {
+		this.host = host;
+		handler.setValue("host",host );
+	}
+
+	/**
+	 * @return the port
+	 */
+	public int getPort() {
+		return port;
+	}
+
+	/**
+	 * @param port the port to set
+	 */
+	public void setPort(int port) {
+		this.port = port;
+		
+		handler.setValue("port",port );
+	}
+
+
+	public void Save()
+	{
+		handler.Save();
+		
+	}
+	
+	public Dbconfig(String filename)
+	{
+		
+     	handler = ConfigFileHandler.getConfigFileHandler(filename);
+    	
+    	host = handler.getValue("host");
+		port = 0;
+	
+		
+		try {
+		  port = 	Integer.parseInt( handler.getValue("port"));
+
+		} catch (Exception ex ) {}
+		
+		dbname =  handler.getValue("dbname");
+		userid =  handler.getValue("userid");
+				
+		 try {
+			password =   iedu.util.ase256.AES_Decode( handler.getValue("password"));
+			
+		} catch (Exception	ex) {
+			
+			password = handler.getValue("password");
+		}
+		 
+	//	 System.out.println(handler.getValue("dbtype"));
+		
+		 try {
+		   dbtype = Integer.parseInt( handler.getValue("dbtype"));
+		 } catch(Exception ex) {
+			
+			 dbtype= 0;
+		 }
+	    	
+
+	}
+	
+    public Dbconfig()
+    {
+      this("iedu.conf");  	
+    }
+    
+}
