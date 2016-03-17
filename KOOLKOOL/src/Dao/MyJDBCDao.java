@@ -6,7 +6,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
 public class MyJDBCDao {
 
 	
-	// db pool ¼³Á¤ 
+	// db pool ï¿½ï¿½ï¿½ï¿½ 
 	BasicDataSource ds = new BasicDataSource();
 	Connection con = null;
 	
