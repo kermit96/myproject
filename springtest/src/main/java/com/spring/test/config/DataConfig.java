@@ -81,7 +81,10 @@ import org.springframework.context.annotation.Configuration;
 	           // 마이바티스 설정파일 위치 설정 
 	           factoryBean.setConfigLocation(applicationContext.getResource("classpath:/com/spring/test/mybatis/myBatis-config.xml")); 
 	   
-	   
+	   // DB2, Derby, H2, HSQL, Informix, MS-SQL, MySQL, Oracle, PostgreSQL, Sybase
+	           
+	           
+	           
 	           // spring.examples.model 패키지 이하의 model 클래스 이름을 짧은 별칭으로 등록 
 	//          factoryBean.setTypeAliasesPackage("spring.examples.model"); 
 	   
