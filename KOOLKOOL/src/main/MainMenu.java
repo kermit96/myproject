@@ -33,16 +33,6 @@ public class MainMenu extends MyJFrame{
 	
 	public MainMenu() {
 		
-		util.ClientRead reader = new util.ClientRead() {
-
-			@Override
-			public void run(Serializable obj) {
-				// TODO Auto-generated method stub
-			}
-		};
-		
-		// 등록
-		//g_global.serverConnect.AddClientRead(reader);
 		
 		
 		reserB = new JButton("예약하기");

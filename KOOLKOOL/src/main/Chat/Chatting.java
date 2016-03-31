@@ -119,7 +119,7 @@ public class Chatting extends JFrame {
 		reader = new ClientRead( ) {
 			
 			@Override
-			public void run(Serializable obj) {
+			public void run(Object obj) {
 				// TODO Auto-generated method stub
 				if (obj instanceof ResponseChatMsg ) {
 					ResponseChatMsg chatmsg = (ResponseChatMsg)obj ;

@@ -87,7 +87,7 @@ public class ReviewList extends JFrame  {
 		reader = new ClientRead( ) {
 			
 			@Override
-			public void run(Serializable obj) {
+			public void run(Object obj) {
 				
 				System.out.println("obj="+obj);
 				
@@ -529,7 +529,7 @@ public class ReviewList extends JFrame  {
 				//int idx =r.get(i).idx;
 				String str =r.get(i).name;
 				secondP.combo.addItem(str);
-				System.out.println(str);
+
 				//break;
 		}
 		secondP.nameF.setText(user_name);//user_name

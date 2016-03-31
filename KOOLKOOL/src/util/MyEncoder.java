@@ -9,10 +9,10 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 
 
-public class MyEncoder  extends  MessageToByteEncoder<java.io.Serializable> {
+public class MyEncoder  extends  MessageToByteEncoder<Object> {
 
     @Override
-    protected void encode(ChannelHandlerContext ctx, java.io.Serializable msg, ByteBuf out) {
+    protected void encode(ChannelHandlerContext ctx, Object msg, ByteBuf out) {
     	
     	ByteArrayOutputStream byteout =new  ByteArrayOutputStream( );
     	

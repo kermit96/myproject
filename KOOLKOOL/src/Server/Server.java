@@ -4,10 +4,14 @@ import java.util.*;
 
 import javax.swing.*;
 
+import Dao.CommonSql;
+import Dao.LoginData;
+import Dao.LoginResponse;
+import io.netty.channel.ChannelHandlerContext;
 import main.Global;
 
 import java.io.*;
-public class Server extends util.MyJFrame  {
+public class Server extends util.MyJFrame implements ServerBase {
 
 	private ServerRun serverrun=null;
 
@@ -123,6 +127,36 @@ public class Server extends util.MyJFrame  {
 		// TODO Auto-generated method stub
 
 		new Server().setVisible(true);;
+	}
+	
+	
+
+
+	@Override
+	public void Inactive(ChannelHandlerContext ctx) {
+		// TODO Auto-generated method stub
+		
+		
+	}
+	
+
+
+	@Override
+	public void Active(ChannelHandlerContext ctx) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Read(ChannelHandlerContext ctx, Object msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

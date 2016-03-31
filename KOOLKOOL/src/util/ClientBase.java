@@ -164,7 +164,7 @@ public class ClientBase
 	}
 
 
-	public void RunRead(java.io.Serializable msg)
+	public void RunRead(Object msg)
 	{
 		
 		HashSet<ClientRead> readersexec; 

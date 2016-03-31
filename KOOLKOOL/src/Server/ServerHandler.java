@@ -46,10 +46,10 @@ import Dao.room.RoomSql;
  * this handler  to avoid a race condition.
  */
 
-public class ServerHandler extends SimpleChannelInboundHandler<java.io.Serializable> {
+public class ServerHandler extends SimpleChannelInboundHandler<Object> {
 
 	private static  final    HashSet<ServerHandler> AcceptHandle = new HashSet<ServerHandler>();  
-	private Server server;
+	private ServerBase server;
 
 	private boolean isAdmin = false;
 	public String userid = "";	
@@ -60,7 +60,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<java.io.Serializa
 	
 
 	
-	public  ServerHandler(Server server)
+	public  ServerHandler(ServerBase server)
 	{
 		super();
 		this.server =server;
@@ -183,8 +183,10 @@ public class ServerHandler extends SimpleChannelInboundHandler<java.io.Serializa
 
 	// data를 읽었을떄 나온다.
 	@Override
-	public void channelRead0(ChannelHandlerContext ctx, java.io.Serializable msg) throws Exception {
+	public void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
 
+		server.Read(ctx, msg);
+		
 		if (msg instanceof LoginData) {    		    		
 			LoginData login = (LoginData)msg;
 			ProcessLogin(login,ctx);    	
@@ -785,6 +787,9 @@ public class ServerHandler extends SimpleChannelInboundHandler<java.io.Serializa
 		host = ((InetSocketAddress)ctx.channel().remoteAddress()).getAddress().getHostAddress();
 		this.ctx =  ctx;
 
+		
+		server.Active(ctx);
+		
 		server.Log("host==>"+host);
 
 		//	System.out.println("host=>"+host);
@@ -794,6 +799,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<java.io.Serializa
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
 		cause.printStackTrace();
+		server.exceptionCaught(ctx, cause);
 		ctx.close();
 	}
 }

@@ -100,7 +100,7 @@ public class ChatAdmin extends JFrame
 
 		reader = new ClientRead() {
 			@Override
-			public void run(Serializable obj) {
+			public void run(Object obj) {
 				if (obj instanceof ResponseSaveChatMsg) {
 					ResponseSaveChatMsg response = (ResponseSaveChatMsg)obj;  
 					Process(response);

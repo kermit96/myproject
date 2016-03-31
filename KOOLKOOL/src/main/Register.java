@@ -108,7 +108,7 @@ public class Register extends JDialog {
 		ClientRead  reader = new ClientRead() {
 
 			@Override
-			public void run(Serializable obj) {
+			public void run(Object obj) {
 				// TODO Auto-generated method stub
 
 				Read(obj);
@@ -234,7 +234,7 @@ public class Register extends JDialog {
 	}
 	
 	
-	public void Read(Serializable obj ) {
+	public void Read(Object obj ) {
 
 		this.Serverconnect.stop();
 			

@@ -36,16 +36,7 @@ public class MyInfo extends JPanel {
 	public MyInfo() {
 		
 		
-		util.ClientRead reader = new util.ClientRead() {
 
-			@Override
-			public void run(Serializable obj) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		};
-		
 		// µî·Ï
 		//g_global.serverConnect.AddClientRead(reader);
 		

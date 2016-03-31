@@ -78,7 +78,7 @@ public class ChatUserSelect extends JDialog {
 		reader = new ClientRead() {
 
 			@Override
-			public void run(Serializable obj) {
+			public void run(Object obj) {
 				// TODO Auto-generated method stub
 
 				if (obj instanceof ResponseAdmin ) {

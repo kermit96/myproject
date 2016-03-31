@@ -168,7 +168,7 @@ public class PmodifyBorder extends JPanel {
 	      ClientRead  reader = new ClientRead() {
 
 	         @Override
-	         public void run(Serializable obj) {
+	         public void run(Object obj) {
 	            // TODO Auto-generated method stub
                try {
 	            Read(obj);
@@ -183,7 +183,7 @@ public class PmodifyBorder extends JPanel {
 	      Serverconnect.AddClientRead(reader);
 	      
 	   }
-	   public void Read(Serializable obj ) {
+	   public void Read(Object obj ) {
 
 	  
 

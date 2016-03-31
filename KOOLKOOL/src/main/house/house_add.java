@@ -80,7 +80,7 @@ public class house_add extends JPanel{
 		
 		reader = new ClientRead() {
 	    	@Override
-	    	public void run(Serializable obj) {
+	    	public void run(Object obj) {
 	    		// TODO Auto-generated method stub
 	    		
 	    		if (obj instanceof ResponseHouse) {

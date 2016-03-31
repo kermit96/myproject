@@ -179,7 +179,7 @@ public class WriteBorder extends JPanel {
 	        reader = new ClientRead() {
 
 	         @Override
-	         public void run(Serializable obj) {
+	         public void run(Object obj) {
 	            // TODO Auto-generated method stub
 
 	               try {
@@ -196,7 +196,7 @@ public class WriteBorder extends JPanel {
 	      
 	   }
 	   
-	   public void Read(Serializable obj ) {
+	   public void Read(Object obj ) {
 
 	
 

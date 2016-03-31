@@ -304,15 +304,7 @@ class MyInfo extends JPanel {
 	public MyInfo(MainBorder m) {
 		main = m;
 		
-		util.ClientRead reader = new util.ClientRead() {
 
-			@Override
-			public void run(Serializable obj) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		};
 		
 		// µî·Ï
 //		g_global.serverConnect.AddClientRead(reader);
@@ -633,7 +625,7 @@ class MyInfo extends JPanel {
 	      ClientRead  reader = new ClientRead() {
 
 	         @Override
-	         public void run(Serializable obj) {
+	         public void run(Object obj) {
 	            // TODO Auto-generated method stub
         	  try {
 	            Read(obj);
@@ -649,7 +641,7 @@ class MyInfo extends JPanel {
 	      Serverconnect.AddClientRead(reader);
 	      
 	   }
-	   public void Read(Serializable obj ) {
+	   public void Read(Object obj ) {
 
     	   System.out.println("list:"+obj);
 

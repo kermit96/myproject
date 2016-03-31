@@ -21,11 +21,11 @@ public final class ServerRun {
     static final int PORT = Integer.parseInt(System.getProperty("port", "8322"));
 
     
-    private Server server;
+    private ServerBase server;
     
     int port = 0;
     
-    public ServerRun(int port,Server server)
+    public ServerRun(int port,ServerBase server)
     {
     	this.port = port;
     	this.server=  server;
@@ -94,6 +94,7 @@ public final class ServerRun {
              .handler(new LoggingHandler(LogLevel.INFO))
              .childHandler(new ServerInitializer(sslCtx,server));
 
+            
            f  =   b.bind(port).sync().channel();
                                         
           f.closeFuture().sync();

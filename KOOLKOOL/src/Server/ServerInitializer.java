@@ -16,8 +16,8 @@ public class ServerInitializer extends ChannelInitializer<SocketChannel> {
 
     private final SslContext sslCtx;
 
-    private Server server;
-    public ServerInitializer(SslContext sslCtx,Server server) {
+    private ServerBase server;
+    public ServerInitializer(SslContext sslCtx,ServerBase server) {
         this.sslCtx = sslCtx;
         this.server= server;
     }

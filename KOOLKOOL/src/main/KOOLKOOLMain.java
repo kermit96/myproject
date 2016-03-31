@@ -57,7 +57,7 @@ public class KOOLKOOLMain {
 	}
 
 	
-	public void ChatRead(Serializable obj) 
+	public void ChatRead(Object obj) 
 	{
 
 		if (obj instanceof ResponseChatMsg )

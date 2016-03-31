@@ -271,7 +271,7 @@ class PMyInfo extends JPanel {
 
 		reader = new ClientRead() {
 			@Override
-			public void run(Serializable obj) {
+			public void run(Object obj) {
 				// TODO Auto-generated method stub
 				if (obj instanceof ResponseMember) {
 					ResponseMember res = (ResponseMember)obj;
@@ -691,7 +691,7 @@ class PMainPanel extends JPanel{
 		  reader = new ClientRead() {
 
 			@Override
-			public void run(Serializable obj) {
+			public void run(Object obj) {
 				// TODO Auto-generated method stub
                try {
 				Read(obj);
@@ -707,7 +707,7 @@ class PMainPanel extends JPanel{
 		Serverconnect.AddClientRead(reader);
 
 	}
-	public void Read(Serializable obj ) {
+	public void Read(Object obj ) {
 
 	
 
