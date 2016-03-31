@@ -44,6 +44,7 @@ public class MyDecoder extends ByteToMessageDecoder {
 
 		} catch (Exception ex) {
 
+			System.out.println("netty decoding error");
 			ex.printStackTrace();
 
 		} finally {

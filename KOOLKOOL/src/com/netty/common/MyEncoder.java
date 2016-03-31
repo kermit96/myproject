@@ -21,8 +21,6 @@ public class MyEncoder  extends  MessageToByteEncoder<Object> {
     	try {
     		dout = new ObjectOutputStream(byteout);
     		dout.writeObject(msg);
-    		
-    		
     		byte[] data2 = byteout.toByteArray();
     		int dataLength2 = data2.length;
             out.writeInt(dataLength2);  // data length
@@ -30,7 +28,8 @@ public class MyEncoder  extends  MessageToByteEncoder<Object> {
             return;
     	
     	} catch(Exception ex) {
-    		    		    ex.printStackTrace();		
+    		  System.out.println("netty encoding error");
+    		  ex.printStackTrace();		
     	} finally {
     		try {
     			dout.close();
