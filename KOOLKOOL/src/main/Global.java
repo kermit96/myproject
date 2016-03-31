@@ -2,6 +2,8 @@ package main;
 
 import java.util.Properties;
 
+import com.netty.client.ClientBase;
+
 import util.*;
 
 

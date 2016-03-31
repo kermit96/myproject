@@ -1,7 +1,7 @@
+package com.netty.client;
+import com.netty.common.MyDecoder;
+import com.netty.common.MyEncoder;
 
-package Server;
-
-import util.*;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -9,39 +9,43 @@ import io.netty.handler.codec.compression.ZlibCodecFactory;
 import io.netty.handler.codec.compression.ZlibWrapper;
 import io.netty.handler.ssl.SslContext;
 
-/**
- * Creates a newly configured {@link ChannelPipeline} for a server-side channel.
- */
-public class ServerInitializer extends ChannelInitializer<SocketChannel> {
+public class ClientInitializer extends ChannelInitializer<SocketChannel> {
 
     private final SslContext sslCtx;
 
-    private ServerBase server;
-    public ServerInitializer(SslContext sslCtx,ServerBase server) {
+    
+    private String host;
+    private int  port;
+    
+    private ClientBase base;
+    public ClientInitializer(SslContext sslCtx,String host,int port,ClientBase base) {
+    	super();
+    	this.host = host;
+    	this.port  = port;
         this.sslCtx = sslCtx;
-        this.server= server;
+        this.base = base;
     }
+  
 
     @Override
     public void initChannel(SocketChannel ch) {
-    	
         ChannelPipeline pipeline = ch.pipeline();
 
         if (sslCtx != null) {
-            pipeline.addLast(sslCtx.newHandler(ch.alloc()));
+            pipeline.addLast(sslCtx.newHandler(ch.alloc(), host, port));
         }
 
-        // 압축 처리 
+        // Enable stream compression (you can remove these two if unnecessary)
         pipeline.addLast(ZlibCodecFactory.newZlibEncoder(ZlibWrapper.GZIP));
         pipeline.addLast(ZlibCodecFactory.newZlibDecoder(ZlibWrapper.GZIP));
 
-        // Add the number codec first,
+        // Add the Object 
         pipeline.addLast(new MyDecoder());
         pipeline.addLast(new MyEncoder());
-
         // and then business logic.
-        // Please note we create a handler for every new channel
-        // because it has stateful properties.
-        pipeline.addLast(new ServerHandler(server));
+        pipeline.addLast(new Clienthandler(base));                
     }
+	
+
+
 }

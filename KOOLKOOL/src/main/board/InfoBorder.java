@@ -11,10 +11,11 @@ import java.io.Serializable;
 import javax.swing.event.*;
 import javax.swing.table.*;
 
-import util.ClientBase;
-import util.ClientConnect;
-import util.ClientError;
-import util.ClientRead;
+import com.netty.client.ClientBase;
+import com.netty.client.ClientConnect;
+import com.netty.client.ClientError;
+import com.netty.client.ClientRead;
+
 import Dao.Constant;
 import Dao.RegisterSql;
 import Dao.RequestRegister;

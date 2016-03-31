@@ -9,14 +9,15 @@ import java.util.Properties;
 
 import javax.swing.*;
 
+import com.netty.client.ClientBase;
+import com.netty.client.ClientRead;
+
 import Dao.Constant;
 import Dao.Chat.RequestChatMsg;
 import Dao.Chat.ResponseChatMsg;
 import main.Chat.Chatting;
 import main.board.MainBorder;
 import main.board.PMainMenu;
-import util.ClientBase;
-import util.ClientRead;
 
 public class KOOLKOOLMain {
 	

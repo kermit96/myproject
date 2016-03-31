@@ -10,10 +10,11 @@ import javax.swing.*;
 import javax.swing.event.*;
 import javax.xml.bind.annotation.XmlElementDecl.GLOBAL;
 
-import util.ClientBase;
-import util.ClientConnect;
-import util.ClientError;
-import util.ClientRead;
+import com.netty.client.ClientBase;
+import com.netty.client.ClientConnect;
+import com.netty.client.ClientError;
+import com.netty.client.ClientRead;
+
 import Dao.Constant;
 import Dao.ResponseMember;
 import Dao.board.BoardConstant;

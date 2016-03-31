@@ -4,7 +4,8 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.*;
 
-import util.ClientRead;
+import com.netty.client.ClientRead;
+
 import Dao.CommonSql;
 import Dao.Constant;
 import Dao.RequestMember;

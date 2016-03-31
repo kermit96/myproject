@@ -18,6 +18,11 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
+import com.netty.client.ClientBase;
+import com.netty.client.ClientConnect;
+import com.netty.client.ClientError;
+import com.netty.client.ClientRead;
+
 import Dao.house.HouseConstant;
 import Dao.house.HouseSql;
 import Dao.Constant;
@@ -25,10 +30,6 @@ import Dao.house.HouseSql;
 import Dao.house.RequestHouse;
 import Dao.house.ResponseHouse;
 import Dao.house.TB_HOUSE;
-import util.ClientBase;
-import util.ClientConnect;
-import util.ClientError;
-import util.ClientRead;
 import main.Global;
 import main.house.house_add.JTextFieldLimit;
 

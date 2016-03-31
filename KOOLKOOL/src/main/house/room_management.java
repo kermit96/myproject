@@ -5,8 +5,9 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.*;
 
+import com.netty.client.ClientRead;
+
 import main.Global;
-import util.ClientRead;
 import Dao.Constant;
 import Dao.house.HouseConstant;
 import Dao.house.ResponseHouse;

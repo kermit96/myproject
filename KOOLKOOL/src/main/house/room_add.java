@@ -5,10 +5,12 @@ import java.awt.event.*;
 
 import javax.swing.*;
 import javax.swing.event.*;
+
+import com.netty.client.ClientRead;
+
 import javax.swing.border.*;
 
 import main.Global;
-import util.ClientRead;
 import Dao.Constant;
 import Dao.house.HouseConstant;
 import Dao.house.HouseSql;

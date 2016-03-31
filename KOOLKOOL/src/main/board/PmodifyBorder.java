@@ -9,12 +9,13 @@ import java.io.Serializable;
 import javax.swing.*;
 import javax.swing.event.*;
 
+import com.netty.client.ClientBase;
+import com.netty.client.ClientConnect;
+import com.netty.client.ClientError;
+import com.netty.client.ClientRead;
+
 import main.Global;
 import main.Register;
-import util.ClientBase;
-import util.ClientConnect;
-import util.ClientError;
-import util.ClientRead;
 import Dao.Constant;
 import Dao.board.BoardConstant;
 import Dao.board.BoardSql;

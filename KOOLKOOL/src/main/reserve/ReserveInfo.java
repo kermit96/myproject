@@ -12,7 +12,8 @@ import javax.swing.event.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-import util.ClientRead;
+import com.netty.client.ClientRead;
+
 import Dao.Constant;
 import Dao.reserve.RequestReserve;
 import Dao.reserve.RequestRoom;

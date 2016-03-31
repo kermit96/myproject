@@ -8,6 +8,12 @@ import java.sql.ResultSet;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.DefaultTableModel;
+
+import com.netty.client.ClientBase;
+import com.netty.client.ClientConnect;
+import com.netty.client.ClientError;
+import com.netty.client.ClientRead;
+
 import	javax.swing.border.*;
 
 import Dao.CommonSql;
@@ -19,10 +25,6 @@ import Dao.board.BoardConstant;
 import Dao.board.BoardSql;
 import Dao.board.RequestBoard;
 import Dao.board.ResponseBoard;
-import util.ClientBase;
-import util.ClientConnect;
-import util.ClientError;
-import util.ClientRead;
 import util.ScreenLocation;
 import util.StarRater;
 import main.Chat.ChatUserSelect;

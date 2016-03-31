@@ -5,6 +5,8 @@ import	java.awt.event.*;
 import	javax.swing.*;
 import	javax.swing.table.*;
 
+import com.netty.client.ClientRead;
+
 import main.Global;
 import main.Login;
 import Dao.review.*;

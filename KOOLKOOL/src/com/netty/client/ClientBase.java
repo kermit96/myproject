@@ -1,4 +1,4 @@
-package util;
+package com.netty.client;
 
 import java.io.Serializable;
 import java.nio.channels.Channel;
@@ -52,6 +52,16 @@ public class ClientBase
 		this.host= host;
 		this.port = port;
 	}
+	
+	
+	public ClientBase(String host,int port,boolean isSSL)
+	{
+		this.host= host;
+		this.port = port;
+		this.SSL = isSSL;
+	}
+
+	
 
 	public ClientBase()
 	{
@@ -353,7 +363,7 @@ public class ClientBase
 		}
 	}
 
-	public void write(Serializable obj) 
+	public void write(Object obj) 
 	{	   
 		
 		// f 에 변수가 할당되기 전에  write 가 실행 될수 있기 때문에 null 값이 활당되지 않게 sleep 한다.

@@ -1,4 +1,4 @@
-package util;
+package com.netty.common;
 
 import java.io.*;
 

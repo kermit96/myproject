@@ -6,6 +6,8 @@ import  java.io.*;
 import	javax.swing.*;
 import	javax.swing.table.*;
 
+import com.netty.client.ClientRead;
+
 import main.Global;
 import  util.*;//util폴더의 JDBCDao 사용
 import  Dao.*;

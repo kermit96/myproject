@@ -9,7 +9,8 @@ import java.io.Serializable;
 
 import javax.swing.*;
 
-import util.ClientRead;
+import com.netty.client.ClientRead;
+
 import main.Global;
 import main.Login;
 import Dao.Constant;

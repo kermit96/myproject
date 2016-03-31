@@ -1,4 +1,4 @@
-package Server;
+package com.netty.server;
 
 import java.io.File;
 import java.io.FileInputStream;

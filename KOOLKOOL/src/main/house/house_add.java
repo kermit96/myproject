@@ -5,6 +5,9 @@ import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.text.*;
+
+import com.netty.client.ClientRead;
+
 import javax.swing.border.*;
 
 import main.Global;
@@ -17,7 +20,6 @@ import Dao.house.HouseSql;
 import Dao.house.RequestHouse;
 import Dao.house.ResponseHouse;
 import Dao.house.TB_HOUSE;
-import util.ClientRead;
 
 import java.io.Serializable;
 import java.sql.*;

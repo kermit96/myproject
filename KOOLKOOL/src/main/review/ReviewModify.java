@@ -6,6 +6,8 @@ import java.io.Serializable;
 import	javax.swing.*;
 import	javax.swing.table.*;
 
+import com.netty.client.ClientRead;
+
 import main.Global;
 import main.review.ReviewList.ReviewPanel;
 import main.review.ReviewWrite.ComboEvent;
@@ -16,7 +18,6 @@ import Dao.review.ResponseTbHouse;
 import Dao.review.ReviewSql;
 import Dao.review.TB_HOUSE;
 import Dao.review.TB_REVIEW;
-import util.ClientRead;
 import util.JDBCDao;
 import util.StarRater;
 

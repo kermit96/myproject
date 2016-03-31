@@ -1,4 +1,4 @@
-package util;
+package com.netty.client;
 
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -11,7 +11,7 @@ import io.netty.util.concurrent.GlobalEventExecutor;
 
 import java.util.*;
 
-public class Clienthandler  extends SimpleChannelInboundHandler<java.io.Serializable> {
+public class Clienthandler  extends SimpleChannelInboundHandler<Object> {
 
     private ClientBase base;
 	public Clienthandler(ClientBase base) {
@@ -33,7 +33,7 @@ public class Clienthandler  extends SimpleChannelInboundHandler<java.io.Serializ
     }
 
     @Override
-    public void channelRead0(ChannelHandlerContext ctx, final java.io.Serializable msg) {
+    public void channelRead0(ChannelHandlerContext ctx, final Object msg) {
 
     	base.RunRead(msg);
     	
