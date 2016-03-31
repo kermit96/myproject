@@ -84,9 +84,9 @@ import java.util.Vector;
 reader = new ClientRead( ) {
 			
 			@Override
-			public void run(Serializable obj) {
+			public void run(Object obj) {
 				
-				System.out.println("obj="+obj);
+
 				
 				if(obj instanceof Dao.review.ResponseReview  ){
 					Dao.review.ResponseReview data = (Dao.review.ResponseReview)obj;

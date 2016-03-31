@@ -72,7 +72,7 @@ public class ReviewWrite extends JPanel  {
 		reader = new ClientRead( ) {
 			
 			@Override
-			public void run(Serializable obj) {
+			public void run(Object obj) {
 				
 				System.out.println("obj="+obj);
 				
