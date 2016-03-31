@@ -71,6 +71,8 @@ public class Login extends JDialog {
 	// 	JOptionPane.showMessageDialog(this, ex.toString());				
 	}
 
+	
+	// 서버에 접속한다.
 	public void Connnect()
 	{
 		String userid = idF.getText();
@@ -84,24 +86,11 @@ public class Login extends JDialog {
 		Serverconnect.write(data);
 	}
 
-	public void DisConnnect()
-	{
-
-	}
-
-	public void Read(Serializable obj ) {
-
-		System.out.println("read");
-			
-		Dao.LoginResponse data = null ;	   
-		if (obj instanceof Dao.LoginResponse ) {
-			data = (LoginResponse)obj;
-			ProcessLogin(data);		   
-		}
-
-	}
 
 
+
+
+// 응답 처리한다.
 	private void ProcessLogin(LoginResponse data) {
 		// TODO Auto-generated method stub
 
@@ -121,14 +110,22 @@ public class Login extends JDialog {
 	    g_global.setUsername(data.data.user_name);
 	    g_global.setPassword(new String(this.pwF.getPassword()).trim() );
 	    this.Select = DEF_LOGIN;
-	    	    	    
-	    
-//		JOptionPane.showMessageDialog(this, "성공 했습니다.");
+	    	    	    	 
 	    
 		Close();				
 	}
     
 
+	public void Read(Serializable obj ) {
+		
+		Dao.LoginResponse data = null ;	   
+		if (obj instanceof Dao.LoginResponse ) {
+			data = (LoginResponse)obj;
+			ProcessLogin(data);		   
+		}
+
+	}
+	
   private void Close()
   {
 		Serverconnect.RemoveClientConnect(connect);

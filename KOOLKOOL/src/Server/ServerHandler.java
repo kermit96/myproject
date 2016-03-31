@@ -185,8 +185,6 @@ public class ServerHandler extends SimpleChannelInboundHandler<java.io.Serializa
 	@Override
 	public void channelRead0(ChannelHandlerContext ctx, java.io.Serializable msg) throws Exception {
 
-	//	System.out.println("Read==>"+msg.toString());
-
 		if (msg instanceof LoginData) {    		    		
 			LoginData login = (LoginData)msg;
 			ProcessLogin(login,ctx);    	
@@ -206,13 +204,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<java.io.Serializa
 		}
 
 		if (msg instanceof RequestAdmin) {
-			
-			if (RequestAdmin.class == msg.getClass() )
-			{
-				
-				
-			}
-			
+
 			RequestAdmin data = (RequestAdmin)msg; 
 			ProcessAdminUser(data, ctx);
 			return;

@@ -24,6 +24,7 @@ public class ServerInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
     public void initChannel(SocketChannel ch) {
+    	
         ChannelPipeline pipeline = ch.pipeline();
 
         if (sslCtx != null) {

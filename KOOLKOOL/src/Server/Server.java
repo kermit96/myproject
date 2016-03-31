@@ -23,6 +23,7 @@ public class Server extends util.MyJFrame  {
 	
 	public Server() {
   
+		this.setTitle("KoolKool Server");
 		// 메뉴 설정을 한다.
 		JMenuBar menubar = new JMenuBar();
 		JMenu   menu  = new JMenu("파일");
