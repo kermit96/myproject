@@ -14,6 +14,7 @@ public class MyEncoder  extends  MessageToByteEncoder<Object> {
     @Override
     protected void encode(ChannelHandlerContext ctx, Object msg, ByteBuf out) {
     	
+    /*	
     	ByteArrayOutputStream byteout =new  ByteArrayOutputStream( );
     	
     	ObjectOutputStream dout = null;
@@ -41,8 +42,8 @@ public class MyEncoder  extends  MessageToByteEncoder<Object> {
     		
     	}
     	
+    	*/
     	
-    	/*
     	XStream xstream = new XStream();
     	
     	byte[] data = null;
@@ -55,6 +56,6 @@ public class MyEncoder  extends  MessageToByteEncoder<Object> {
         out.writeInt(dataLength);  // data length
         out.writeBytes(data);      // data
         
-        */
+        
     }
 }

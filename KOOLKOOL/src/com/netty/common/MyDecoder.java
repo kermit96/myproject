@@ -17,6 +17,7 @@ public class MyDecoder extends ByteToMessageDecoder {
 			return;
 		}
 
+	
 		in.markReaderIndex();
 
 		// Wait until the whole data is available.
@@ -30,7 +31,9 @@ public class MyDecoder extends ByteToMessageDecoder {
 		in.readBytes(decoded);
 
 
+		/*
 		ByteArrayInputStream bytein =new  ByteArrayInputStream(decoded);
+
 
 		ObjectInputStream data = null;
 
@@ -57,8 +60,10 @@ public class MyDecoder extends ByteToMessageDecoder {
 				
 			}
 		}
+		
+		*/
 
-/*
+
 		XStream xstream = new XStream();
 
 
@@ -72,7 +77,7 @@ public class MyDecoder extends ByteToMessageDecoder {
 		}
 		Object obj = xstream.fromXML(temp);				
 		out.add(obj);
-*/
+
 
 	}
 }
